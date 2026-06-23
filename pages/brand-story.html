@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>POPPI DONUTS — Brand Story</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/images/favicon-64.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png" />
+
+  <!-- Core: tokens + reset + utility 클래스 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="../assets/css/commons.css?v=ria-regular-v1" />
+  <!-- 공통 헤더(plate-nav) + 공통 푸터 -->
+  <link rel="stylesheet" href="../assets/css/header.css" />
+  <link rel="stylesheet" href="../assets/css/footer.css?v=legal-modal-pc-height" />
+  <!-- 인덱스(섹션 01~07) 스타일은 페이지간 토큰/유틸 공유를 위해 유지 -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <!-- 서브 페이지 공통(.page-wrap, reveal, sr-only) -->
+  <link rel="stylesheet" href="../assets/css/pages-common.css" />
+  <!-- Brand Story 페이지 전용 -->
+<!-- 반응형 -->
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20260609130729" />
+    
+  <link rel="stylesheet" href="../assets/css/brand-story.css?v=mo-shift-50" />
+  </head>     
+<body>
+  <div class="page-wrap">
+    <div data-include="site-header"></div>
+
+    <main>
+
+      <!-- 00. BRAND KV — event-news .page-top 와 완전히 동일한 구조/스타일
+           (배경: 사용자 제공 핑크 그리드 + 도넛 합성본, 최대 높이 572) -->
+      <header class="page-top" aria-label="BRAND 키비주얼">
+        <h1 class="kv-title" data-text="BRAND">BRAND</h1>
+      </header>
+
+      <!-- 01. HI, I'M POPPI — Figma 1920×666, bg #F8A720 -->
+      <section class="brand-hello" aria-label="POPPI 브랜드 소개">
+        <img
+          src="../assets/images/brand/brand-hello-title.png"
+          alt="HI, I'm POPPI"
+          class="brand-hello__deco"
+        />
+        <p class="brand-hello__desc">
+          POPPI는 달콤함이 단순한 맛에서 끝나지 않는다고 생각합니다.<br />
+          눈으로 먼저 즐겁고, 한 입 베어 무는 순간 기분까지 가벼워지는 경험.<br />
+          우리는 도넛을 통해 일상 속 작은 설렘과 밝은 에너지를 전하고,<br />
+          사람들이 자연스럽게 웃게 되는 순간들을 만들어갑니다.
+        </p>
+      </section>
+
+      <!-- 02. BRAND STORY 타임라인 — Figma 1258:741 (Group 58, 1293×1410) -->
+      <section class="brand-story-section" aria-label="POPPI 브랜드 스토리 타임라인">
+        <h2 class="brand-story-section__title">BRAND STORY</h2>
+
+        <div class="brand-roadmap" aria-label="POPPI 연도별 주요 이정표">
+          <img src="../assets/images/brand/timeline-path.png" alt="" class="brand-roadmap__path" aria-hidden="true" />
+
+          <!-- 모바일(≤767px) 전용 세로 타임라인 연결선 — 태블릿·PC에서는 숨김 -->
+          <img
+            src="../assets/images/brand/timeline-mo.png"
+            alt=""
+            class="brand-roadmap__segment"
+            aria-hidden="true"
+          />
+
+          <article class="brand-roadmap__marker"
+            style="
+              --img-x: 44.93%;  --img-y: 0%;      --img-w: 17.79%; --img-h: 14.11%;
+              --lbl-x: 43.39%;  --lbl-y: 13.33%;  --lbl-w: 19.41%;
+            "
+          >
+            <img class="brand-roadmap__media" src="../assets/images/brand/story-2010.png" alt="2010년 POPPI 첫 시그니처 도넛" />
+            <div class="brand-roadmap__label">
+              <img class="brand-roadmap__pin" src="../assets/images/brand/timeline-pin.png" alt="" aria-hidden="true" />
+              <span class="brand-roadmap__year">2010</span>
+              <p class="brand-roadmap__desc">
+                <span class="brand-roadmap__desc-line">POPPI의 첫 시그니처 도넛이</span>
+                <span class="brand-roadmap__desc-line">탄생했습니다.</span>
+              </p>
+            </div>
+          </article>
+
+          <img
+            src="../assets/images/brand/timeline-mo.png"
+            alt=""
+            class="brand-roadmap__segment"
+            aria-hidden="true"
+          />
+
+          <article class="brand-roadmap__marker"
+            style="
+              --img-x: 82.37%;  --img-y: 23.97%;  --img-w: 14.46%; --img-h: 15.53%;
+              --lbl-x: 80.59%;  --lbl-y: 38.15%;  --lbl-w: 19.41%;
+            "
+          >
+            <img class="brand-roadmap__media" src="../assets/images/brand/story-2013.png" alt="2013년 전 매장 당일 생산 시스템 도입" />
+            <div class="brand-roadmap__label">
+              <img class="brand-roadmap__pin" src="../assets/images/brand/timeline-pin.png" alt="" aria-hidden="true" />
+              <span class="brand-roadmap__year">2013</span>
+              <p class="brand-roadmap__desc">
+                <span class="brand-roadmap__desc-line">전 매장 당일 생산 시스템을</span>
+                <span class="brand-roadmap__desc-line">도입했습니다.</span>
+              </p>
+            </div>
+          </article>
+
+          <img
+            src="../assets/images/brand/timeline-mo.png"
+            alt=""
+            class="brand-roadmap__segment"
+            aria-hidden="true"
+          />
+
+          <article class="brand-roadmap__marker"
+            style="
+              --img-x: 45.55%;  --img-y: 29.79%;  --img-w: 17.25%; --img-h: 21.35%;
+              --lbl-x: 41.53%;  --lbl-y: 50.43%;  --lbl-w: 23.12%;
+            "
+          >
+            <img class="brand-roadmap__media" src="../assets/images/brand/story-2017.png" alt="2017년 시그니처 크림 레시피 개발" />
+            <div class="brand-roadmap__label">
+              <img class="brand-roadmap__pin" src="../assets/images/brand/timeline-pin.png" alt="" aria-hidden="true" />
+              <span class="brand-roadmap__year">2017</span>
+              <p class="brand-roadmap__desc">
+                <span class="brand-roadmap__desc-line">시그니처 크림 레시피를 개발하고</span>
+                <span class="brand-roadmap__desc-line">누적 판매량 20만개를 달성했습니다.</span>
+              </p>
+            </div>
+          </article>
+
+          <img
+            src="../assets/images/brand/timeline-mo.png"
+            alt=""
+            class="brand-roadmap__segment"
+            aria-hidden="true"
+          />
+
+          <article class="brand-roadmap__marker"
+            style="
+              --img-x: 2.01%;   --img-y: 63.12%;  --img-w: 15.31%; --img-h: 13.19%;
+              --lbl-x: 0%;      --lbl-y: 74.82%;  --lbl-w: 19.41%;
+            "
+          >
+            <img class="brand-roadmap__media" src="../assets/images/brand/story-2022.png" alt="2022년 시즌 이벤트와 가맹점 100호" />
+            <div class="brand-roadmap__label">
+              <img class="brand-roadmap__pin" src="../assets/images/brand/timeline-pin.png" alt="" aria-hidden="true" />
+              <span class="brand-roadmap__year">2022</span>
+              <p class="brand-roadmap__desc">
+                <span class="brand-roadmap__desc-line">시즌 이벤트 운영을 시작하고,</span>
+                <span class="brand-roadmap__desc-line">가맹점 100개를 돌파했습니다.</span>
+              </p>
+            </div>
+          </article>
+
+          <img
+            src="../assets/images/brand/timeline-mo.png"
+            alt=""
+            class="brand-roadmap__segment"
+            aria-hidden="true"
+          />
+
+          <article class="brand-roadmap__marker"
+            style="
+              --img-x: 45.32%;  --img-y: 75.39%;  --img-w: 17.48%; --img-h: 13.62%;
+              --lbl-x: 43.39%;  --lbl-y: 88.37%;  --lbl-w: 19.41%;
+            "
+          >
+            <img class="brand-roadmap__media" src="../assets/images/brand/story-2025.png" alt="2025년 새로운 브랜드 아이덴티티 리뉴얼" />
+            <div class="brand-roadmap__label">
+              <img class="brand-roadmap__pin" src="../assets/images/brand/timeline-pin.png" alt="" aria-hidden="true" />
+              <span class="brand-roadmap__year">2025</span>
+              <p class="brand-roadmap__desc">
+                <span class="brand-roadmap__desc-line">새로운 브랜드 아이덴티티로</span>
+                <span class="brand-roadmap__desc-line">POPPI를 리뉴얼했습니다.</span>
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 03. BRAND IDENTITY — PC: 1920×1400 절대좌표 / 모바일: 브랜드북 세로 스택 -->
+      <section class="brand-identity" aria-label="POPPI 브랜드 아이덴티티">
+        <div class="brand-identity__inner">
+
+          <h2 class="brand-identity__title">BRAND<br />IDENTITY</h2>
+
+          <div class="brand-identity__group brand-identity__group--logo">
+            <div class="brand-identity__logo-box">
+              <img class="brand-identity__logo-img" src="../assets/images/brand/logo-big.png?v=3" alt="POPPI DONUTS 로고" />
+            </div>
+            <h3 class="brand-identity__label brand-identity__label--logo">LOGO</h3>
+          </div>
+
+          <div class="brand-identity__group brand-identity__group--typo">
+            <div class="brand-identity__typo-block brand-identity__typo-block--ria">
+              <div class="brand-identity__aa brand-identity__aa--ria">
+                <img src="../assets/images/brand/aa-ria.png" alt="Ria Sans Aa 샘플" />
+              </div>
+              <div class="brand-identity__typo-info">
+                <h4 class="brand-identity__font-name brand-identity__font-name--ria">Ria Sans</h4>
+                <div class="brand-identity__font-sample brand-identity__font-sample--ria">
+                  <p>ABCDEFGHIJKLMNOP</p>
+                  <p>abcdefghijklmnopq</p>
+                  <p>~!@#$%^&amp;*()12345</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="brand-identity__typo-block brand-identity__typo-block--paper">
+              <div class="brand-identity__aa brand-identity__aa--paper">
+                <img src="../assets/images/brand/aa-paper.png" alt="Paperlogy Aa 샘플" />
+              </div>
+              <div class="brand-identity__typo-info">
+                <h4 class="brand-identity__font-name brand-identity__font-name--paper">Paperlogy</h4>
+                <div class="brand-identity__font-sample brand-identity__font-sample--paper">
+                  <p>ABCDEFGHIJKLMNOP</p>
+                  <p>abcdefghijklmnopq</p>
+                  <p>~!@#$%^&amp;*()12345</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="brand-identity__label brand-identity__label--typo">TYPOGRAPHY</h3>
+          </div>
+
+          <div class="brand-identity__group brand-identity__group--color">
+            <ul class="brand-identity__color-grid" aria-label="POPPI 컬러 팔레트">
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #ED6325;"></span>
+                <span class="brand-identity__color-name">Poppi Orange</span>
+                <span class="brand-identity__color-hex">#ED6325</span>
+              </li>
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #F8A720;"></span>
+                <span class="brand-identity__color-name">Poppi Yellow</span>
+                <span class="brand-identity__color-hex">#F8A720</span>
+              </li>
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #FDE2CF;"></span>
+                <span class="brand-identity__color-name">Peach Ivory</span>
+                <span class="brand-identity__color-hex">#FDE2CF</span>
+              </li>
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #FBA5BC;"></span>
+                <span class="brand-identity__color-name">Poppi Pink</span>
+                <span class="brand-identity__color-hex">#FBA5BC</span>
+              </li>
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #452319;"></span>
+                <span class="brand-identity__color-name">Deep Cacao</span>
+                <span class="brand-identity__color-hex">#452319</span>
+              </li>
+              <li class="brand-identity__color-item">
+                <span class="brand-identity__color-chip" style="background-color: #FFFCF6;"></span>
+                <span class="brand-identity__color-name">off white Ivory</span>
+                <span class="brand-identity__color-hex">#FFFCF6</span>
+              </li>
+            </ul>
+
+            <h3 class="brand-identity__label brand-identity__label--color">COLOR GUIDE</h3>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 04. BRAND APPLICATION — Figma 5장 그리드 (와이드 / 1:1 2분할 / 와이드 / 와이드) -->
+      <section class="brand-application" aria-label="POPPI 브랜드 어플리케이션">
+        <div class="brand-application__inner">
+          <h2 class="brand-application__title">BRAND APPLICATION</h2>
+
+          <!-- 1400px 섹션 — Figma 레퍼런스 구도 (좌 3행: sign/paper/box, 우: storefront/set 2행 스팬) -->
+          <div class="brand-application__grid">
+            <img
+              class="brand-application__item brand-application__item--sign"
+              src="../assets/images/brand/application-sign.png?v=20260608"
+              alt="POPPI 매장 외부 사인보드"
+            />
+            <img
+              class="brand-application__item brand-application__item--storefront"
+              src="../assets/images/brand/application-storefront.png?v=20260608"
+              alt="POPPI 매장 외관"
+            />
+            <img
+              class="brand-application__item brand-application__item--paper"
+              src="../assets/images/brand/application-paper.png?v=20260608"
+              alt="POPPI 종이봉투, 카드, 스티커"
+            />
+            <img
+              class="brand-application__item brand-application__item--box"
+              src="../assets/images/brand/application-box.png?v=20260608"
+              alt="POPPI 글레이즈드 도넛 박스"
+            />
+            <img
+              class="brand-application__item brand-application__item--set"
+              src="../assets/images/brand/application-set.png?v=20260608"
+              alt="POPPI 박스, 쇼핑백, 컵 패키지 세트"
+            />
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div data-include="site-footer"></div>
+  </div>
+
+  <!-- GSAP runtime: assets/vendor/gsap 로컬 번들 사용 -->
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 공통 헤더/푸터 컴포넌트 — main.js 보다 먼저 로드 -->
+  <script src="../assets/js/components/site-header.js"></script>
+  <script src="../assets/js/components/site-ready-modal.js?v=ready-modal-v2"></script>
+  <script src="../assets/js/components/site-footer.js?v=legal-modal-ios"></script>
+  <script src="../assets/js/main.js?v=socials-v4"></script>
+  <script src="../assets/js/brand-story.js?v=marker-seq-15"></script>
+</body>
+</html>

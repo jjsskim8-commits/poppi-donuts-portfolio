@@ -1,0 +1,247 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — HEADER
+   - PLATE NAV: 모든 페이지 공통 고정 메뉴 버튼 + 풀스크린 메뉴 오버레이
+     (main.js 가 동적으로 주입)
+   - PAGE HEADER: 서브 페이지 좌상단 로고 헤더
+   ========================================================= */
+
+/* =========================================================
+   PLATE NAV — 고정 위치 메뉴 버튼 + 풀스크린 메뉴 오버레이
+   - 버튼: position: fixed top:30px right:125px (모바일과 동일하게 우상단 통일)
+   - 오버레이: position: fixed inset:0, 다크 브라운 #452219, 풀화면
+   ========================================================= */
+.plate-nav-btn {
+  position: fixed;
+  top: 30px;
+  right: 125px;
+  z-index: 1000;
+  width: clamp(72px, 5.21vw, 100px);
+  height: clamp(72px, 5.21vw, 100px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.plate-nav-btn:hover {
+  transform: scale(1.05) rotate(8deg);
+}
+
+.plate-nav-btn:focus-visible {
+  outline: 3px solid #ED6325;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.plate-nav-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* ── 풀스크린 메뉴 오버레이 ── */
+.plate-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #452219;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.plate-nav-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.plate-nav-overlay[hidden] {
+  display: none !important;
+}
+
+/* 닫기 버튼 (Figma 1206-574: 100×102) — 햄버거(plate-nav-btn)와 같은 우상단 위치로 통일 */
+.plate-nav-close {
+  position: absolute;
+  top: 30px;
+  right: 125px;
+  width: clamp(72px, 5.21vw, 100px);
+  height: clamp(72px, 5.21vw, 100px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.plate-nav-close:hover {
+  transform: scale(1.05) rotate(-8deg);
+}
+
+.plate-nav-close:focus-visible {
+  outline: 3px solid #ED6325;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.plate-nav-close img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* ── 메뉴 그리드 — Figma 1206-571 1:1 매핑
+   • 1920×937 풀스크린 캔버스
+   • 좌측 컬럼(GNB): HOME/BRAND/MENU/STORE (각 100.27 height, row gap 80)
+   • 우측 컬럼(Frame 7751): BUSINESS/SUPPORT/EVENT/SHOP↗
+   • 두 컬럼 사이 간격 ≈ 200px (좌측 끝 526 → 우측 시작 726)
+   • 폰트: Ria Sans Bold 92px (텍스트 박스 92 tall)
+   • 색상: 기본 #fde2cf (cream), 활성 #ED6325 (orange)
+   ── */
+.plate-nav-menu {
+  position: absolute;
+  left: clamp(80px, 19.22vw, 369px);
+  top: clamp(120px, 15.79vh, 148px);
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: clamp(80px, 10.42vw, 200px);
+  row-gap: clamp(28px, 4.17vw, 80px);
+  align-content: start;
+  text-align: left;
+}
+
+.plate-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4.17vw, 80px);
+}
+
+.plate-nav-item {
+  font-family: var(--font-ria, "Ria Sans"), "Pretendard", "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: var(--type-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: 0.012em;
+  color: #fde2cf;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 0.83vw, 16px);
+  white-space: nowrap;
+}
+
+.plate-nav-item:hover {
+  color: #ED6325;
+  transform: translateX(6px);
+}
+
+.plate-nav-item.is-active {
+  color: #ED6325;
+}
+
+/* SHOP 의 ↗ 화살표 — Figma 80×80 (텍스트 92 기준 0.87 비율) */
+.plate-nav-item .plate-nav-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.87em;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.06em);
+}
+
+/* =========================================================
+   모바일 — 햄버거(열기)/닫기 모두 우상단으로 통일 (PC와 같은 방향, 더 코너에 가까운 위치)
+   기준: 모바일 hero 섹션 햄버거 슬롯 좌표(.m-hero__header padding + slot 크기)
+       - 상단 거리 : clamp(12px, 3.2vw, 18px)
+       - 우측 거리 : clamp(14px, 3.6vw, 20px)
+       - 버튼 크기 : clamp(56px, 14vw, 72px) (정사각)
+   - .plate-nav-btn  : 메인 페이지에선 hero 슬롯 안으로 이동되어 더 specific 한
+                       `.m-hero__menu-slot .plate-nav-btn` 룰이 우선 적용됨.
+                       그 외 페이지에서는 아래 fixed 우상단 룰이 적용됨.
+   - .plate-nav-close: 오버레이 안 absolute 로 우상단 좌표 살짝 더 코너로 당김.
+   - `!important` 는 기본 PC 룰(`top:30px; right:125px`)의 더 큰 여백을 확실히 덮기 위함 */
+@media (max-width: 768px) {
+  .plate-nav-btn,
+  .plate-nav-close {
+    top:   clamp(12px, 3.2vw, 18px) !important;
+    right: clamp(14px, 3.6vw, 20px) !important;
+    left:  auto !important;
+    bottom: auto !important;
+    width:  clamp(56px, 14vw, 72px) !important;
+    height: clamp(56px, 14vw, 72px) !important;
+  }
+  /* hover 시 rotate 줄임(소형 버튼에서 과도한 회전 방지) */
+  .plate-nav-btn:hover,
+  .plate-nav-close:hover {
+    transform: scale(1.05);
+  }
+
+  .plate-nav-menu {
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 24px;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    text-align: center;
+    column-gap: 0;
+    row-gap: clamp(20px, 5vw, 40px);
+  }
+  .plate-nav-col {
+    align-items: center;
+  }
+}
+
+/* =========================================================
+   PAGE HEADER — 서브 페이지 좌상단 로고 헤더
+   (이전 pages.css 의 .page-header* 블록)
+   ========================================================= */
+.page-header {
+  position: absolute;
+  z-index: 10;
+  top: clamp(8px, 0.58vw, 11px);
+  left: clamp(8px, 0.83vw, 16px);
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.04vw, 20px);
+  pointer-events: none;
+}
+
+.page-header__badge {
+  width: clamp(80px, 9.9vw, 190px);
+  height: auto;
+  display: block;
+}
+
+.page-header__wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.625vw, 12px);
+  margin-top: clamp(20px, 2.6vw, 50px);
+}
+
+.page-header__wordmark img {
+  width: clamp(40px, 4.4vw, 85px);
+  height: auto;
+  display: block;
+}

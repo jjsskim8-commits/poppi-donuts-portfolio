@@ -1,0 +1,3417 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — Responsive layout (mobile / tablet / desktop)
+   ========================================================= */
+
+/* --- Global --- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body.store-page main {
+  overflow-x: visible;
+}
+
+/* --- 01. Donut hero — 1920×1024 비율 유지 % 기반 스테이지 (style.css에서 처리) --- */
+
+/* --- 02. Flavor slider --- */
+.spring-slider .vscroll-drive__pin {
+  touch-action: pan-y pinch-zoom;
+  height: 100vh;
+  height: 100dvh;
+}
+
+@media (max-width: 1024px) {
+  .vscroll-drive {
+    --step-vh: 80;
+  }
+
+  .flavor-marquee {
+    gap: clamp(28px, 4vw, 44px);
+  }
+
+  .donut-visual {
+    width: min(var(--flavor-donut-width), 78vw);
+  }
+}
+
+@media (max-width: 768px) {
+  /* GSAP pin 해제 시 — 맛별 패널 세로 스택 (main.js .is-mobile-stack) */
+  .vscroll-drive.is-mobile-stack {
+    height: auto !important;
+    min-height: 0;
+  }
+
+  .vscroll-drive.is-mobile-stack .vscroll-drive__pin {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0;
+    overflow: visible;
+    touch-action: auto;
+    will-change: auto;
+  }
+
+  .vscroll-drive.is-mobile-stack .wheel-horizontal-track {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .vscroll-drive.is-mobile-stack .wheel-horizontal-panel {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0;
+    height: auto;
+    min-height: 88svh;
+    min-height: 88dvh;
+    overflow: visible;
+  }
+
+  .vscroll-drive.is-mobile-stack .wheel-horizontal-panel .flavor-hero {
+    min-height: 88svh;
+    min-height: 88dvh;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    isolation: auto;
+  }
+
+  .vscroll-drive.is-mobile-stack .flavor-indicator {
+    display: none;
+  }
+
+  .vscroll-drive {
+    --step-vh: 72;
+    --spring-slider-hold-ratio: 0.3;
+    --spring-slider-wheel-cooldown: 0.85s;
+  }
+
+  .flavor-marquee {
+    gap: 50px;
+    padding-block: 0;
+  }
+
+  /* 모바일 마퀴 — shift 값만 축소 (viewport 풀블리드·우측 보정은 style.css 공통) */
+  .marquee-row {
+    line-height: 0.82;
+    padding-block: 0;
+    padding-left: 0;
+    overflow: visible;
+    transform: none !important;
+  }
+  .marquee-row--top { --marquee-row-shift: -6vw; }
+  .marquee-row--middle { --marquee-row-shift: -14vw; }
+  .marquee-row--bottom { --marquee-row-shift: -4vw; }
+
+  .marquee-row__viewport {
+    overflow: visible;
+    line-height: 0.82;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  /* 모바일 — 배경 타이포 정지 + 글자 확대 (PC 마퀴 애니메이션 유지) */
+  .marquee-row,
+  .marquee-row__viewport,
+  .marquee-track span {
+    font-size: clamp(88px, 26vw, 120px);
+  }
+
+  .marquee-track,
+  .marquee-track--reverse {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    align-items: center;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+  }
+  .marquee-track span {
+    line-height: 0.82;
+    padding-block: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  section[aria-label="맛별 도넛 비주얼"] {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .donut-visual {
+    top: 53%;
+    width: min(92vw, 420px);
+  }
+
+  .flavor-hero--corn .donut-visual img,
+  .flavor-hero--peach .donut-visual img,
+  .flavor-hero--melon .donut-visual img,
+  .flavor-hero--blueberry .donut-visual img {
+    filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.18));
+  }
+
+  /* 우측 인디케이터 — 연한 톤 (파스텔 배경 위) */
+  .flavor-indicator {
+    right: 8px;
+    gap: 4px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .flavor-indicator__dot {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+  }
+
+  .flavor-indicator__dot::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.42) !important;
+    opacity: 1;
+  }
+
+  .flavor-indicator__dot.is-active::before {
+    width: 10px;
+    height: 28px;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.78) !important;
+    opacity: 1;
+  }
+
+  .flavor-indicator__dot::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .vscroll-drive {
+    --step-vh: 62;
+  }
+
+  .donut-visual {
+    top: 54%;
+    width: min(96vw, 360px);
+  }
+}
+
+/* --- 03. POPPI text hero (Figma 1153:247 — 브랜드 가치관) --- */
+
+/* 1280px 이하: 컨텐츠 좌측 패딩만 점진적으로 축소, 이미지는 우측 그대로 */
+@media (max-width: 1280px) {
+  .poppi-hero {
+    padding-left: clamp(40px, 9vw, 180px);
+  }
+}
+
+/* 1024px 이하: 도넛 공장 이미지가 잘리기 시작 → 약간 커지면서 우상단 고정 */
+@media (max-width: 1024px) {
+  .poppi-hero {
+    background-size: 75% auto;
+    background-position: 100% 0%;
+  }
+}
+
+/* 768px 이하: 이미지가 너무 작아져 cover 로 전환, 모바일 본문은 좁게 */
+@media (max-width: 768px) {
+  .poppi-hero {
+    background-size: cover;
+    background-position: 70% top;
+    padding-left: clamp(24px, 6vw, 60px);
+    padding-right: clamp(24px, 6vw, 60px);
+  }
+
+  .hero-content {
+    /* 모바일에서는 더 좁게 */
+    max-width: 100%;
+  }
+
+  .hero-content p {
+    line-height: 1.4;
+  }
+
+  .hero-content p br {
+    display: none;
+  }
+
+  .hero-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+
+  .hero-button img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-button {
+    padding: 12px 22px;
+    gap: 8px;
+  }
+}
+
+/* --- 04. Event receipt --- */
+@media (max-width: 1280px) {
+  .event-section {
+    background-size: 100% var(--event-bakery-bg-height);
+  }
+}
+
+@media (max-width: 900px) {
+  .event-sticky {
+    min-height: 0;
+    height: 100dvh;
+    height: 100svh;
+  }
+
+  .event-title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .receipt-stage {
+    width: min(var(--slot-width), calc(100vw - 32px));
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .event-content {
+    padding-top: max(var(--content-top), env(safe-area-inset-top, 0px));
+  }
+
+  .receipt-stage {
+    width: min(var(--slot-width), calc(100vw - 24px));
+  }
+}
+
+/* --- Tablet landscape / small laptop --- */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .donut-visual {
+    width: min(640px, 70vw);
+  }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-duration: 120s;
+  }
+}
+
+
+/* =========================================================
+   04-B. Event Calendar - responsive
+   ========================================================= */
+
+@media (max-width: 1280px) {
+  .poppi-event__inner {
+    gap: 32px;
+    width: min(100% - 48px, 1200px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .poppi-event {
+    padding: 96px 0 96px;
+  }
+
+  .poppi-event__inner {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .event-slide-card__viewport { --slide-width: 100%; --slide-gap: 0px; }
+
+  .event-slide-card,
+  .event-calendar-card {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .poppi-event {
+    padding: 64px 0 72px;
+  }
+
+  .poppi-event__title {
+    font-size: 26px;
+  }
+
+  .poppi-event__inner {
+    width: min(100% - 32px, 600px);
+    gap: 22px;
+  }
+
+  .event-slide-card {
+    padding: 18px 18px 22px;
+    aspect-ratio: auto;
+  }
+
+  .event-slide-card__more { font-size: 14px; }
+  .event-slide-card__viewport { aspect-ratio: 16 / 11; --slide-width: 100%; --slide-gap: 0px; }
+  .event-slide-card__dots { gap: 14px; margin-top: 14px; }
+
+  .event-calendar-card {
+    padding: clamp(14px, 2.5vw, 20px) clamp(12px, 2vw, 18px) clamp(16px, 3vw, 22px);
+    aspect-ratio: auto;
+  }
+
+  .event-calendar-card__month { font-size: clamp(18px, 2.4vw, 22px); }
+  .event-calendar-card__nav-btn {
+    width: clamp(24px, 3.4vw, 30px);
+    height: clamp(24px, 3.4vw, 30px);
+  }
+  .event-calendar-card__weekdays {
+    font-size: clamp(12px, 1.7vw, 15px);
+    height: clamp(40px, 6vw, 52px);
+    padding: 0 clamp(4px, 0.8vw, 8px);
+  }
+
+  /* 격자 칸을 채우도록 fluid — width 100% + aspect-ratio 1로 정원 유지, 최대 cap */
+  .cal-cell {
+    width: min(100%, 48px);
+    height: auto;
+    aspect-ratio: 1;
+    font-size: clamp(13px, 1.8vw, 16px);
+  }
+
+  .cal-week-label { font-size: clamp(10px, 1.4vw, 12px); }
+
+  /* ── main-choice 탭 스위처 (모바일 전용) ── */
+  .main-choice__tabs { display: flex; }   /* 탭 바 표시 */
+
+  /* overflow 래퍼: 카드 트랙 클리핑 */
+  .main-choice__cards-overflow {
+    overflow: hidden;
+    flex: 1;
+  }
+
+  /* 카드 트랙: 가로 슬라이드 모드 */
+  .main-choice__cards[data-choice-track] {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: 200% !important;
+    margin-left: 0 !important;
+    overflow: visible;
+    will-change: transform;
+    align-items: flex-start;
+  }
+
+  /* 각 카드: 트랙의 50% = 뷰포트 100% */
+  .main-choice__cards[data-choice-track] .main-choice-card {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    min-width: 0;
+  }
+
+  /* 모바일에서 hover 호버 확장 효과 비활성화 */
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--store,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--store {
+    flex: 0 0 50% !important;
+  }
+}
+
+
+/* =========================================================
+   05. Business Banner - responsive
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .business-banner__inner {
+    width: min(720px, calc(100% - 48px));
+    gap: 10px;
+    height: 240px;
+  }
+
+  .business-banner__character {
+    width: 240px;
+    height: 270px;
+  }
+
+  .business-banner__title {
+    font-size: 24px;
+  }
+
+  .business-banner__desc {
+    font-size: 16px;
+  }
+
+  .business-banner__divider {
+    height: 100px;
+  }
+
+  .business-banner__cta {
+    padding: 16px 48px;
+    gap: 16px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .business-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 20px 32px;
+    margin: 40px auto;
+    text-align: center;
+    background-color: #fdadc6;
+    border-radius: 20px;
+    overflow: visible;
+  }
+
+  .business-banner__character {
+    position: relative; /* absolute 해제하여 겹침 차단 */
+    left: auto;
+    top: auto;
+    width: 150px;
+    height: auto;
+    margin-top: -68px; /* 카드의 상단 테두리에 걸치도록 마진 보정 */
+    margin-bottom: 12px;
+    align-self: center;
+    order: 0;
+  }
+
+  .business-banner__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    height: auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  .business-banner__text {
+    flex: 0 0 auto;
+    width: 100%;
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .business-banner__divider {
+    display: none;
+  }
+
+  .business-banner__action {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  .business-banner__cta {
+    padding: 12px 48px;
+    font-size: 16px;
+    border-radius: 50px;
+    background-color: #452219;
+    color: #ffffff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+    box-shadow: 0 4px 12px rgba(69, 35, 25, 0.25);
+  }
+
+  .business-banner__title {
+    font-size: 22px;
+    color: #ffffff;
+    line-height: 1.25;
+  }
+
+  .business-banner__desc {
+    font-size: 14px;
+    margin-top: 4px;
+    color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+
+/* =========================================================
+   06. Main Choice - responsive
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .main-choice__inner {
+    width: min(720px, calc(100% - 48px));
+  }
+
+  .main-choice__cards {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .main-choice-card,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--store,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--store {
+    flex: 1;
+  }
+
+  .main-choice:has(.main-choice-card--online:hover) .main-choice__bg-curve,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice__bg-curve {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-choice {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .main-choice__inner {
+    width: min(100% - 32px, 560px);
+    padding: 100px 0 56px;
+  }
+
+  .main-choice .h1 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .main-choice__desc {
+    margin-top: 16px;
+  }
+
+  .main-choice .p2-r.main-choice__desc {
+    font-size: 16px;
+  }
+
+  .main-choice__cards {
+    margin-top: 32px;
+  }
+
+  .main-choice-card {
+    padding: 40px 16px 48px;
+  }
+
+  .main-choice-card--online:hover .main-choice-card__image,
+  .main-choice-card--store:hover .main-choice-card__image {
+    animation: none;
+    transform: none;
+    opacity: 1;
+    filter: drop-shadow(0 20px 24px rgba(69, 35, 25, 0.1));
+  }
+
+  .main-choice-card:hover .main-choice-card__label,
+  .main-choice-card:hover .main-choice-card__title,
+  .main-choice-card:hover .main-choice-card__text,
+  .main-choice-card:hover .main-choice-card__button {
+    transform: none;
+  }
+
+  .main-choice-card:hover .main-choice-card__label::before {
+    width: 44px;
+  }
+
+  .main-choice-card__image-wrap {
+    min-height: 180px;
+    height: auto;
+    padding: 0;
+    margin-bottom: 24px;
+  }
+
+  .main-choice-card--online {
+    overflow-x: visible;
+  }
+
+  .main-choice-card__image {
+    width: min(240px, 100%);
+  }
+
+  .main-choice-card__label {
+    font-size: 15px;
+  }
+
+  .main-choice .main-choice-card__title.h3-b {
+    font-size: 24px;
+  }
+
+  .main-choice .main-choice-card__text.p2-r {
+    font-size: 15px;
+  }
+
+  .main-choice-card__button {
+    min-width: 220px;
+    min-height: 52px;
+    margin-top: 28px;
+  }
+}
+
+
+/* =========================================================
+   07. Review Slider - responsive
+   (≤768 상세 룰은 하단 07-B 블록 — vw 기반 카드·폰 스케일)
+   ========================================================= */
+
+
+/* =========================================================
+   08. Footer - responsive
+   ========================================================= */
+
+@media (max-width: 629px) {
+  .poppi-footer {
+    --footer-pad-top: clamp(48px, 14vw, 72px);
+    --footer-pad-x: 20px;
+    --footer-pad-bottom: clamp(28px, 7vw, 36px);
+    border-radius: clamp(24px, 8.53vw, 32px) clamp(24px, 8.53vw, 32px) 0 0;
+  }
+
+  .footer-info,
+  .footer-rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(16px, 4vw, 22px);
+  }
+
+  .footer-info {
+    margin: 0;
+    padding: 0;
+    gap: clamp(18px, 5vw, 24px);
+  }
+
+  .footer-rights {
+    padding: clamp(20px, 5vw, 28px) 0 0;
+  }
+
+  .footer-menu,
+  .footer-tagline,
+  .footer-brand-copy {
+    display: none !important;
+  }
+
+  .footer-legal {
+    display: flex;
+  }
+
+  .footer-contact h2 {
+    display: none;
+  }
+
+  .footer-contact,
+  .footer-center,
+  .footer-copyright,
+  .footer-socials {
+    justify-self: center;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .footer-center {
+    margin-bottom: 0;
+  }
+
+  .footer-logo {
+    width: min(168px, 52vw);
+  }
+
+  .footer-contact li,
+  .footer-contact a {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .footer-socials {
+    gap: clamp(20px, 6vw, 28px);
+  }
+
+  .footer-socials img {
+    height: 22px;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   STORE — Figma 1176-750 반응형
+   ========================================================= */
+@media (max-width: 1280px) {
+  .store-search__list { width: 340px; top: 24px; left: 16px; }
+}
+
+@media (max-width: 1024px) {
+  .interior-carousel__dots { gap: 18px; }
+}
+
+@media (max-width: 768px) {
+  .store-interior__blob { transform: scale(0.65); opacity: 0.6; }
+}
+
+@media (max-width: 768px) and (min-width: 541px) {
+  .interior-carousel__dots { gap: 14px; margin-top: 28px; }
+  .interior-carousel__dot { width: 13px; height: 13px; }
+  .interior-carousel__dot.is-active { width: 20px; height: 20px; }
+}
+
+/* 태블릿만 — 모바일(≤540px) STORE SEARCH 는 store.css 에서 처리 */
+@media (max-width: 768px) and (min-width: 541px) {
+  .store-search { padding: 60px 16px; }
+
+  .store-search__filters {
+    gap: 8px;
+    /* 678px 등에서 한 줄이 넘쳐 잘리는 문제 방지 */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .store-search__select {
+    flex: 1 1 calc(33.333% - 8px);
+    min-width: 0;
+  }
+  .store-search__select select {
+    width: 100%;
+    padding: 9px 40px 9px 18px;
+    font-size: 15px;
+  }
+  .store-search__select select[data-filter-type] {
+    min-width: 0;
+  }
+  .store-search__keyword {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .store-search__keyword input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    padding: 9px 40px 9px 16px;
+    font-size: 15px;
+    box-sizing: border-box;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .store-search__btn { flex: 1 1 calc(50% - 8px); }
+
+  .store-search__store-name { font-size: 18px; gap: 14px; }
+  .store-search__store-addr { font-size: 14px; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .store-interior__head {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .store-interior .store-interior__title { font-size: 32px; }
+  .store-interior__sub { font-size: 15px; }
+  .store-search .store-search__title { font-size: 28px; }
+  .interior-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 263px;
+    min-height: 263px;
+    aspect-ratio: unset;
+    --slide-width: 242px;
+    --slide-gap: 12px;
+  }
+}
+
+
+/* =========================================================
+   INDEX.HTML — MOBILE
+   Figma 시안 1252:42 (Mo-main, 402×5566) 1:1 매핑
+   - 적용 범위: 모든 모바일 디바이스 (max-width: 480px)
+   - 정밀 보정: max-width: 402px (시안 폭 기준)
+   - 기존 산재된 480/767/760px 규칙들을 보완/덮어씌움
+   ========================================================= */
+
+/* ---------- 01. Donut motion hero ----------
+   시안: 상단 중앙에 "A LITTLE SWEET FACTORY" + 큰 POPPI 로고
+   (Frame 7730 @ y=174, 360×223) */
+@media (max-width: 480px) {
+  .donut-motion-section {
+    min-height: 100svh;
+    height: auto;
+  }
+  .donut-hero-stage {
+    aspect-ratio: 402 / 720;
+    min-height: 100svh;
+  }
+  .donut-logo-block {
+    /* Figma: 상단 중앙 (y=174 of 402×ヒーロー), 큰 로고 + 작은 tagline */
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .donut-logo-tagline {
+    font-size: clamp(12px, 3.4vw, 16px);
+    letter-spacing: 0.04em;
+  }
+  .donut-logo-image {
+    width: clamp(180px, 56vw, 230px);
+    height: auto;
+  }
+}
+
+/* ---------- 02. Flavor slider (vscroll-drive) ----------
+   시안: BLUEBERRY marquee 1 장 (실제론 4 flavor 스크롤). 가로 마퀴는 유지 */
+@media (max-width: 480px) {
+  .vscroll-drive { --step-vh: 62; }
+
+  .donut-visual {
+    top: 56%;
+    width: min(92vw, 330px);
+  }
+
+  .flavor-marquee {
+    gap: 50px;
+    padding-block: 0;
+  }
+
+  .marquee-row {
+    line-height: 0.84;
+    padding-block: 0;
+    padding-left: 0;
+  }
+
+  .marquee-row__viewport {
+    line-height: 0.84;
+    overflow: visible;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  .marquee-row,
+  .marquee-row__viewport,
+  .marquee-track span {
+    font-size: clamp(96px, 28vw, 132px);
+  }
+
+  .marquee-track span {
+    line-height: 0.84;
+    padding-block: 0;
+  }
+}
+
+/* iOS Safari — 세로 글리프 여유 (가로는 viewport visible 로 끝 잘림 방지) */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .flavor-marquee {
+      overflow: visible;
+      padding-block: 0;
+      gap: 50px;
+    }
+
+    .marquee-row {
+      line-height: 0.9;
+      padding-block: 0;
+      overflow: visible;
+      contain: none;
+    }
+
+    .marquee-row__viewport {
+      overflow: visible;
+      padding-block: 0;
+      margin-block: 0;
+      line-height: 0.9;
+      -webkit-mask-image: none;
+    }
+
+    .marquee-track {
+      will-change: auto;
+      -webkit-backface-visibility: visible;
+      backface-visibility: visible;
+      align-items: center;
+    }
+
+    .marquee-track span {
+      line-height: 0.9;
+      padding-block: 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .vscroll-drive.is-mobile-stack .wheel-horizontal-panel .flavor-hero {
+      overflow: visible;
+      isolation: auto;
+    }
+  }
+}
+
+/* ---------- 03. POPPI hero (A LITTLE SWEET FACTORY) ----------
+   모바일은 단일 bg image (사용자 제공) + 텍스트/버튼 overlay.
+   bg image는 commons.css 의 --poppi-hero-mobile-bg 변수로 주입.
+   변수가 비어있으면(none) fallback color (apricot) 만 노출. */
+@media (max-width: 768px) {
+  .poppi-hero {
+    /* 데스크탑 bg image 해제 후 모바일 전용 변수로 교체 */
+    background-image: var(--poppi-hero-mobile-bg, none);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--apricot-bg, #FDE2CF);
+  }
+}
+
+@media (max-width: 480px) {
+  .poppi-hero {
+    /* 이미지 받았을 때 충분한 캔버스 확보. 이미지 없을 땐 apricot bg 위에 텍스트만 노출되며
+       하단 여백은 다음 섹션과 자연 스택. */
+    min-height: clamp(560px, 92dvh, 720px);
+    padding: clamp(40px, 12vw, 56px) 20px clamp(40px, 12vw, 56px);
+    background-image: var(--poppi-hero-mobile-bg, none);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--apricot-bg, #FDE2CF);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
+  .poppi-hero .hero-content {
+    width: 100%;
+    max-width: 362px;
+    text-align: center;
+    align-items: center;
+  }
+  .poppi-hero .hero-content h1 {
+    font-size: clamp(32px, 9vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .poppi-hero .hero-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 12px 0 0;
+  }
+  /* HTML 의 <br> 은 디자인상 의도된 줄바꿈이므로 모바일에서도 유지 */
+  .poppi-hero .hero-button {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 290px;
+    min-height: 52px;
+    justify-content: center;
+    padding: 12px 24px;
+    border: 2px solid var(--donut-brown-dark, #452319);
+    background: transparent;
+    color: var(--donut-brown-dark, #452319);
+    border-radius: 999px;
+    font-size: 15px;
+    gap: 12px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+  }
+  .poppi-hero .hero-button img {
+    width: 20px;
+    height: 20px;
+  }
+  .poppi-hero .hero-button:active {
+    transform: scale(0.97);
+    background-color: var(--donut-brown-dark, #452319);
+    color: #ffffff;
+  }
+  /* 기존 floating town card (::after) 제거 — 사용자 제공 mobile bg 이미지로 대체될 것 */
+  .poppi-hero::after { content: none; display: none; }
+}
+
+/* ---------- 04. EVENT (타이틀 + 슬라이드 카드 + 캘린더) ----------
+   Figma 1252:93 / 1252:77 / 1252:94 — 세로 스택, 카드 흰 배경, 큰 EVENT 타이틀 */
+@media (max-width: 480px) {
+  .poppi-event {
+    padding: clamp(40px, 11vw, 56px) 0 clamp(48px, 12vw, 64px);
+  }
+  .poppi-event__head {
+    padding: 0 16px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .poppi-event__title {
+    font-size: 26px;
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  .poppi-event__inner {
+    flex-direction: column;
+    gap: 28px;
+    width: min(100% - 32px, 400px);
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* event slide card (370×496) */
+  .event-slide-card {
+    padding: 16px 16px 20px;
+    aspect-ratio: auto;
+    min-height: 460px;
+  }
+  .event-slide-card__head {
+    margin-bottom: 8px;
+  }
+  .event-slide-card__more {
+    font-size: 13px;
+    gap: 8px;
+  }
+  .event-slide-card__viewport {
+    aspect-ratio: 334 / 352;
+    --slide-width: 100%;
+    --slide-gap: 0px;
+    border-radius: 18px;
+  }
+  .event-slide-card__dots { gap: 14px; margin-top: 14px; }
+  .event-slide-card__dot { width: 14px; height: 14px; }
+  .event-slide-card__dot.is-active { width: 22px; height: 22px; }
+
+  /* event calendar card (342×496) — 폭 비례 fluid 사이즈
+     셀(원)/요일/날짜 폰트가 카드 폭에 따라 같이 커지도록 clamp 적용.
+     특히 .cal-cell 은 width 100% + aspect-ratio + max 캡으로 격자 칸을 가득 채움. */
+  .event-calendar-card {
+    padding: clamp(14px, 4vw, 20px) clamp(12px, 3.4vw, 18px) clamp(18px, 5vw, 24px);
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+  .event-calendar-card__month {
+    font-size: clamp(20px, 5.6vw, 26px);
+  }
+  .event-calendar-card__nav-btn {
+    width: clamp(24px, 6.4vw, 30px);
+    height: clamp(24px, 6.4vw, 30px);
+  }
+  .event-calendar-card__weekdays {
+    font-size: clamp(12px, 3.4vw, 15px);
+    height: clamp(40px, 11vw, 52px);
+    padding: 0 clamp(4px, 1.4vw, 8px);
+    border-radius: 12px;
+    background: #FCE0CC;
+  }
+  .event-calendar-card__grid {
+    padding: clamp(6px, 2vw, 10px) clamp(4px, 1.6vw, 10px) clamp(6px, 2vw, 10px);
+  }
+  .cal-cell {
+    /* 격자 칸(1fr)의 100%까지 채우되 너무 커지지 않도록 cap. 
+       aspect-ratio 1로 정원 유지. height auto 해제 후 격자 row 맞춤. */
+    width: min(100%, 48px);
+    height: auto;
+    aspect-ratio: 1;
+    font-size: clamp(13px, 3.7vw, 16px);
+  }
+  .cal-week-label {
+    font-size: clamp(10px, 2.7vw, 12px);
+    line-height: 1.25;
+  }
+}
+
+/* ---------- 05. Business banner ----------
+   Figma 1252:149 (409×344) — 캐릭터 상단 중앙, 텍스트/CTA 하단 중앙, 핑크 라운드 박스 */
+@media (max-width: 480px) {
+  .business-banner {
+    margin: 40px auto 0;
+    width: min(100% - 16px, 420px);
+    padding: 32px 20px 24px;
+    border-radius: 20px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .business-banner__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: auto;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  .business-banner__character {
+    position: relative; /* absolute 해제하여 겹침 방지 */
+    left: auto;
+    top: auto;
+    width: clamp(100px, 28vw, 120px);
+    height: auto;
+    margin-top: -56px; /* 모바일 카드 상단 경계에 걸쳐진 플로팅 느낌 연출 */
+    margin-bottom: 12px;
+    align-self: center;
+    order: 0;
+  }
+  .business-banner__text { 
+    order: 1; 
+    flex: 0 0 auto; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .business-banner__action {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: 4px;
+  }
+  .business-banner__divider { display: none; }
+  .business-banner__title {
+    font-size: clamp(17px, 4.8vw, 19px);
+    line-height: 1.3;
+    color: #ffffff;
+    margin: 0;
+  }
+  .business-banner__desc {
+    font-size: 13px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 2px 0 0;
+  }
+  .business-banner__cta {
+    margin: 8px auto 0;
+    padding: 10px 36px;
+    background: #6E2F1A;
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 13px;
+    gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+    box-shadow: 0 4px 10px rgba(69, 35, 25, 0.2);
+  }
+}
+
+/* ---------- 06. Main choice (Online order / Visit our store) ----------
+   태블릿: 세로 스택 + 물결 구분선 / 모바일: 위아래 1열 + 물결 구분선 */
+
+/* 태블릿 (769px ~ 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-choice {
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    background-color: #FDF4E6;
+  }
+
+  .main-choice__bg { display: none; }
+
+  .main-choice__inner {
+    width: min(720px, calc(100% - 48px));
+    padding: 72px 0 56px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .main-choice__cards {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 32px;
+    gap: clamp(18px, 4vw, 24px);
+    overflow: visible;
+  }
+
+  .main-choice-card {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 40px clamp(32px, 5vw, 60px) 48px;
+    border-radius: 0;
+    align-items: center;
+    text-align: center;
+    overflow: visible;
+  }
+
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--store,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--store {
+    flex: 0 0 auto;
+  }
+
+  .main-choice:has(.main-choice-card--online:hover) .main-choice__bg-curve,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice__bg-curve {
+    transform: none;
+  }
+
+  .main-choice-card--online {
+    background-color: #FCEEE8;
+    overflow: visible;
+    position: relative;
+  }
+
+  .main-choice-card--online::after {
+    display: none;
+  }
+
+  .main-choice-card--store {
+    background-color: #F5EDE6;
+    position: relative;
+    z-index: 1;
+    padding-top: clamp(32px, 7vw, 44px);
+  }
+
+  .main-choice-card__image-wrap {
+    min-height: 0;
+    padding: 16px 0 12px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .main-choice-card__image {
+    width: min(260px, 55%);
+  }
+
+  .main-choice-card__button {
+    position: relative;
+    z-index: 3;
+    gap: 32px;
+    padding: 14px 44px;
+    min-width: 200px;
+    min-height: 52px;
+    font-size: 16px;
+    margin-top: 24px;
+  }
+
+  .main-choice .main-choice-card__title.h3-b { font-size: 26px; }
+  .main-choice .main-choice-card__text.p2-r  { font-size: 15px; }
+  .main-choice-card__label                   { font-size: 13px; }
+
+  .main-choice__title-img {
+    max-width: min(460px, 80%);
+  }
+}
+
+/* 모바일 (≤ 768px)
+   - 단일 bg image (사용자 제공) + 헤더(타이틀/설명) + 카드 2장 overlay 구조.
+   - bg image는 commons.css 의 --main-choice-mobile-bg 변수로 주입.
+   - 변수 비어있으면 fallback color (#FCEEE8) 만 노출. */
+@media (max-width: 768px) {
+  .main-choice {
+    height: auto;
+    min-height: 0;
+    overflow: clip;
+    padding: 0;
+    background-image: var(--main-choice-mobile-bg, none);
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-color: #FCEEE8;
+  }
+
+  .main-choice__bg { display: none; }
+
+  .main-choice__inner {
+    width: 100%;
+    padding: clamp(40px, 11vw, 56px) clamp(16px, 5vw, 24px) 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .main-choice__cards {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    margin-top: clamp(24px, 7vw, 36px);
+    gap: clamp(18px, 4vw, 24px);
+    overflow: visible;
+  }
+
+  .main-choice-card {
+    flex: 0 0 auto;
+    width: 100%;
+    border-radius: 0;
+    padding: clamp(20px, 6vw, 28px) clamp(16px, 5vw, 24px);
+    align-items: center;
+    text-align: center;
+    overflow: visible;
+    position: relative;
+  }
+
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--store,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--store {
+    flex: 0 0 auto;
+  }
+
+  .main-choice-card--online {
+    background-color: #FCEEE8;
+    overflow: visible;
+  }
+
+  .main-choice-card--online::after {
+    display: none;
+  }
+
+  .main-choice-card--store {
+    background-color: #F5EDE6;
+    position: relative;
+    z-index: 1;
+    padding-top: clamp(24px, 7vw, 32px);
+  }
+
+  .main-choice-card__button {
+    position: relative;
+    z-index: 3;
+    gap: 16px;
+    padding: 15px 28px;
+    min-width: 0;
+    width: min(100%, 280px);
+    min-height: 52px;
+    font-size: 15px;
+    box-sizing: border-box;
+    margin-top: clamp(14px, 3vw, 20px);
+  }
+
+  .main-choice-card--store .main-choice-card__button {
+    background: #452219;
+    color: #fff;
+    border: none;
+  }
+
+  .main-choice-card__image-wrap {
+    min-height: 0;
+    padding: 0;
+    margin-bottom: clamp(14px, 4vw, 20px);
+    width: 100%;
+    max-width: clamp(130px, 38vw, 170px);
+  }
+
+  .main-choice-card__image {
+    width: 100%;
+    height: auto;
+  }
+
+  .main-choice-card__label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  .main-choice-card__label::before { display: none; }
+
+  .main-choice .main-choice-card__title.h3-b {
+    font-size: clamp(20px, 5.8vw, 24px);
+    margin-bottom: 6px;
+  }
+
+  .main-choice .main-choice-card__text.p2-r {
+    font-size: clamp(13px, 3.5vw, 15px);
+    margin-bottom: clamp(16px, 5vw, 22px);
+  }
+
+  .main-choice__header { text-align: center; }
+
+  .main-choice .h1,
+  .main-choice__title {
+    font-size: clamp(24px, 7vw, 32px);
+    line-height: 1.2;
+  }
+
+  .main-choice__title-img {
+    max-width: min(320px, 85vw);
+  }
+
+  .main-choice .p2-r.main-choice__desc {
+    font-size: clamp(13px, 3.5vw, 15px);
+    margin-top: 10px;
+    line-height: 1.55;
+    color: #88706A;
+  }
+
+  .main-choice-card:hover .main-choice-card__label,
+  .main-choice-card:hover .main-choice-card__title,
+  .main-choice-card:hover .main-choice-card__text,
+  .main-choice-card:hover .main-choice-card__button {
+    transform: none !important;
+  }
+
+  .main-choice-card--online:hover .main-choice-card__image,
+  .main-choice-card--store:hover .main-choice-card__image {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- 07. Review (인스타) ----------
+   Figma 1252:43 / 1252:186 (304×505) — 단일 인스타 카드. 썸네일 무한슬라이더는 숨김 */
+@media (max-width: 480px) {
+  .poppi-review-section {
+    padding: clamp(40px, 11vw, 56px) 16px clamp(48px, 12vw, 64px);
+  }
+  .review-stage {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
+  .gallery {
+    display: block;
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+  .gallery-thumbs { display: none; }
+  .phone-slider {
+    position: static;
+    width: min(100%, 340px);
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+  .phone-frame-wrap { aspect-ratio: 304 / 505; }
+}
+
+/* ---------- 정밀 모바일 (~402px) — Figma 시안 1:1 미세조정 ---------- */
+@media (max-width: 402px) {
+  .donut-logo-image { width: 200px; }
+  .donut-logo-tagline { font-size: 13px; }
+
+  .poppi-hero .hero-content h1 { font-size: 40px; }
+  .poppi-hero .hero-content p { font-size: 13px; }
+
+  .poppi-event__title { font-size: 26px; }
+
+  .business-banner__title { font-size: 17px; }
+  .business-banner__desc { font-size: 13px; }
+  .business-banner__cta { font-size: 13px; padding: 11px 32px; }
+
+  .main-choice .h1 { font-size: 26px; }
+  .main-choice .main-choice-card__title.h3-b { font-size: 22px; }
+  .main-choice-card__button { min-width: 220px; font-size: 14px; padding: 14px 32px; }
+  /* .cal-cell 은 ≤480 룰의 clamp+aspect-ratio 가 알아서 처리 — 이 구간 override 제거 */
+}
+
+
+/* =========================================================
+   Production responsive refinement
+   - 768~403 태블릿/모바일 구간에서 공통 gutter와 section gap 사용
+   ========================================================= */
+@media (max-width: 1024px) {
+  .poppi-event__inner,
+  .business-banner,
+  .main-choice__inner {
+    width: min(720px, calc(100% - (var(--site-gutter) * 2)));
+  }
+
+  .business-banner__inner {
+    padding: 28px clamp(24px, 4vw, 48px);
+    min-height: 240px;
+  }
+
+  .main-choice {
+    min-height: auto;
+  }
+
+  .main-choice__inner {
+    padding-top: var(--section-y-sm);
+    padding-bottom: var(--section-y-sm);
+  }
+
+  .main-choice__cards {
+    gap: var(--content-gap-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .poppi-event,
+  .main-choice,
+  .poppi-review-section {
+    padding-top: var(--section-y-sm);
+    padding-bottom: var(--section-y-sm);
+  }
+
+  .business-banner {
+    margin-top: var(--section-gap-tight);
+    margin-bottom: var(--section-gap-tight);
+    width: min(600px, calc(100% - 32px));
+  }
+
+  .business-banner__inner {
+    padding: 28px 20px 24px;
+  }
+
+  .main-choice__cards {
+    margin-top: var(--content-gap-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .poppi-event,
+  .main-choice,
+  .poppi-review-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .business-banner {
+    width: calc(100% - 32px);
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .main-choice__inner {
+    width: calc(100% - 32px);
+  }
+}
+
+
+/* =========================================================
+   FINAL — spacing/grid sync for Brand & Store pages
+   responsive.css가 페이지 CSS 뒤에 로드되므로, 실무용 간격 기준은 여기서 최종 보정합니다.
+   ========================================================= */
+@media (max-width: 1280px) and (min-width: 1025px) {
+  .interior-carousel__viewport { --slide-width: 70%; }
+}
+
+@media (max-width: 1024px) {
+  .store-search {
+    padding-top: var(--section-y-md);
+    padding-bottom: var(--section-y-md);
+  }
+
+  .store-interior {
+    margin-top: 0;
+  }
+
+  .store-interior__head {
+    gap: var(--heading-sub-gap);
+    margin-bottom: var(--heading-media-gap);
+  }
+
+  .store-search__head { margin-bottom: var(--section-gap-tight); }
+  .store-search__filters { margin-bottom: var(--content-gap-md); }
+}
+
+@media (max-width: 767px) and (min-width: 541px) {
+  .interior-carousel__viewport {
+    --slide-width: 74%;
+    --slide-gap: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .interior-carousel__viewport {
+    --slide-width: 472px;
+    --slide-gap: 14px;
+    height: 216px;
+    min-height: 216px;
+    aspect-ratio: unset;
+  }
+}
+
+@media (max-width: 767px) {
+  .store-interior,
+  .store-search {
+    padding-top: var(--section-y-md);
+    padding-bottom: var(--section-y-md);
+  }
+
+  .store-search { padding-left: var(--site-gutter); padding-right: var(--site-gutter); }
+
+  .store-interior {
+    margin-top: 0;
+    padding-top: 54px;
+    padding-bottom: 0;
+  }
+
+  .store-interior__head { padding-inline: var(--site-gutter); }
+}
+
+@media (max-width: 768px) and (min-width: 541px) {
+  .interior-carousel__dots { gap: 16px; margin-top: var(--content-gap-sm); }
+}
+
+@media (max-width: 768px) and (min-width: 541px) {
+  .store-search {
+    padding-top: var(--section-y-md);
+    padding-bottom: var(--section-y-md);
+    padding-left: var(--site-gutter);
+    padding-right: var(--site-gutter);
+  }
+
+  /* 541~768: 4개 필터(3 select + 1 button)를 한 줄(일자) 로 정렬.
+     각 항목이 균등하게 줄어들어 stage 너비 내에 모두 들어가도록. */
+  .store-search__filters {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: 100%;
+    max-width: 100%;
+    justify-content: stretch;
+    align-items: center;
+    transform: none;                       /* PC translateX(-10px) 효과 제거 */
+  }
+
+  .store-search__filters > .store-search__select,
+  .store-search__filters > .store-search__btn {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+
+  .store-search__select select {
+    width: 100%;
+    /* 좁은 폭에서 한 줄 보장 + 잘림 시 말줄임 */
+    padding: 9px 28px 9px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background-position: right 10px center;
+  }
+
+  /* 점포유형 select 의 강제 min-width 제거 (flex 비율 따라가도록) */
+  .store-search__select select[data-filter-type] {
+    min-width: 0;
+  }
+
+  .store-search__btn {
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 13px;
+    line-height: 1.2;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  /* (legacy) keyword 입력 — HTML 에서는 제거됐으나 잔여 룰 안전 처리 */
+  .store-search__keyword {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .store-search__keyword input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    padding: 9px 40px 9px 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+/* ===== MERGED: pro-spacing.css -> responsive.css ===== */
+
+
+/* =========================================================
+   POPPI Professional Spacing System
+   ---------------------------------------------------------
+   1) 섹션 시작/끝 여백 통일
+   2) 제목↔설명, 텍스트↔이미지, 카드↔카드 간격 토큰화
+   3) 고정 height 클리핑 최소화: min-height + 콘텐츠 기준
+   4) 공통 footer 섹션 크기 정리
+   ========================================================= */
+
+:root {
+  --pro-max: 1440px;
+  --pro-narrow: 1180px;
+  --pro-text: 680px;
+  --pro-gutter: max(24px, calc((100vw - var(--pro-max)) / 2));
+  --pro-col-gap: 24px;
+
+  --pro-visual-hero-h: clamp(420px, 38.073vw, 731px);
+  --pro-section-h-sm: clamp(420px, 28vw, 540px);
+  --pro-section-h-md: clamp(640px, 46vw, 880px);
+  --pro-section-h-lg: clamp(780px, 57vw, 1090px);
+
+  --pro-section-y-xs: clamp(56px, 4.17vw, 80px);
+  --pro-section-y-sm: clamp(72px, 5.21vw, 100px);
+  --pro-section-y-md: clamp(88px, 6.25vw, 120px);
+  --pro-section-y-lg: clamp(104px, 7.29vw, 140px);
+  --pro-section-y-xl: clamp(120px, 8.33vw, 160px);
+
+  --pro-title-desc-gap: clamp(16px, 1.25vw, 24px);
+  --pro-head-content-gap: clamp(40px, 3.33vw, 64px);
+  --pro-text-image-gap: clamp(48px, 4.17vw, 80px);
+  --pro-block-gap: clamp(64px, 5.21vw, 100px);
+  --pro-component-gap: clamp(24px, 2.08vw, 40px);
+  --pro-small-gap: clamp(10px, 0.83vw, 16px);
+
+  --pro-footer-h: calc(min(100vw, 1920px) * 595 / 1920);
+  --pro-footer-top: clamp(72px, 11.05vw, 212px);
+  --pro-footer-x: var(--pro-gutter);
+  --pro-footer-bottom: clamp(32px, 5vw, 96px);
+}
+
+.pro-container,
+.site-container,
+.brand-identity__inner,
+.brand-application__inner,
+.store-search__body,
+.main-choice__inner,
+.poppi-event__inner,
+.business-banner {
+  width: min(var(--pro-max), calc(100% - (var(--pro-gutter) * 2)));
+  margin-inline: auto;
+}
+
+/* store-search__filters 는 store-search 섹션 padding (이미 --pro-gutter 적용됨) 안에 위치하므로
+   추가 gutter 적용 시 우측에 빈 공간이 생김 → 별도 처리:
+   stage 전체 너비 사용 + items 우측 정렬 (justify-content: flex-end). */
+.store-search__filters {
+  width: 100%;
+  max-width: var(--pro-max);
+  margin-inline: auto;
+}
+
+/* x 좌표 -10px 미세 조정 — PC(≥1025px)에서만 적용 (태블릿/모바일에서는 잘림 방지) */
+@media (min-width: 1025px) {
+  .store-search__filters {
+    transform: translateX(-10px);
+  }
+}
+
+main > section { box-sizing: border-box; }
+
+.brand-title-section {
+  height: 750px;
+  min-height: 750px;
+  max-height: 750px;
+  aspect-ratio: auto;
+}
+
+.store-title-section {
+  height: 750px;
+  min-height: 750px;
+  max-height: 750px;
+  aspect-ratio: auto;
+}
+
+.brand-title,
+.brand-title--fill,
+.brand-title--stroke,
+.store-title,
+.store-title--fill,
+.store-title--stroke {
+  font-size: clamp(61px, 7.99vw, 154px);
+  line-height: 0.95;
+}
+
+/* Brand Story */
+/* Brand Story — brand-hello 데스크탑 고정 레이아웃 (≥1025px 전용).
+   769~1024px / ≤768px / ≤540px 에서는 brand-story.css 미디어쿼리가
+   세로 스택 + 가운데 정렬을 담당하므로 이 글로벌 고정 룰을 격리한다. */
+@media (min-width: 1025px) {
+  .brand-hello {
+    height: 666px;
+    min-height: 666px;
+    max-height: 666px;
+    padding: 0;
+    display: block;
+  }
+}
+
+.brand-story-section {
+  padding: 210px 0 clamp(60px, 5.21vw, 100px);
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-story-section__title {
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.store-search .store-search__title {
+  margin: 0;
+  font-family: var(--font-ria);
+  font-weight: 800;
+  font-size: var(--type-h3);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #ED6325;
+  text-align: center;
+}
+
+/* INTERIOR 타이틀 — 48px Bold (요청) */
+.store-interior .store-interior__title {
+  margin: 0;
+  font-family: var(--font-ria);
+  font-weight: 700;
+  font-size: clamp(28px, 2.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  color: #ED6325;
+  text-align: center;
+}
+
+/* BRAND IDENTITY / BRAND APPLICATION — 64px 가운데 정렬 (요청) */
+.brand-identity__title,
+.brand-application__title {
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-ria);
+  font-weight: 800;
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+  letter-spacing: 0;
+  color: #ED6325;
+  text-align: center;
+}
+
+.brand-roadmap {
+  width: min(1293px, calc(100% - (var(--pro-gutter) * 2)));
+  margin: 170px auto 0;
+  aspect-ratio: 1293 / 1410;
+}
+
+.brand-roadmap__label { gap: 10px; }
+.brand-roadmap__desc { font-family: var(--font-paperlogy); line-height: 1.2; }
+
+.brand-identity {
+  height: auto;
+  min-height: var(--pro-section-h-lg);
+  padding: var(--pro-section-y-lg) 0 var(--pro-section-y-xl);
+  overflow: visible;
+}
+
+.brand-identity__inner { display: flex; flex-direction: column; height: auto; }
+.brand-identity__title { margin-bottom: calc(var(--pro-head-content-gap) + 100px); }
+
+.brand-identity__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--pro-text-image-gap);
+  margin-bottom: var(--pro-block-gap);
+}
+
+.brand-identity__col h3 {
+  margin: 0 0 var(--pro-component-gap);
+  font-family: var(--font-paperlogy);
+  font-size: clamp(20px, 1.67vw, 32px);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+/* logo-box 삭제됨 — .brand-identity__logo-img 가 직접 표시 */
+
+.brand-identity__typo-list { gap: var(--pro-component-gap); }
+.brand-identity__typo-item { gap: var(--pro-component-gap); }
+.brand-identity__typo-info h4 { margin-bottom: var(--pro-small-gap); }
+
+.brand-identity__typo-info p {
+  font-family: inherit;
+  font-size: clamp(15px, 1.04vw, 20px);
+  line-height: 1.4;
+}
+
+.brand-identity__color-name,
+.brand-identity__color-name small {
+  font-family: var(--font-paperlogy);
+  font-size: clamp(15px, 1.04vw, 20px);
+  line-height: 1.5;
+}
+
+.brand-identity__colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  align-items: start;
+  gap: clamp(16px, 1.46vw, 28px);
+}
+.brand-identity__color {
+  width: 100%;
+  max-width: 200px;
+  gap: var(--pro-small-gap);
+}
+.brand-identity__color-name { white-space: nowrap; }
+.brand-identity__color-swatch {
+  width: clamp(80px, 7.29vw, 140px);
+  height: clamp(80px, 7.29vw, 140px);
+}
+
+/* BRAND APPLICATION — height/spacing 은 brand-story.css 에서 관리.
+   여기서는 컨테이너 정렬과 board 자유흐름만 보조한다. */
+.brand-application__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.brand-application__board { width: 100%; height: auto; flex: 0 0 auto; object-fit: contain; }
+
+/* 이미지 그리드 — 가로 길이 유지(컨테이너 폭), 2-row 사이드바이사이드 레이아웃은 brand-story.css 에서 정의 */
+.brand-application__grid {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 8px;                                                 /* 사용자 요청 — 사진 사이 간격 8px 고정 */
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.brand-application__row { gap: 8px; }
+
+/* 태블릿/모바일은 콘텐츠 잘림 방지를 위해 자동 높이 + 단일 컬럼으로 복귀 */
+@media (max-width: 1024px) {
+  .brand-application {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: clamp(56px, 9vw, 80px) 0;
+    overflow: visible;
+  }
+  .brand-application__grid {
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+  /* Row 1 을 단일 컬럼으로 풀어 배너 + 정사각 2장이 자연 높이로 펼쳐지게 */
+  .brand-application__row--lead {
+    flex: 0 0 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+  .brand-application__row--tail {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .brand-application__row--lead .brand-application__item--banner,
+  .brand-application__row--tail .brand-application__item--paper,
+  .brand-application__row--tail .brand-application__item--box {
+    height: auto;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  .brand-application__col {
+    width: 100%;
+    height: auto;
+    flex-direction: row;                                    /* 정사각 2장 가로 배치 (태블릿 기존 형태) */
+  }
+  .brand-application__col .brand-application__item--square {
+    height: auto;
+    width: 100%;
+    flex: 1 1 0;
+  }
+}
+
+/* Store — INTERIOR 850px (PC만) */
+@media (min-width: 1025px) {
+  .store-interior {
+    height: 850px;
+    min-height: 850px;
+    max-height: 850px;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+/* 헤드/타이틀/서브카피 위치는 store.css 의 절대좌표 정의 사용 — 오버라이드 안 함 */
+
+.store-search {
+  min-height: var(--pro-section-h-lg);
+  max-height: none;
+  padding: var(--pro-section-y-lg) var(--pro-gutter) var(--pro-section-y-xl);
+  overflow: visible;
+}
+
+.store-search__head { margin: 0 auto var(--pro-head-content-gap); }
+.store-search__filters { margin-bottom: var(--pro-component-gap); gap: var(--pro-small-gap); }
+.store-search__body { width: min(var(--pro-max), 100%); }
+.store-search__map-wrap { border-radius: var(--radius-md); max-height: none; }
+
+.store-search__list {
+  left: var(--pro-component-gap);
+  top: var(--pro-component-gap);
+  width: clamp(300px, 24vw, 380px);
+  max-height: calc(100% - (var(--pro-component-gap) * 2));
+  padding: clamp(16px, 1.25vw, 24px);
+  border-radius: var(--radius-md);
+}
+
+/* 태블릿 STORE SEARCH — 지도·리스트 카드 세로 확대 (1042px 등 769~1024 포함) */
+@media (min-width: 541px) and (max-width: 1024px) {
+  .store-search__stage {
+    grid-template-rows: auto auto minmax(clamp(320px, 43vw, 485px), auto);
+  }
+
+  .store-search__map-body {
+    min-height: clamp(320px, 43vw, 485px);
+    height: clamp(320px, 43vw, 485px);
+  }
+
+  .store-search__map-wrap {
+    min-height: 100%;
+    height: 100%;
+  }
+
+  .store-search__list {
+    grid-area: map;
+    top: 20px;
+    left: 20px;
+    width: min(340px, calc(100% - 40px));
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+    min-height: min(300px, calc(100% - 40px));
+    padding: 20px;
+  }
+}
+
+.store-search__search-input { margin-bottom: var(--pro-small-gap); }
+.store-search__store-item { gap: var(--pro-small-gap); padding: clamp(14px, 1.04vw, 20px) 0; }
+.store-search__store-name { font-family: var(--font-paperlogy); font-size: var(--type-b2); line-height: 1.35; font-weight: 700; }
+.store-search__store-addr { font-family: var(--font-paperlogy); font-size: var(--type-caption); line-height: 1.45; font-weight: 500; }
+
+/* Main page sections */
+.poppi-event { padding: var(--pro-section-y-lg) 0 var(--pro-section-y-lg); }
+.poppi-event__head { margin-bottom: var(--pro-head-content-gap); }
+.poppi-event__inner { gap: var(--pro-component-gap); }
+
+.business-banner { margin: var(--pro-block-gap) auto; border-radius: var(--radius-md); }
+.business-banner__inner { min-height: clamp(220px, 13vw, 250px); padding: clamp(32px, 3.33vw, 64px) clamp(48px, 8.33vw, 160px); gap: var(--pro-text-image-gap); }
+.business-banner__text { gap: var(--pro-title-desc-gap); }
+
+.main-choice { min-height: var(--pro-section-h-md); height: auto; overflow: hidden; }
+.main-choice__inner { padding: var(--pro-section-y-md) 0 var(--pro-section-y-sm); }
+.main-choice__desc { margin-top: var(--pro-title-desc-gap); line-height: var(--lh-body); }
+.main-choice__cards { margin-top: var(--pro-head-content-gap); gap: var(--pro-component-gap); }
+.main-choice-card__image-wrap { margin-bottom: var(--pro-component-gap); }
+.main-choice-card__label { margin-bottom: var(--pro-small-gap); }
+.main-choice-card__title { margin-bottom: var(--pro-small-gap); }
+
+.poppi-review-section {
+  padding-top: var(--pro-section-y-xs);
+  padding-bottom: var(--review-footer-bleed, 0px);
+}
+.review-stage { min-height: 560px; height: clamp(560px, 50.68vw, 900px); }
+
+/* Common footer — index(리뷰 섹션)는 style.css에서 푸터 겹침 처리 */
+body:not(:has(.poppi-review-section)) .poppi-footer-wrap,
+body:not(:has(.poppi-review-section)) .poppi-footer-wrap[data-common-footer] {
+  margin-top: 0;
+  overflow: visible;
+}
+
+.poppi-footer {
+  width: 100%;
+  max-width: 1920px;
+  min-height: auto;
+  padding: 0;
+  display: grid;
+  grid-template-areas: "footer-stack";
+  gap: 0;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --pro-gutter: clamp(32px, 6vw, 64px);
+    --pro-section-y-lg: 96px;
+    --pro-section-y-xl: 112px;
+    --pro-head-content-gap: 48px;
+    --pro-text-image-gap: 56px;
+    --pro-block-gap: 72px;
+  }
+
+  .brand-roadmap { width: min(1293px, calc(100% - (var(--pro-gutter) * 2))); margin-top: clamp(72px, 8.85vw, 170px); }
+  .brand-identity__row { gap: var(--pro-component-gap); }
+  .interior-carousel__viewport { --slide-width: 74%; --slide-gap: 18px; }
+}
+
+@media (max-width: 1200px) and (min-width: 630px) {
+  body:not(:has(.poppi-review-section)) .poppi-footer-wrap,
+  body:not(:has(.poppi-review-section)) .poppi-footer-wrap[data-common-footer] {
+    margin-top: clamp(-56px, -6vw, -84px);
+    overflow: hidden;
+    background-color: #4c3630;
+  }
+
+  body:has(.poppi-review-section) > .poppi-footer-wrap,
+  body:has(.poppi-review-section) > .poppi-footer-wrap[data-common-footer] {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  /* 레이아웃은 footer.css — 타이포·간격만 동기 */
+  .poppi-footer h2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  .footer-contact li,
+  .footer-contact a,
+  .menu-grid a,
+  .footer-tagline,
+  .footer-brand-copy,
+  .footer-copyright {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2.1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-tagline,
+  .footer-brand-copy,
+  .footer-copyright {
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 630px) {
+  /* 좁은 태블릿(677px 등) — footer.css 겹침 방지 타이포 동기 */
+  .poppi-footer h2 {
+    font-size: clamp(10px, 1.45vw, 13px);
+    margin-bottom: clamp(6px, 1.2vw, 10px);
+  }
+
+  .footer-contact li,
+  .footer-contact a,
+  .menu-grid a,
+  .footer-tagline,
+  .footer-brand-copy,
+  .footer-copyright {
+    font-size: clamp(9px, 1.35vw, 12px);
+    font-weight: 400;
+    line-height: 1.7;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-tagline {
+    line-height: 1.3;
+  }
+
+  .footer-brand-copy,
+  .footer-copyright {
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 629px) {
+  .poppi-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: clamp(400px, 105vw, 480px);
+    padding: clamp(48px, 14vw, 72px) 20px clamp(28px, 7vw, 36px);
+  }
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: clamp(18px, 5vw, 24px);
+  }
+
+  .footer-rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 5vw, 28px) 0 0;
+    gap: clamp(16px, 4vw, 22px);
+  }
+
+  .footer-menu,
+  .footer-tagline,
+  .footer-brand-copy {
+    display: none !important;
+  }
+
+  .footer-legal {
+    display: flex;
+    margin-left: 15px;
+  }
+
+  .footer-contact li,
+  .footer-contact a {
+    font-size: 13px;
+    line-height: 1.65;
+    white-space: normal;
+  }
+
+  .footer-logo {
+    width: min(168px, 52vw);
+  }
+
+  .footer-socials img {
+    height: 22px;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .menu-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pro-gutter: 24px;
+    --pro-section-y-sm: 56px;
+    --pro-section-y-md: 64px;
+    --pro-section-y-lg: 72px;
+    --pro-section-y-xl: 80px;
+    --pro-title-desc-gap: 14px;
+    --pro-head-content-gap: 32px;
+    --pro-text-image-gap: 36px;
+    --pro-block-gap: 48px;
+    --pro-component-gap: 24px;
+  }
+
+  .brand-title-section {
+    height: clamp(420px, 110vw, 750px);
+    min-height: 420px;
+    max-height: 750px;
+  }
+
+  .store-title-section { height: clamp(420px, 70vw, 600px); min-height: 420px; max-height: 600px; }
+  .brand-hello {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .brand-identity__row { display: grid; grid-template-columns: 1fr; }
+
+  .store-title-section { height: clamp(360px, 80vw, 480px); min-height: 360px; max-height: 480px; }
+
+  .brand-story-section,
+  .brand-identity,
+  .brand-application,
+  .store-interior,
+  .store-search,
+  .main-choice,
+  .poppi-event { min-height: auto; }
+
+  .brand-roadmap { width: 100%; margin-top: clamp(48px, 12vw, 120px); aspect-ratio: auto; }
+  .brand-identity__colors { grid-template-columns: repeat(3, 1fr); }
+  .store-interior__head,
+  .store-search__head { width: min(var(--pro-max), calc(100% - (var(--pro-gutter) * 2))); }
+
+  .business-banner__inner,
+  .main-choice__cards { flex-direction: column; }
+  .business-banner__action { width: 100%; justify-content: space-between; gap: 24px; }
+  .business-banner__divider { display: none; }
+}
+
+/* 태블릿 INTERIOR (768~1024px) — 472×216 peek + 타이틀 flex, 582px 세로 중앙 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .store-interior {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    height: 582px;
+    min-height: 582px;
+    max-height: 582px;
+    overflow-x: clip;
+    overflow-y: hidden;
+  }
+
+  .store-interior__head {
+    position: relative;
+    z-index: 3;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 24px;
+    flex-shrink: 0;
+  }
+
+  .store-interior .store-interior__title {
+    position: static;
+    top: auto !important;
+    font-size: clamp(28px, 4.69vw, 36px) !important;
+  }
+
+  .store-interior__sub {
+    position: static;
+    top: auto !important;
+    font-size: clamp(16px, 2.6vw, 20px) !important;
+  }
+
+  .interior-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 216px;
+    min-height: 216px;
+    aspect-ratio: unset;
+    --slide-width: 472px;
+    --slide-gap: 14px;
+    overflow: hidden;
+  }
+
+  .interior-carousel__track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .interior-carousel__slide {
+    flex: 0 0 472px;
+    width: 472px;
+    height: 216px;
+    aspect-ratio: unset;
+    border-radius: 22px;
+  }
+}
+
+/* 모바일 STORE SEARCH — store.css 540px 규칙 유지 */
+@media (max-width: 540px) {
+  /* INTERIOR — 402 시안: 3장 동시 노출, 242:263 비율 (responsive 하단 덮어쓰기 방지) */
+  .store-interior {
+    height: auto;
+    min-height: 548px;
+    max-height: none;
+    padding-top: 54px;
+    padding-bottom: 28px;
+  }
+
+  .store-interior__head {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .interior-carousel {
+    z-index: 2;
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+    gap: 35px;
+  }
+
+  .interior-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 263px;
+    min-height: 263px;
+    aspect-ratio: unset;
+    --slide-width: 242px;
+    --slide-gap: 12px;
+  }
+
+  .interior-carousel__track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .interior-carousel__slide {
+    flex: 0 0 242px;
+    width: 242px;
+    height: 263px;
+    aspect-ratio: unset;
+    border-radius: 22px;
+  }
+
+  .interior-carousel__dots {
+    gap: 12px;
+    margin-top: 0;
+    height: 18px;
+  }
+
+  .interior-carousel__dot {
+    width: 18px;
+    height: 18px;
+  }
+
+  .interior-carousel__dot::before {
+    width: 10px;
+    height: 10px;
+  }
+
+  .store-search { padding: 0; }
+
+  .store-search__stage {
+    height: clamp(580px, 86svh, 820px);
+    min-height: 580px;
+  }
+
+  .store-search__map-body {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    height: 100%;
+  }
+
+  .store-search__map-wrap {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .store-search__filters {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .store-search__list {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .store-search__keyword {
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* BRAND IDENTITY — 모바일 브랜드북 (brand-story.css 보조, cascade 안전) */
+  .brand-identity {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .brand-identity__title {
+    position: static;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-ria);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 clamp(48px, 12vw, 72px);
+  }
+  .brand-identity__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(360px, calc(100% - 32px));
+    max-width: 360px;
+    height: auto;
+  }
+  .brand-identity__color-grid {
+    display: grid;
+  }
+  .brand-identity__circles,
+  .brand-identity__circle {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  :root { --pro-gutter: 20px; --pro-section-y-lg: 64px; --pro-section-y-xl: 72px; }
+  .menu-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* =========================================================
+   PC footer — Figma 1191-508 간격 (1201px+, 태블릿 미적용)
+   ========================================================= */
+@media (min-width: 1201px) {
+  .poppi-footer {
+    --footer-title: clamp(16px, 1.04vw, 20px);
+    --footer-body: clamp(14px, 0.83vw, 16px);
+    --footer-line: 2.1;
+    --footer-pad-top: clamp(72px, 11.05vw, 212px);
+    --footer-pad-x: clamp(24px, 5vw, 250px);
+    --footer-pad-bottom: clamp(32px, 5vw, 96px);
+    --footer-rights-block: clamp(72px, 8vw, 136px);
+    --footer-content-gap: clamp(28px, 2.5vw, 48px);
+    min-height: auto;
+  }
+
+  .footer-info {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    grid-template-columns: max-content 1fr max-content;
+    justify-content: space-between;
+    gap: clamp(40px, 5vw, 228px);
+    align-items: flex-end;
+    margin-bottom: calc(var(--footer-rights-block) + var(--footer-content-gap));
+    padding: var(--footer-pad-top) var(--footer-pad-x) 0;
+  }
+
+  .footer-rights {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    grid-template-columns: max-content auto max-content;
+    justify-content: space-between;
+    gap: clamp(20px, 5vw, 330px);
+    justify-items: center;
+    padding: 0 var(--footer-pad-x) var(--footer-pad-bottom);
+  }
+
+  .footer-contact {
+    width: max-content;
+    min-width: max-content;
+    max-width: none;
+  }
+
+  .footer-center {
+    width: 450px;
+    gap: clamp(12px, 1.04vw, 20px);
+    margin-bottom: 0;
+  }
+
+  .footer-logo {
+    width: clamp(170px, 12.92vw, 248px);
+  }
+
+  .footer-menu {
+    width: 251px !important;
+    min-width: 251px !important;
+    max-width: 251px !important;
+    align-items: flex-start;
+  }
+
+  .footer-menu h2 {
+    text-align: left !important;
+    align-self: stretch;
+  }
+
+  .menu-grid {
+    column-gap: 50px;
+    align-self: stretch;
+    width: 100%;
+    justify-content: start;
+    justify-items: start;
+  }
+
+  .poppi-footer h2 {
+    font-size: var(--footer-title);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  .footer-contact li,
+  .footer-contact a,
+  .menu-grid a,
+  .footer-brand-copy,
+  .footer-tagline,
+  .footer-copyright {
+    font-size: var(--footer-body);
+    font-weight: 400;
+    line-height: var(--footer-line);
+    white-space: nowrap;
+  }
+
+  .footer-tagline {
+    line-height: 1.4;
+  }
+
+  .footer-brand-copy {
+    width: max-content;
+    min-width: max-content;
+    max-width: none;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .footer-copyright {
+    width: 251px !important;
+    min-width: 251px !important;
+    max-width: 251px !important;
+    justify-self: end !important;
+    text-align: left !important;
+  }
+
+  .footer-socials {
+    width: 185px;
+    height: clamp(28px, 1.77vw, 40px);
+    gap: clamp(22px, 1.83vw, 35px);
+  }
+
+  .footer-socials img {
+    height: clamp(24px, 1.77vw, 34px);
+  }
+}
+
+/* =========================================================
+   07-B. POPPI Review — TA / MO 통합 재설계 (2026-06)
+   - PC는 기존 룰 그대로 (사용자 확인: PC OK)
+   - 폰 그림자 0 (style.css에서 제거)
+   - 양옆 폴라로이드 1장씩 항상 peek (MO 포함)
+   - 헤더(제목+데코) 디바이스별 스케일
+   - 스코프: .poppi-review-section 내부만 — 다른 페이지 영향 0
+   ========================================================= */
+
+/* ---------- PC (≥ 1025px) — 하단 패딩·스테이지 높이 (푸터 bleed 외 여백 제거) ---------- */
+@media (min-width: 1025px) {
+  .poppi-review-section {
+    padding-top: clamp(12px, 1vw, 24px);
+    padding-bottom: var(--review-footer-bleed, 0px);
+  }
+
+  .review-stage {
+    height: clamp(560px, 50.68vw, 900px) !important;
+    min-height: 560px;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+}
+
+/* 1025~1280 — clamp(50.68vw)만 쓰면 폰 목업 하단이 잘림 → vw 산출 높이로 재정의 */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .poppi-review-section {
+    --review-card-width: 20.5vw;
+    --review-phone-width: 24vw;
+  }
+
+  .review-stage {
+    height: max(
+      720px,
+      calc(24vw * 2.0806 + 12vw),
+      calc(20.5vw * 1.706 + 30vw)
+    ) !important;
+    min-height: 720px;
+  }
+
+  .gallery-thumbs {
+    top: 24%;
+    height: 62%;
+  }
+
+  .phone-slider {
+    top: 6%;
+  }
+}
+
+/* ---------- TA (769 ~ 1024px) ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .poppi-review-section {
+    --review-card-width: 30vw;
+    --review-phone-width: 36vw;
+  }
+
+  .review-stage {
+    height: max(
+      clamp(520px, 62vw, 660px),
+      calc(36vw * 2.0806 + 10vw),
+      calc(30vw * 1.706 + 28vw)
+    ) !important;
+    min-height: 520px;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .gallery-thumbs {
+    top: 24%;
+    height: 62%;
+    overflow: visible;
+  }
+
+  .phone-slider { top: 5%; }
+
+  .thumb-track { gap: 18px; }
+
+  .thumb-slide.is-center-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 헤더 */
+  .review-header {
+    width: min(720px, calc(100% - 32px));
+    padding: clamp(40px, 5vw, 64px) 0 clamp(18px, 2vw, 28px);
+  }
+  .review-header__eyebrow {
+    margin-bottom: 8px;
+    /* font-size 는 디자인 시스템 caption 토큰(--type-caption) 그대로 사용 */
+  }
+  /* font-size 는 --type-h3 토큰이 처리 (다른 섹션 타이틀과 동일 위계) */
+
+  /* 데코 — 헤더 안에서 살짝 안쪽으로 */
+  .review-deco--tag {
+    font-size: clamp(10px, 1.2vw, 12px);
+    padding: 6px 12px;
+  }
+  .review-deco--heart { width: clamp(20px, 2.4vw, 28px); }
+  .review-deco--tag-1 {
+    left: clamp(12px, 4vw, 36px);
+    top: clamp(22px, 3vw, 38px);
+  }
+  .review-deco--tag-2 {
+    right: clamp(12px, 6vw, 48px);
+    top: clamp(8px, 1.5vw, 18px);
+  }
+  .review-deco--heart-1 {
+    left: clamp(0px, 1vw, 12px);
+    top: clamp(10px, 1.5vw, 20px);
+  }
+  .review-deco--heart-2 {
+    right: clamp(40px, 8vw, 80px);
+    top: clamp(4px, 0.6vw, 8px);
+  }
+}
+
+/* ---------- MO (≤768px) — 카드·폰 vw 스케일 ---------- */
+@media (max-width: 768px) {
+  .poppi-review-section {
+    --review-card-width: clamp(128px, 42vw, 322px);
+    --review-phone-width: clamp(200px, 54vw, 415px);
+    padding-top: clamp(8px, 2vw, 16px);
+    padding-bottom: 0;
+  }
+
+  .review-stage {
+    height: max(
+      calc(var(--review-phone-width) * 2.0806 + 14vw),
+      calc(var(--review-card-width) * 1.706 + 24vw)
+    ) !important;
+    min-height: 680px;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .gallery {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .gallery-thumbs {
+    display: block;
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    width: 100%;
+    height: 62%;
+    transform: translateX(-50%);
+    overflow: visible;
+  }
+
+  .phone-slider {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    width: var(--review-phone-width);
+    max-width: none;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+  .phone-frame-wrap {
+    aspect-ratio: 744 / 1548;
+    transform: translateY(-20px);
+  }
+
+  .thumb-track { gap: clamp(10px, 2.5vw, 14px); }
+
+  .thumb-slide {
+    flex: 0 0 var(--review-card-width);
+    width: var(--review-card-width);
+    max-width: none;
+  }
+
+  .thumb-slide.is-center-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 헤더 */
+  .review-header {
+    width: calc(100% - 24px);
+    padding: clamp(32px, 6vw, 48px) 0 clamp(12px, 2.5vw, 20px);
+  }
+  .review-header__eyebrow {
+    margin-bottom: 6px;
+  }
+
+  /* 데코 — 좌1·우1만 (heart-1 숨김) */
+  .review-deco--tag {
+    font-size: clamp(9px, 1.7vw, 11px);
+    padding: 5px 10px;
+  }
+  .review-deco--heart { width: clamp(16px, 3vw, 22px); }
+  .review-deco--tag-1 {
+    left: clamp(4px, 2vw, 16px);
+    top: clamp(18px, 4vw, 32px);
+  }
+  .review-deco--tag-2 {
+    right: clamp(4px, 2vw, 16px);
+    top: clamp(8px, 2vw, 16px);
+  }
+  .review-deco--heart-1 { display: none; }
+  .review-deco--heart-2 {
+    right: clamp(60px, 16vw, 110px);
+    top: clamp(2px, 0.6vw, 6px);
+  }
+}
+
+/* ---------- MO 작은 (≤480px) ---------- */
+@media (max-width: 480px) {
+  .poppi-review-section {
+    --review-card-width: clamp(120px, 54vw, 260px);
+    --review-phone-width: clamp(180px, 66vw, 320px);
+    padding: 0 !important;
+  }
+
+  .review-stage {
+    height: max(
+      calc(var(--review-phone-width) * 2.0806 + 12vw),
+      calc(var(--review-card-width) * 1.706 + 20vw)
+    ) !important;
+    min-height: 420px !important;
+    padding: 0 !important;
+  }
+
+  .gallery {
+    display: block !important;
+    position: relative !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  /* 480px 룰의 display:none 무효화 — 모바일에서도 양옆 peek 보이게 */
+  .gallery-thumbs {
+    display: block !important;
+    position: absolute !important;
+    top: 22%;
+    left: 50%;
+    width: 100%;
+    height: 64%;
+    transform: translateX(-50%);
+    overflow: visible;
+  }
+
+  .phone-slider {
+    position: absolute !important;
+    top: 3% !important;
+    left: 50% !important;
+    width: var(--review-phone-width) !important;
+    max-width: none !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+  }
+
+  .phone-frame-wrap {
+    aspect-ratio: 744 / 1548 !important;
+    transform: translateY(-20px);
+  }
+
+  .thumb-track { gap: clamp(8px, 2vw, 10px); }
+
+  .thumb-slide {
+    flex: 0 0 var(--review-card-width) !important;
+    width: var(--review-card-width) !important;
+    max-width: none !important;
+  }
+
+  .thumb-slide.is-center-hidden { opacity: 0; pointer-events: none; }
+
+  /* 헤더 */
+  .review-header {
+    width: calc(100% - 16px);
+    padding: clamp(28px, 8vw, 40px) 0 clamp(10px, 3vw, 16px);
+  }
+  .review-header__eyebrow {
+    margin-bottom: 4px;
+    /* font-size 는 디자인 시스템 caption 토큰 그대로 사용 */
+  }
+  /* .review-header__title font-size 는 --type-h3 토큰이 처리 (다른 섹션 타이틀과 동일 위계) */
+
+  /* 데코 — 가장 핵심만 (tag-2 만 유지) */
+  .review-deco--tag {
+    font-size: clamp(9px, 2.4vw, 11px);
+    padding: 4px 9px;
+  }
+  .review-deco--heart { width: clamp(14px, 4vw, 18px); }
+  .review-deco--tag-1 { display: none; }
+  .review-deco--tag-2 {
+    right: clamp(2px, 2vw, 12px);
+    top: clamp(4px, 1.5vw, 12px);
+  }
+  .review-deco--heart-1 { display: none; }
+  .review-deco--heart-2 {
+    right: clamp(72px, 26vw, 130px);
+    top: clamp(0px, 0.5vw, 4px);
+  }
+}
+
+/* =========================================================
+   01-B. Hero — MO 전용 비주얼 (≤768px)
+   - PC/TA: 기존 floating 도넛 hero 유지 (변경 없음)
+   - MO   : 배경 페이드 슬라이더 + 중앙 텍스트(블러 박스)
+            + 우상단 햄버거(기존 .plate-nav-btn 이용)
+   ========================================================= */
+.donut-mobile-hero { display: none; }
+
+@media (max-width: 768px) {
+  /* ---- 컨테이너 ---- */
+  .donut-motion-section {
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+  .donut-motion-section .donut-hero-stage { display: none !important; }
+
+  .donut-mobile-hero {
+    display: block;
+    position: relative;
+    width: 100%;
+    /* svh = 주소창 포함 최소 뷰포트 높이 → 주소창 유무와 관계없이 항상 화면에 꽉 맞음
+       dvh 폴백: svh 미지원 구형 브라우저 대응 */
+    height: 100svh;
+    height: 100dvh;
+    min-height: 480px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--apricot-bg-50, #FFF6F0);
+  }
+
+  /* MO KV 코너 blob — mo-bg.svg (402×546, 섹션 전체 fill — PC kv-bg.png 와 동일) */
+  .m-hero__mo-bg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    object-fit: fill;
+    object-position: center;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* ---- 1) 배경 슬라이더 ---- */
+  .m-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .m-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    will-change: opacity;
+  }
+  .m-hero__slide.is-active { opacity: 1; }
+  .m-hero__slide img,
+  .m-hero__slide video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 모바일 hero는 인물/주요 비주얼이 상단에 배치되는 시안 패턴 → center top 으로 잘림 보정 */
+    object-position: center top;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none; /* 길게 누름 메뉴/우클릭 컨텍스트 차단 */
+  }
+  /* 16:9 가로 영상이 9:16 세로 화면에 들어갈 때 좌우 크롭이 큼 → 중앙(center) 고정으로
+     주피사체(보통 중앙)가 잘리지 않도록. 이미지는 위쪽 정렬을 유지(인물 상단 비중). */
+  .m-hero__slide video {
+    object-position: center center;
+  }
+
+  /* ----- PLACEHOLDER 그라데이션 (실제 이미지 들어오면 위 .m-hero__slide img 룰이 우선) ----- */
+  .m-hero__slide--placeholder-1 {
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18) 0%, transparent 50%),
+      linear-gradient(135deg, var(--poppi-yellow, #FBA720) 0%, var(--poppi-orange, #ED6325) 100%);
+  }
+  .m-hero__slide--placeholder-2 {
+    background:
+      radial-gradient(circle at 70% 35%, rgba(255,255,255,0.18) 0%, transparent 50%),
+      linear-gradient(135deg, var(--poppi-pink-300, #FFADC7) 0%, var(--poppi-pink-500, #E96D94) 100%);
+  }
+  .m-hero__slide--placeholder-3 {
+    background:
+      radial-gradient(circle at 40% 60%, rgba(255,255,255,0.20) 0%, transparent 50%),
+      linear-gradient(135deg, var(--poppi-yellow-200, #FFD480) 0%, var(--apricot-bg, #FDE2CF) 100%);
+  }
+  .m-hero__slide--placeholder-4 {
+    background:
+      radial-gradient(circle at 50% 30%, rgba(255,255,255,0.12) 0%, transparent 50%),
+      linear-gradient(135deg, var(--brown-dark-400, #845241) 0%, var(--brown-dark, #452319) 100%);
+  }
+  .m-hero__slide--placeholder-5 {
+    background:
+      radial-gradient(circle at 30% 50%, rgba(255,255,255,0.20) 0%, transparent 50%),
+      linear-gradient(135deg, var(--melon-bg, #F5F3A4) 0%, var(--peach-bg, #FFEEF7) 100%);
+  }
+  /* 어두운 그라데이션 — 텍스트 가독성 보조 */
+  .m-hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 12, 10, 0.32) 0%,
+      rgba(20, 12, 10, 0.10) 38%,
+      rgba(20, 12, 10, 0.45) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---- 1-C) 핑크 blob 데코 (inline SVG, preserveAspectRatio="none") ----
+     - hero 하단 65% 만 채움 (top 35% 는 비워둠 — 영상/텍스트 노출)
+     - bottom 정렬 + width 100% 로 좌우 모서리 부착
+     - preserveAspectRatio="none" 으로 디바이스 비율(9:16~9:21)에 강제 핏
+     - z-index 2 (슬라이더·그라데이션 위, 텍스트 아래)
+     - 진입 애니메이션 없음 (페이지 로드 즉시 노출) */
+  .m-hero__blob-deco {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 65%;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index: 2;
+    overflow: visible;
+    filter: drop-shadow(0 4px 14px rgba(233, 109, 148, 0.18));
+  }
+
+  /* ---- 1-B) 핑크 blob frame — SVG feTurbulence + feDisplacementMap MORPH ----
+     - 진짜 morph: 픽셀이 노이즈 맵에 따라 변위 (단순 transform 아님)
+     - SVG 필터의 baseFrequency / displacement scale 둘 다 animate → 모양이 시간 따라 변함
+     - CSS transform은 거시적 drift만 약하게 보조 (이중으로 살아있는 느낌) */
+  .m-hero__svg-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .m-hero__blob-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index: 2;
+    transform-origin: center center;
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  /* 뒤 레이어 — 큰 morph + 블러 + 반투명. 핑크 그림자처럼 출렁 */
+  .m-hero__blob-frame--back {
+    opacity: 0.6;
+    /* 순서 중요: SVG morph 먼저 → blur/saturate 후처리.
+       (모핑된 형태에 블러를 입혀 부드러운 핑크 헤일로) */
+    filter: url(#m-hero-blob-morph-a) blur(8px) saturate(1.08);
+    animation: mHeroBlobDriftA 12s ease-in-out infinite;
+  }
+  /* 앞 레이어 — 작은 morph (또렷한 본체) */
+  .m-hero__blob-frame--front {
+    opacity: 1;
+    filter: url(#m-hero-blob-morph-b);
+    animation: mHeroBlobDriftB 9s ease-in-out infinite;
+  }
+
+  /* drift A — SVG morph가 메인이라 CSS는 미세 drift/회전만 */
+  @keyframes mHeroBlobDriftA {
+    0%, 100% { transform: scale(1) translate3d(0, 0, 0) rotate(0deg); }
+    33%      { transform: scale(1.03) translate3d(-3px, -3px, 0) rotate(-0.8deg); }
+    66%      { transform: scale(1.02) translate3d(3px, 2px, 0) rotate(0.6deg); }
+  }
+  /* drift B — A와 다른 주기 */
+  @keyframes mHeroBlobDriftB {
+    0%, 100% { transform: scale(1) translate3d(0, 0, 0) rotate(0deg); }
+    25%      { transform: scale(1.02) translate3d(2px, 3px, 0) rotate(0.5deg); }
+    50%      { transform: scale(1.01) translate3d(-3px, -2px, 0) rotate(-0.4deg); }
+    75%      { transform: scale(1.025) translate3d(2px, -3px, 0) rotate(0.3deg); }
+  }
+
+  /* 모션 거부 — SVG 필터 안의 <animate> 도 함께 정지하려면 CSS만으로 안 되지만
+     (SMIL 정지는 JS 필요), 최소한 CSS transform 애니메이션은 멈춤.
+     필터 자체는 첫 프레임 상태로 정적 노출 (변형은 보이지만 움직임은 없음). */
+  @media (prefers-reduced-motion: reduce) {
+    .m-hero__blob-frame--back,
+    .m-hero__blob-frame--front {
+      animation: none;
+    }
+  }
+
+  /* ---- 2) 헤더 컨테이너 — 햄버거 slot 우상단 ---- */
+  .m-hero__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: clamp(12px, 3.2vw, 18px) clamp(14px, 3.6vw, 20px);
+    pointer-events: none; /* 자식만 클릭 가능 */
+  }
+  /* 햄버거 slot — JS가 기존 .plate-nav-btn(도넛 이미지 버튼)을 이 안으로 이동 */
+  .m-hero__menu-slot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: auto;
+    width: clamp(56px, 14vw, 72px);
+    height: clamp(56px, 14vw, 72px);
+  }
+
+  /* 기존 plate-nav-btn — slot 안으로 이동됐을 때 fixed 해제하고 slot 영역을 꽉 채움
+     (PC/TA로 복귀하면 slot 외부로 빠지므로 자동으로 본래 fixed 룰 복원) */
+  .m-hero__menu-slot .plate-nav-btn {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: auto !important;
+  }
+  .m-hero__menu-slot .plate-nav-btn:hover {
+    transform: scale(1.05); /* slot 안에서는 rotate 살짝 줄임 */
+  }
+
+
+
+  /* ---- 4) 카피 — 시안 그대로 중앙 정렬, 텍스트만 노출 ---- */
+  .m-hero__copy {
+    position: absolute;
+    top: auto;
+    /* 풀-페이지 모바일 viewport 비율 맞춰 — 화면 중앙(약 38~45%) 부근에 타이틀 배치 */
+    bottom: clamp(180px, 38vh, 260px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    max-width: 90%;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* 타이포 — 시안 비율: 타이틀을 가득 채우지 않고 정돈된 중앙 3줄로 노출 */
+  .m-hero__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(38px, 10.5vw, 48px);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+  .m-hero__title-line {
+    display: block;
+    line-height: 1.04;
+    white-space: nowrap;
+  }
+  .m-hero__title-em {
+    color: var(--poppi-orange, #ED6325);
+    margin-top: 4px;
+    text-shadow: none;
+  }
+
+  .m-hero__sub {
+    margin: 12px 0 0;
+    font-family: var(--font-paperlogy);
+    font-size: clamp(13px, 3.4vw, 15px);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: lowercase;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ---- 4-2) CTA 그룹 — primary(오렌지 필) + secondary(plain 텍스트 + 원형 아이콘)
+     모바일: 가로 한 줄 배치 (디자인/효과 PC 와 동일, 사이즈만 컴팩트) ---- */
+  .m-hero__cta-group {
+    margin-top: clamp(16px, 4vw, 24px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 2.8vw, 16px);
+  }
+
+  /* Primary — 오렌지 솔리드 알약 (디자인/shine sweep/hover/active 효과 PC 동일, 한 줄 fit 위해 사이즈 축소) */
+  .m-hero__cta {
+    margin-top: clamp(22px, 5vw, 32px);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 11px 22px;
+    border-radius: 999px;
+    background: var(--poppi-orange);
+    color: var(--color-white, #ffffff);
+    font-family: var(--font-body);
+    font-size: clamp(12px, 3.2vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    box-shadow: 0 6px 14px rgba(237, 99, 37, 0.32);
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+  }
+  .m-hero__cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(255, 255, 255, 0.42) 50%,
+      transparent 62%,
+      transparent 100%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .m-hero__cta:hover {
+    box-shadow: 0 10px 22px rgba(237, 99, 37, 0.42);
+    transform: translateY(-1px);
+  }
+  .m-hero__cta:hover::before { transform: translateX(120%); }
+  .m-hero__cta:active { transform: translateY(0); }
+
+  /* Secondary — 보더/배경 없음, 좌측 원형 오렌지 play 아이콘 + 흰 텍스트
+     (어두운 hero 배경 위 가독성을 위해 텍스트만 흰색 + 살짝 그림자, 한 줄 fit 위해 사이즈 축소) */
+  .m-hero__cta-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: clamp(12px, 3.2vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    transition: color 0.25s ease, transform 0.2s ease;
+  }
+  /* 전체 CTA 가 hover 에 반응 — text + icon 함께 lift, 컬러도 톤 변화 */
+  .m-hero__cta-ghost:hover {
+    transform: translateY(-2px);
+    color: #FFE3D0;
+  }
+  .m-hero__cta-ghost:hover .m-hero__cta-ghost-icon {
+    background: #2E1812;
+    transform: scale(1.06);
+    box-shadow: 0 6px 14px rgba(20, 12, 8, 0.45);
+  }
+  .m-hero__cta-ghost:active { transform: translateY(0); }
+  .m-hero__cta-ghost:active .m-hero__cta-ghost-icon { transform: scale(0.96); }
+  .m-hero__cta-ghost-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--brown-dark);
+    color: var(--color-white, #ffffff);
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(20, 12, 8, 0.32);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  }
+  .m-hero__cta-ghost-icon svg {
+    width: 11px;
+    height: 11px;
+    margin-left: 2px;
+  }
+
+}
+
+/* ---- MO 작은 (≤480px) ---- */
+@media (max-width: 480px) {
+  .donut-mobile-hero {
+    min-height: 480px;
+  }
+  /* 카피: 중앙 정렬 유지 */
+  .m-hero__copy {
+    padding: 0;
+    border-radius: 0;
+    /* 좁은 화면(≤480) — 비율 맞춰 타이틀을 viewport 중앙 부근까지 끌어올림 */
+    bottom: clamp(170px, 38vh, 240px);
+    max-width: calc(100% - 24px);
+  }
+  /* 시안 매칭: 360~414px 구간에서 'DONUT' 한 줄이 ~150~175px 폭 (≈ font 11~12vw)
+     상위(≤768px)의 clamp(38, 10.5vw, 48)를 그대로 따르되, 최소만 살짝 올림 */
+  .m-hero__title {
+    font-size: clamp(40px, 11.5vw, 50px);
+  }
+  .m-hero__sub {
+    font-size: clamp(12px, 3.4vw, 14px);
+  }
+}

@@ -1,0 +1,1342 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — Support / Event page styles
+   (구 pages.css 에서 분리)
+   ========================================================= */
+
+/* =========================================================
+   SUPPORT — KV (Key Visual)
+   사용자 요청: 높이 572px 고정, 도넛 분리 이미지 제거, 배경은 합성 PNG 한 장.
+   ========================================================= */
+.support-kv {
+  width: 100%;
+  overflow: hidden;
+}
+
+.support-kv__container {
+  position: relative;
+  width: 100%;
+  height: var(--kv-height, 572px);
+}
+
+/* 배경 이미지 — 영역 전체 채움 (cover) */
+.support-kv__bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 사용자 요청 — Support 타이틀을 EVENT 페이지(.kv-title) 와 100% 동일한 텍스트 효과/위치로 표시
+   (event-news.css 의 .kv-title / ::before 룰 그대로 동기화 — 가운데 회전 5°, 흰 외곽선, 갈색 stroke, text-shadow)
+   support 페이지에서만 활성 (support.css 가 support 페이지에만 로드됨) */
+.support-kv {
+  /* event-news .page-top 와 동일한 PC 기본 토큰
+     (1920px → 572px / 너비 기준 29.79vw) */
+  --kv-height: clamp(219px, 29.79vw, 572px);
+  --kv-title-size: clamp(48px, 5.21vw, 100px);
+  --kv-title-stroke: clamp(2px, 0.26vw, 5px);
+  --kv-title-outline: clamp(6px, 0.78vw, 15px);
+  --kv-title-top: clamp(88px, 28%, 200px);
+}
+
+/* event-news 와 동일한 반응형 — 태블릿(≤1024) / 모바일(≤560) */
+@media (max-width: 1024px) {
+  .support-kv {
+    --kv-height: clamp(219px, 29.79vw, 282px);
+    --kv-title-size: clamp(44px, 7.8vw, 72px);
+    --kv-title-stroke: clamp(2px, 0.35vw, 4px);
+    --kv-title-outline: clamp(5px, 1vw, 12px);
+    --kv-title-top: clamp(80px, 26%, 160px);
+  }
+}
+
+@media (max-width: 560px) {
+  .support-kv {
+    --kv-height: 219px;
+    --kv-title-size: clamp(36px, 10.5vw, 56px);
+    --kv-title-stroke: 3px;
+    --kv-title-outline: clamp(5px, 1.8vw, 9px);
+    --kv-title-top: clamp(72px, 24%, 120px);
+  }
+}
+
+.support-kv .kv-title {
+  position: absolute;
+  top: var(--kv-title-top);
+  left: 50%;
+  z-index: 2;
+  isolation: isolate;
+  margin: 0;
+  max-width: calc(100% - 32px);
+  color: #452319;
+  font-family: var(--font-heading);
+  font-size: var(--kv-title-size);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: clamp(0.5px, 0.1vw, 2px);
+  transform: translate(-50%, -50%) rotate(-5deg);
+  transform-origin: center;
+  white-space: nowrap;
+  -webkit-text-stroke: var(--kv-title-stroke) #452319;
+  paint-order: stroke fill;
+  text-shadow:
+    -1px -2px 4px rgba(255, 235, 221, 0.75),
+    2px 3px 7px rgba(0, 0, 0, 0.42),
+    -4px 3px 8px rgba(69, 50, 31, 0.45),
+    0 6px 10px rgba(32, 18, 12, 0.2);
+  pointer-events: none;
+}
+
+.support-kv .kv-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: inherit;
+  pointer-events: none;
+  -webkit-text-stroke: var(--kv-title-outline) #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95));
+}
+
+/* =========================================================
+   SUPPORT — Title
+   ========================================================= */
+.support-title-section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding-top: clamp(120px, 12.14vw, 233px);
+  padding-bottom: clamp(160px, 19.1vw, 367px);
+  text-align: center;
+}
+
+.support-title {
+  font-family: var(--font-ria);
+  font-size: clamp(32px, 2.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: 0.012em;
+  color: var(--donut-brown-dark);
+  margin: 0;
+}
+
+/* =========================================================
+   SUPPORT — FAQ 아코디언
+   ========================================================= */
+.support-faq {
+  width: 100%;
+  background: #ffffff;
+  padding: 160px 0;
+}
+
+.support-faq__inner {
+  width: min(1320px, calc(100% - 80px));
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* 타이틀 — h2 토큰(commons) 재사용, 48px Bold Ria Sans */
+.support-faq__title {
+  font-family: var(--font-ria);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  color: var(--color-brown-dark);
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+/* 리스트 리셋 */
+.support-faq__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 아이템 — 구분선 */
+.support-faq__item {
+  border-top: 1px solid #d9d9d9;
+}
+
+.support-faq__item:last-child {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+/* 질문 버튼 */
+.support-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--color-brown-dark);
+}
+
+.support-faq__q-text {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif !important;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-brown-dark);
+  flex: 1;
+}
+
+/* +/- 아이콘 */
+.support-faq__icon {
+  flex-shrink: 0;
+  font-family: var(--font-ria);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-brown-dark);
+  width: 32px;
+  text-align: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+
+.support-faq__question[aria-expanded='true'] .support-faq__icon {
+  transform: rotate(0deg);
+}
+
+/* 답변 패널 */
+.support-faq__answer {
+  overflow: hidden;
+}
+
+.support-faq__answer p {
+  font-family: "Paperlogy", sans-serif !important;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-brown-dark);
+  margin: 0;
+  padding: 0 0 28px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   SUPPORT — 고객의 소리 (form)
+   ========================================================= */
+.support-voice {
+  position: relative;
+  width: 100%;
+  /* background: var(--donut-yellow);
+  padding: clamp(80px, 7.97vw, 153px) 0 clamp(80px, 10vw, 192px);
+  overflow: hidden; */
+}
+
+.support-voice__inner {
+  /* width: min(1320px, calc(100% - 80px));
+  max-width: 1320px; */
+  background-image: url("../images/support/contact-bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: clamp(80px, 8.33vw, 160px) clamp(24px, 4.17vw, 80px);
+}
+
+
+.support-voice__card {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 32px;
+  padding: 40px 40px;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+.support-voice__card-head {
+  display: flex;
+  /* align-items: flex-end;
+  margin-bottom: clamp(20px, 2.08vw, 40px); */
+
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 40px;
+}
+
+
+.support-voice__card-label {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  color: var(--color-brown-dark);
+  white-space: nowrap;
+}
+
+.support-voice__card-hint {
+  display: flex;
+  align-items: center;
+  /* gap: 10px;
+  font-family: var(--font-pretendard);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--donut-brown-dark);
+  letter-spacing: 0.016em; */
+  gap: 6px;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-brown-dark);
+}
+
+.support-voice__card-hint::before {
+  /* content: ""; */
+  width: 5px;
+  height: 5px;
+  /* border-radius: 50%;
+  background: var(--donut-orange); */
+}
+
+.support-voice__dot {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.support-voice__fields {
+  display: flex;
+  /* align-items: center;
+  margin-bottom: clamp(10px, 0.83vw, 16px);
+  min-height: 48px; */
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.support-voice__row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0 100px;
+}
+
+.support-voice__row--textarea {
+  align-items: start;
+}
+
+/* textarea 행의 우측 입력 셀 — min-width: 0 으로 그리드 셀 팽창 차단 */
+.support-voice__row--textarea .support-voice__textarea {
+  min-width: 0;
+}
+
+.support-voice__field input,
+.support-voice__field select,
+.support-voice__field textarea {
+  /* flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #bfbfbf; */
+
+  border-radius: 8px;
+
+  /* font-family: var(--font-pretendard);
+  font-size: 16px; */
+
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+
+
+.support-voice__label {
+  display: flex;
+  flex-direction: row;
+  /* dot 이미지가 항상 텍스트 좌측에 위치 */
+  align-items: center;
+  gap: 6px;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  color: var(--color-brown-dark);
+  white-space: nowrap;
+  /* grid 첫 번째 열에 고정 — 텍스트 길이 무관하게 인풋 시작점 통일 */
+}
+
+
+/* 공통 인풋 */
+.support-voice__input {
+  height: 48px;
+  width: 100%;
+  padding: 0 14px;
+  border: 1px solid #d9d9d9;
+  /* FAQ 구분선과 동일 */
+  border-radius: 8px;
+
+  background: #ffffff;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: var(--color-brown-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+
+/* .support-voice__field input:focus,
+.support-voice__field select:focus,
+.support-voice__field textarea:focus {
+  border-color: var(--donut-orange);
+} */
+
+.support-voice__input:focus {
+  border-color: var(--color-poppi-orange);
+}
+
+/* .support-voice__field--textarea {
+  align-items: flex-start;
+  min-height: 114px;
+} */
+
+/* .support-voice__field--textarea textarea {
+  min-height: 114px;
+  resize: vertical;
+} */
+
+/* select 커스텀 화살표 */
+.support-voice__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23452219' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+/* 문의내용 textarea */
+.support-voice__textarea {
+  /* 고정 px 너비 제거 — 그리드 셀(1fr)이 허용하는 전체 폭을 채움 */
+  width: 100%;
+  box-sizing: border-box;
+  height: 114px;
+  padding: 12px 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #ffffff;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: var(--color-brown-dark);
+  outline: none;
+  /* 세로 방향만 리사이즈 허용, 가로 초과 원천 차단 */
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.support-voice__textarea:focus {
+  border-color: var(--color-poppi-orange);
+}
+
+.support-voice__agree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid #bfbfbf; */
+  padding: 24px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: transparent;
+  margin-bottom: 64px;
+}
+
+.support-voice__agree-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-brown-dark);
+}
+
+.support-voice__agree-check {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-poppi-orange);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.support-voice__agree-check:checked {
+  background: var(--color-poppi-orange);
+}
+
+.support-voice__agree-check:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%) rotate(45deg);
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+.support-voice__agree-more {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-poppi-orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-poppi-orange);
+}
+
+.support-voice__agree-more:hover {
+  opacity: 0.75;
+}
+
+/* ── 연락처 3단 분할 ── */
+
+/* 래퍼: 다른 인풋(.support-voice__input)과 동일한 340px 폭 유지 */
+.support-voice__phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  /* 부모 넘침 방지 */
+  box-sizing: border-box;
+}
+
+/* 하이픈 */
+.support-voice__phone-sep {
+  flex-shrink: 0;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: #888888;
+  line-height: 1;
+  user-select: none;
+}
+
+/* select + input 공통 리셋 & 공통 스타일 */
+.support-voice__phone-select,
+.support-voice__phone-input {
+  /* 브라우저 기본 스타일 초기화 */
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-sizing: border-box;
+  /* 패딩이 너비를 초과하지 않도록 */
+  height: 48px;
+  padding: 0 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: var(--color-brown-dark);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.support-voice__phone-select:focus,
+.support-voice__phone-input:focus {
+  border-color: var(--color-poppi-orange);
+}
+
+/* 국번 select: 고정 너비 + 커스텀 화살표 */
+.support-voice__phone-select {
+  flex: 0 0 84px;
+  width: 100%;
+  /* flex-basis 보조 — 구형 브라우저 안전망 */
+  padding-right: 26px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23452219' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+/* 번호 input 두 칸: 남은 너비를 50/50 균등 분배 */
+.support-voice__phone-input {
+  flex: 1 1 0;
+  /* flex-basis: 0 → 패딩·보더 영향 없이 순수 비율 분배 */
+
+}
+
+/* ── 연락처 분할 인풋 placeholder — .support-voice__input 과 동일 스펙 동기화
+   크로스 브라우징: 표준 / WebKit(Chrome·Safari) / Firefox / IE·구Edge 전 벤더 포함
+   specificity: .support-voice__fields + .support-voice__phone + .support-voice__phone-input
+   (클래스 3개 = 0-3-0) → 요소 자체 color 선언(0-2-0)을 !important 없이 확실히 상회 ── */
+
+/* 표준 */
+.support-voice__fields .support-voice__phone .support-voice__phone-input::placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1; /* Firefox 기본 opacity(0.54) 덮어쓰기 */
+}
+
+/* WebKit 계열 (Chrome, Safari, 구버전 Edge) */
+.support-voice__fields .support-voice__phone .support-voice__phone-input::-webkit-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* Firefox */
+.support-voice__fields .support-voice__phone .support-voice__phone-input::-moz-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* IE 10–11 / 구버전 Edge */
+.support-voice__fields .support-voice__phone .support-voice__phone-input:-ms-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+}
+
+/* ④ 문의하기 버튼 */
+.support-voice__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.support-voice__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  padding: 16px 16px;
+  background: var(--color-brown-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: 90px;
+  font-family: var(--font-ria);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.support-voice__submit:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  /* box-shadow: 0 12px 24px rgba(69, 34, 25, 0.3); */
+}
+
+/* 반응형 */
+/* (max-width: 1200px) — textarea는 기본값에서 이미 width: 100% 적용, 별도 선언 불필요 */
+
+@media (max-width: 768px) {
+
+  /* 주요 타이틀 — 모바일에서 font-size만 축소, 나머지 속성 상속 */
+  .support-faq__title {
+    font-size: 26px;
+  }
+
+  /* 카드 헤드 — 상담자 정보 + 필수 안내 줄바꿈 허용 */
+  .support-voice__card-head {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* 각 입력 행: grid → 단일 컬럼 세로 스택으로 전환 */
+  .support-voice__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* 공통 인풋 — 고정 너비 해제, 부모 너비를 채움 */
+  .support-voice__input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 텍스트에어리어 — 고정 너비 해제 */
+  .support-voice__textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 연락처 3단 분할 — 340px 고정 해제, 부모 너비를 꽉 채움 */
+  .support-voice__phone {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 국번 select — 작은 화면에서 너비 축소, 절대 줄지 않도록 고정 */
+  .support-voice__phone-select {
+    flex: 0 0 72px;
+    width: 72px;
+  }
+
+  /* 번호 입력 두 칸 — flex: 1 + width: 0 으로 남은 공간 균등 분배, 절대 넘치지 않음 */
+  .support-voice__phone-input {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* 하이픈 — 어떤 상황에서도 찌그러지지 않도록 */
+  .support-voice__phone-sep {
+    flex-shrink: 0;
+  }
+
+  .mo-br{
+    display: block;
+  }
+}
+
+
+
+/* =========================================================
+   SUPPORT — 앵커 스크롤 오프셋 보정
+   고정 헤더(plate-nav-btn top:30px + 버튼 높이 ~100px) 가림 방지
+   ========================================================= */
+
+/* 고객의 소리 섹션 — 가맹문의전화 버튼 앵커 타겟(#voice) */
+.support-voice {
+  scroll-margin-top: 100px;
+}
+
+/* FAQ 섹션 */
+.support-faq {
+  scroll-margin-top: 100px;
+}
+
+/* 고객지원 섹션 */
+.support-contact {
+  scroll-margin-top: 100px;
+}
+
+/* =========================================================
+   SUPPORT — 문의 접수 완료 모달
+   크기: 450 × 540 / 딤 오버레이 포함
+   ========================================================= */
+
+/* 오버레이 루트 — 기본: 숨김 대기 상태, is-active 시 페이드인 */
+
+.mo-br{
+  display: none;
+}
+.support-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 트랜지션 대기: 투명 + 포인터 이벤트 차단 */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 활성화 — 오버레이 전체 페이드인 */
+.support-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 딤 배경 레이어 — 백드롭 블러 */
+.support-modal-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+/* 모달 패널 — 딤 위에 렌더링 + 스르륵 떠오르는 등장 모션 */
+.support-modal-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 450px;
+  min-height: 540px;
+  padding: 56px 40px 48px;
+  background: #fdfafa;
+  border-radius: 24px;
+  gap: 0;
+  box-sizing: border-box;
+  /* 대기 상태: 살짝 아래 + 축소 */
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 활성화 시: 제자리 + 원래 크기 */
+.support-modal-overlay.is-active .support-modal-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* 닫기(X) 버튼 — 우측 상단 절대 위치 */
+.support-modal-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-poppi-orange);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.support-modal-close:hover {
+  opacity: 0.85;
+}
+
+/* 체크 아이콘: 144 × 144 → 아래 32px */
+.support-modal-icon {
+  width: 144px;
+  height: 144px;
+  flex-shrink: 0;
+  margin-bottom: 32px;
+}
+
+/* 타이틀: Ria 32px bold → 아래 32px */
+.support-modal-title {
+  font-family: var(--font-ria);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-brown-dark);
+  margin: 0 0 32px;
+}
+
+/* 본문: Paperlogy 20px / lh 160% → 아래 48px */
+.support-modal-body {
+  font-family: var(--font-paperlogy);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-brown-dark);
+  margin: 0 0 48px;
+}
+
+/* 확인 버튼 공통: Ria 24px bold / capsule */
+.support-modal-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ria);
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--color-brown-dark);
+  border: none;
+  border-radius: 999px;
+  padding: 16px 120px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.support-modal-confirm:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* 듀얼 버튼 컨테이너 — 50:50 균등 분할 (현재 미사용, 추후 재활용 대비 보존) */
+/* .support-modal-actions { display: flex; gap: 12px; width: 100%; } */
+/* .support-modal-actions .support-modal-confirm { flex: 1; padding: 16px 0; } */
+
+/* 닫기 변형 — 공통 스타일에서 상속 */
+/* .support-modal-confirm--close { background: var(--color-brown-dark); } */
+
+/* 인스타 바로가기 변형 — 현재 미사용 */
+/* .support-modal-confirm--insta { background: var(--color-poppi-orange); } */
+
+/* 본문 내 인스타그램 텍스트 링크 */
+.modal-insta-link {
+  color: var(--color-poppi-orange);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.modal-insta-link:hover {
+  color: var(--color-brown-dark);
+}
+
+/* 모바일 대응 */
+@media (max-width: 500px) {
+
+  .mo-br{
+    display: block;
+  }
+
+  .support-modal-panel {
+    width: calc(100vw - 32px);
+    min-height: auto;
+    padding: 48px 24px 40px;
+  }
+
+  .support-modal-icon {
+    width: 112px;
+    height: 112px;
+  }
+
+  .support-modal-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .support-modal-body {
+    font-size: 16px;
+    margin-bottom: 36px;
+  }
+
+  .support-modal-confirm {
+    font-size: 18px;
+    padding: 14px 64px;
+  }
+}
+
+.support-hero {
+  position: relative;
+  width: 100%;
+  padding: clamp(110px, 11.4vw, 220px) clamp(24px, 4.17vw, 80px) clamp(40px, 4.17vw, 80px);
+  text-align: center;
+  background: var(--donut-ivory);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 1.04vw, 20px);
+}
+
+.support-hero .support-hero__title {
+  font-family: var(--font-ria);
+  font-weight: 700;
+  font-size: clamp(40px, 4.69vw, 90px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--donut-brown-dark);
+  margin: 0;
+}
+
+.support-hero__desc {
+  font-family: var(--font-paperlogy);
+  font-weight: 500;
+  font-size: clamp(14px, 1.04vw, 20px);
+  line-height: 1.6;
+  color: var(--donut-brown-light);
+  margin: 0;
+}
+
+.support-hero__shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(8px, 0.625vw, 12px);
+  margin-top: clamp(8px, 0.625vw, 12px);
+}
+
+.support-hero__chip {
+  font-family: var(--font-paperlogy);
+  font-weight: 600;
+  font-size: clamp(13px, 0.83vw, 16px);
+  padding: clamp(8px, 0.625vw, 12px) clamp(16px, 1.25vw, 24px);
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1.5px solid var(--donut-orange);
+  color: var(--donut-orange);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.support-hero__chip:hover {
+  background: var(--donut-orange);
+  color: #ffffff;
+}
+
+
+
+
+
+/* =========================================================
+   Support / Event — Responsive (구 pages.css 하단 미디어쿼리 통합)
+   ========================================================= */
+
+@media (max-width: 1280px) {
+
+  /* 좁은 데스크탑: 폰트/연결자만 살짝 축소, 위치 비율은 그대로 */
+  .brand-roadmap__year {
+    font-size: clamp(20px, 2vw, 28px);
+  }
+
+  .brand-roadmap__desc {
+    font-size: clamp(13px, 1.4vw, 18px);
+  }
+
+  .brand-roadmap__pin {
+    height: clamp(34px, 3vw, 50px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .support-voice__row {
+    grid-template-columns: 1fr;
+  }
+
+  .support-channels .support-channels__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 타이틀 ↔ 로드맵 간격 축소 */
+  .brand-roadmap {
+    margin-top: clamp(60px, 9vw, 120px);
+  }
+
+  .brand-roadmap__year {
+    font-size: 22px;
+  }
+
+  .brand-roadmap__desc {
+    font-size: 14px;
+  }
+
+  .brand-roadmap__pin {
+    height: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .support-channels__grid,
+  .brand-identity__row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .brand-identity__col--full {
+    grid-column: auto;
+  }
+
+  .brand-hello__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  /* 모바일: 로드맵 절대좌표 해제 → 세로 스택 + path 숨김 */
+  .brand-roadmap {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    margin-top: 48px;
+    padding: 0 24px;
+  }
+
+  .brand-roadmap__path {
+    display: none;
+  }
+
+  .brand-roadmap__marker {
+    position: relative;
+    inset: auto;
+    width: min(280px, 80%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-roadmap__media {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .brand-roadmap__label {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+  }
+
+  .brand-roadmap__pin {
+    height: 38px;
+  }
+
+  .brand-roadmap__year {
+    font-size: 24px;
+  }
+
+  .brand-roadmap__desc {
+    font-size: 15px;
+  }
+
+  .support-channels .support-channels__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-list__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-list__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-faq__q-text {
+    font-size: 16px;
+
+  }
+
+  .support-voice__agree-more {
+    font-size: 13px;
+  }
+
+}
+
+
+/* =========================================================
+   SUPPORT — 고객지원 (원형 아이템 3종 + 호버 인터랙션)
+   ========================================================= */
+.support-contact {
+  width: 100%;
+  background: #ffffff;
+  padding-top: 160px;
+  padding-bottom: 160px;
+}
+
+.support-contact__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+
+/* 리스트 래퍼 — li의 기본 마커 제거 */
+.support-contact__list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 54px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── 원형 아이템 (a 태그) ─────────────────────────────── */
+.support-contact__item {
+  /* 레이어 겹침의 기준점 */
+  position: relative;
+  /* 원형 외형 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 500px;
+  border-width: 2px;
+  border-style: solid;
+  background-color: #ffffff;
+  /* 링크 초기화 */
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  /* 배경색·그림자 전환 */
+  transition:
+    background-color 0.35s ease-in-out,
+    box-shadow 0.35s ease-in-out;
+  /* 원 밖으로 콘텐츠가 삐져나오지 않게 */
+  overflow: hidden;
+}
+
+/* ── 개별 테두리 색상 ──────────────────────────────────── */
+.support-contact__item--phone {
+  border-color: var(--poppi-yellow);
+}
+
+.support-contact__item--email {
+  border-color: var(--poppi-orange);
+}
+
+.support-contact__item--store {
+  border-color: var(--poppi-yellow);
+}
+
+/* ── 기본 콘텐츠 레이어 ───────────────────────────────── */
+.circle-content-default {
+  /* 원 중앙을 꽉 채우는 절대 레이어 */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  /* 기본: 완전히 표시 */
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.35s ease-in-out,
+    visibility 0.35s ease-in-out;
+}
+
+/* 아이콘 이미지 */
+.support-contact__icon {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* 아이템 기본 라벨 */
+.support-contact__label {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: var(--lh-body);
+  color: var(--brown-dark);
+  text-align: center;
+}
+
+/* ── 호버 콘텐츠 레이어 ───────────────────────────────── */
+.circle-content-hover {
+  /* 원 중앙을 꽉 채우는 절대 레이어 */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  /* 기본: 숨김 */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease-in-out,
+    visibility 0.35s ease-in-out;
+}
+
+/* "바로가기" + SVG를 한 줄에 */
+.hover-link-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 호버 텍스트 — "전화문의" / "바로가기" 공통 */
+.circle-hover__text {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ivory-bg);
+  text-align: center;
+  margin: 0;
+}
+
+/* ── 호버 인터랙션 — 포인터 장치에서만 활성화 ──────────── */
+@media (hover: hover) {
+
+  /* 가맹문의전화 / 오프라인 매장 → poppi-yellow 배경 */
+  .support-contact__item--phone:hover,
+  .support-contact__item--store:hover {
+    background-color: var(--poppi-yellow);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 이메일 → poppi-orange 배경 */
+  .support-contact__item--email:hover {
+    background-color: var(--poppi-orange);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 기본 레이어: 호버 시 사라짐 */
+  .support-contact__item:hover .circle-content-default {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* 호버 레이어: 호버 시 나타남 */
+  .support-contact__item:hover .circle-content-hover {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+  }
+}
+
+/* ── 반응형 ────────────────────────────────────────────── */
+
+/* 900px 이하: 자연 줄바꿈 + 모바일 여백 */
+@media (max-width: 900px) {
+  .support-contact {
+    padding-top: clamp(80px, 10vw, 160px);
+    padding-bottom: clamp(80px, 10vw, 160px);
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .support-contact__list {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mo-br{
+    display: block;
+  }
+  .support-contact__list {
+    gap: 24px;
+  }
+
+  .support-contact__item {
+    width: 200px;
+    height: 200px;
+  }
+
+  .support-contact__icon {
+    width: 96px;
+  }
+
+  .support-contact__label {
+    font-size: 17px;
+  }
+
+  .circle-hover__text {
+    font-size: 20px;
+  }
+}

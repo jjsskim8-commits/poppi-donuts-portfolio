@@ -1,0 +1,2253 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — Brand Story page styles
+   (구 pages.css 에서 분리)
+   ========================================================= */
+
+/* =========================================================
+   BRAND STORY — Title (구 버전 — 아래 시안 B로 덮어쓰여짐. 호환용 placeholder)
+   ========================================================= */
+
+/* =========================================================
+   BRAND STORY — Reveal (비활성 — 애니메이션 없음)
+   ========================================================= */
+[data-reveal],
+[data-fade],
+[data-reveal].is-revealed,
+[data-fade].is-revealed {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* =========================================================
+   BRAND STORY — Brand title KV
+   • 배경: #FFFCF6 + brand-kv-bg.png — 750px
+   • BRAND 2중 타이포: y 240px, 154px (128×1.2), x 가운데, -1.5°
+   • 도넛: y 350px, width 850px (708×1.2), x 가운데
+   ========================================================= */
+/* =========================================================
+   BRAND KV — event-news 의 .page-top + .kv-title 구조/스타일과 완전히 동일.
+   - 배경: 사용자 제공 이미지 brand-kv-bg-v2.png (핑크 그리드 + 하단 도넛)
+   - 최대 높이 572px (1920px 기준 29.79vw)
+   - 타이틀 회전/외곽선/그림자 모두 event-news 값과 1:1 매칭
+   ========================================================= */
+.page-top {
+  --event-kv-bg: #FFFCF6;                                    /* Brand 폴백 배경 (이미지 로드 전) */
+  --kv-height: clamp(219px, 29.79vw, 572px);                 /* 1920 → 572 */
+  --kv-title-size: clamp(48px, 5.21vw, 100px);
+  --kv-title-stroke: clamp(2px, 0.26vw, 5px);
+  --kv-title-outline: clamp(6px, 0.78vw, 15px);
+  --kv-title-top: clamp(88px, 28%, 200px);
+
+  position: relative;
+  width: 100%;
+  min-height: var(--kv-height);
+  padding-top: 0;
+  overflow: hidden;
+  background-color: var(--event-kv-bg);
+  background-image: url("../images/brand/brand-kv-bg-v2.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+.kv-title {
+  position: absolute;
+  top: var(--kv-title-top);
+  left: 50%;
+  z-index: 2;
+  isolation: isolate;
+  max-width: calc(100% - 32px);
+  color: #452319;
+  font-family: var(--font-heading, var(--font-ria));
+  font-size: var(--kv-title-size);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: clamp(0.5px, 0.1vw, 2px);
+  transform: translate(-50%, -50%) rotate(-5deg);
+  transform-origin: center;
+  white-space: nowrap;
+  -webkit-text-stroke: var(--kv-title-stroke) #452219;
+  paint-order: stroke fill;
+  text-shadow:
+    -1px -2px 4px rgba(255, 235, 221, 0.75),
+    2px 3px 7px rgba(0, 0, 0, 0.42),
+    -4px 3px 8px rgba(69, 50, 31, 0.45),
+    0 6px 10px rgba(32, 18, 12, 0.2);
+  margin: 0;
+}
+
+.kv-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: inherit;
+  pointer-events: none;
+  -webkit-text-stroke: var(--kv-title-outline) #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95));
+}
+
+/* 도넛 — x 가운데, y 410px (350+60), width 680px (850×0.8)
+   데스크탑(≥1025px)에서는 px 고정으로 위치/크기를 못박아 화면 너비가 바뀌어도 흔들리지 않음.
+   태블릿/모바일은 아래 미디어쿼리에서 % / vw 기반으로 별도 처리. */
+.brand-title__donut {
+  position: absolute;
+  left: 50%;
+  top: 410px;
+  transform: translateX(-50%);
+  width: clamp(226px, 35.42vw, 680px);
+  max-width: 680px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  z-index: 2;
+}
+
+/* event-news 와 동일한 태블릿/모바일 KV 토큰 비례 축소 */
+@media (max-width: 1024px) {
+  .page-top {
+    --kv-height: clamp(219px, 29.79vw, 282px);
+    --kv-title-size: clamp(44px, 7.8vw, 72px);
+    --kv-title-stroke: clamp(2px, 0.35vw, 4px);
+    --kv-title-outline: clamp(5px, 1vw, 12px);
+    --kv-title-top: clamp(80px, 26%, 160px);
+  }
+}
+
+@media (max-width: 560px) {
+  .page-top {
+    --kv-height: 219px;
+    padding-top: 0;
+    --kv-title-size: clamp(36px, 10.5vw, 56px);
+    --kv-title-stroke: 3px;
+    --kv-title-outline: clamp(5px, 1.8vw, 9px);
+    --kv-title-top: clamp(72px, 24%, 120px);
+  }
+}
+
+/* =========================================================
+   BRAND STORY — Hi I'm POPPI (Figma 1920×666)
+   • bg Poppi Yellow 400 (#FBA720) / height 666px
+   • deco x=240, desc x=1047 — y축 가운데 정렬
+   ========================================================= */
+.brand-hello {
+  position: relative;
+  width: 100%;
+  height: 666px;
+  min-height: 666px;
+  max-height: 666px;
+  background-color: #FFADC7;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Figma Vector 631×345 @ (240, y-center) */
+.brand-hello__deco {
+  position: absolute;
+  left: clamp(24px, 12.5vw, 240px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 32.86vw, 631px);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Figma text 650×212 @ (1047, y-center) — Paperlogy Medium 24px #fff */
+.brand-hello__desc {
+  position: absolute;
+  left: clamp(24px, 54.53vw, 1047px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(650px, calc(100% - clamp(24px, 54.53vw, 1047px) - 24px));
+  max-width: 650px;
+  margin: 0;
+  font-family: var(--font-paperlogy);
+  font-weight: 500;
+  font-size: clamp(16px, 1.25vw, 24px);
+  line-height: 2.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .brand-hello {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding-top: clamp(48px, 6vw, 80px) !important;
+    padding-bottom: clamp(48px, 6vw, 80px) !important;
+    padding-left: clamp(24px, 5vw, 48px) !important;
+    padding-right: clamp(24px, 5vw, 48px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(28px, 4vw, 48px) !important;
+    text-align: center !important;
+    overflow: visible !important;
+  }
+
+  .brand-hello__deco,
+  .brand-hello__desc {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto !important;
+    align-self: center !important;
+  }
+
+  .brand-hello__deco {
+    width: clamp(180px, 30vw, 280px) !important;
+    max-width: 280px !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  .brand-hello__desc {
+    width: 100% !important;
+    max-width: 520px !important;
+    text-align: center !important;
+    font-size: clamp(13px, 1.5vw, 16px) !important;
+    line-height: 1.8 !important;
+    letter-spacing: -0.01em !important;
+  }
+}
+
+/* =========================================================
+   BRAND STORY — Story Timeline (Figma 1258:741 Group 58, 1293×1410)
+   • 타이틀: 64px, x 가운데, y 210 (160+50)
+   • 로드맵: 타이틀 아래 170px (190-20), Group 58 중앙 정렬
+   ========================================================= */
+.brand-story-section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: 210px 0 clamp(60px, 5.21vw, 100px);
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-story-section__title {
+  width: 100%;
+  font-family: var(--font-ria);
+  font-size: clamp(36px, 3.33vw, 64px);
+  font-weight: 800;
+  color: #ED6325;
+  margin: 0;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Group 58 — 1293×1410, 타이틀 아래 170px, 가운데 정렬
+   ※ PC 그리드 1440 정렬 — 컨테이너 폭을 1440으로 확장하되, 내부 절대좌표(%) 계산 기준은
+      그대로 1293 기준을 유지하면 비율이 깨지므로 max-width 만 1440 으로 확대.
+      aspect-ratio 와 마커 좌표(% 값)는 원본 비율(1293×1410) 그대로 유지. */
+.brand-roadmap {
+  position: relative;
+  width: min(1440px, calc(100% - 48px));
+  margin: 170px auto 0;
+  aspect-ratio: 1293 / 1410;
+  overflow: hidden;
+  container-type: inline-size;
+  container-name: roadmap;
+}
+
+/* Path Group 52 — (158, 122.714) 1000×1083 within 1293×1410 */
+.brand-roadmap__path {
+  position: absolute;
+  left: 12.21%;
+  top: 8.70%;
+  width: 77.36%;
+  height: 76.83%;
+  object-fit: contain;
+  object-position: top center;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 모바일(402px) 세로 타임라인 연결선 — PC에서는 숨김 */
+.brand-roadmap__segment {
+  display: none;
+}
+
+/* 마커: 컨테이너 전체를 차지하는 inert 오버레이 (이미지/라벨이 각자 절대좌표)
+   ※ 기본(폴백) 경로 — IntersectionObserver 가 .is-visible 부착 → 아래에서 위로 살짝 튕기며 등장.
+   ※ GSAP 경로 — body.js-roadmap-anim 부착 시 CSS transition 을 끄고 GSAP 가 transform/opacity 를 제어. */
+.brand-roadmap__marker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: translate3d(0, 100px, 0);
+  transition:
+    opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.brand-roadmap__marker.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* GSAP ScrollTrigger 활성 시 — CSS transition/초기상태가 GSAP set() 과 충돌하지 않도록 해제.
+   초기 opacity/transform 은 JS의 gsap.set() 이 인라인 스타일로 지정한다. */
+body.js-roadmap-anim .brand-roadmap__marker,
+body.js-roadmap-anim .brand-roadmap__media {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-roadmap__marker {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 이미지 — Figma 원본 좌표 (--img-x, --img-y) + 크기 (--img-w, --img-h) */
+.brand-roadmap__media {
+  position: absolute;
+  left: var(--img-x, 0);
+  top: var(--img-y, 0);
+  width: var(--img-w, 100%);
+  height: var(--img-h, auto);
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+  backface-visibility: hidden;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* IO 폴백 — 아이콘이 마커보다 살짝 늦게 따라오며 등장 */
+.brand-roadmap__marker:not(.is-visible) .brand-roadmap__media {
+  transform: translate3d(0, 24px, 0);
+}
+
+.brand-roadmap__marker.is-visible .brand-roadmap__media {
+  transform: translate3d(0, 0, 0);
+}
+
+/* 라벨 — 세로(--lbl-y), 가로는 아이콘 중앙 정렬 (이미지·텍스트 축 일치) */
+.brand-roadmap__label {
+  --label-w: var(--lbl-w, 19.41%);
+  position: absolute;
+  left: calc(var(--img-x, 0) + (var(--img-w, 18%) / 2));
+  top: var(--lbl-y, 50%);
+  width: var(--label-w);
+  max-width: 100%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  pointer-events: auto;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.brand-roadmap__pin {
+  display: block;
+  width: auto;
+  height: clamp(32px, 2.6vw, 50px);
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.brand-roadmap__year {
+  font-family: var(--font-ria);
+  font-weight: 700;
+  font-size: clamp(22px, 1.67vw, 32px);
+  line-height: 1;
+  color: #ED6325;
+  letter-spacing: 0;
+  margin: 0;
+  display: block;
+  white-space: nowrap;
+}
+
+.brand-roadmap__desc {
+  font-family: var(--font-paperlogy);
+  font-weight: 500;
+  font-size: clamp(8px, 1.35cqi, 18px);
+  line-height: 1.2;
+  color: var(--brown-dark);
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.12em;
+  min-height: calc(2 * 1lh + 0.12em);
+  overflow: visible;
+}
+
+.brand-roadmap__desc-line {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  line-height: inherit;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  overflow: visible;
+  text-align: center;
+}
+
+/* =========================================================
+   BRAND IDENTITY — 사용자 지정 1920×1400 절대좌표 레이아웃
+   ---------------------------------------------------------
+   섹션 1400px (1400/1920 = 72.9166...vw)
+   모든 요소 absolute 배치 (1920 기준 px → % 변환):
+     · BRAND IDENTITY 타이틀 (593,110)  Ria Sans EB 64 #ED6325
+     · LOGO 라벨          (250,282)   Paperlogy 700 32 #452219
+     · TYPOGRAPHY 라벨    (1025,282)
+     · 로고 박스          (250,380)   599×454 배경 #f6f6f6
+     · COLOR GUIDE 라벨   (250,970)
+     · Ria Sans Aa 이미지 (1025,380)  293×166
+     · Ria Sans name      (1417,412)  Ria Sans 700 32
+     · Ria Sans sample    (1417,468)  Ria Sans 400 20
+     · Paperlogy Aa 이미지(1025,646)  293×166
+     · Paperlogy name     (1417,694)  Paperlogy 700 32
+     · Paperlogy sample   (1417,742)  Paperlogy 400 20
+     · 컬러 써클 (y:1058) 140×140 + 1px inside 검정 stroke
+       290 ED6325 / 540 F8A720 / 780 FDE2CF / 1020 E5A5C8 / 1500 452319
+   ========================================================= */
+.brand-identity {
+  position: relative;
+  width: 100%;
+  /* 1400/1920 = 72.9167vw → 데스크탑 ~1920 에서 1400px, 작아질수록 비례 축소 */
+  height: clamp(1050px, 72.9167vw, 1400px);
+  min-height: clamp(1050px, 72.9167vw, 1400px);
+  background: #FEF7F1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.brand-identity__inner {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  margin: 0 auto;
+  display: block;            /* responsive.css 의 flex column 덮어쓰기 */
+}
+
+/* PC(≥1024) — 그룹 래퍼는 레이아웃에 영향 없음(자식 절대좌표 유지) */
+@media (min-width: 1024px) {
+  .brand-identity__group,
+  .brand-identity__typo-block,
+  .brand-identity__typo-info {
+    display: contents;
+  }
+
+  .brand-identity__title br {
+    display: none;
+  }
+
+  /* 6 원 정렬 — 1920 기준
+       · 원 사이 100px gap (1920 의 5.2083vw)
+       · 컬럼 폭 = 원 칩 폭(clamp 56~140) → 자동으로 컨테이너 폭이 6칩+5gap=1340px 로 결정
+       · COLOR GUIDE 라벨(970, 32px) 의 baseline 아래 50px → top 1052/1400 = 75.1429% */
+  .brand-identity__color-grid {
+    display: grid;
+    grid-template-columns: repeat(6, clamp(56px, 7.2917vw, 140px));
+    column-gap: clamp(40px, 5.2083vw, 100px);
+    row-gap: clamp(8px, 0.6vw, 12px);
+    position: absolute;
+    left: 15.1042%;            /* 290/1920 */
+    top: 75.1429%;             /* 1052/1400 — 라벨 아래 50px */
+    width: auto;
+    max-width: 1340px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .brand-identity__color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(8px, 0.6vw, 12px);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .brand-identity__color-chip {
+    display: block;
+    width: 100%;
+    max-width: clamp(56px, 7.2917vw, 140px);
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    flex-shrink: 1;
+    margin: 0 auto;
+  }
+
+  .brand-identity__color-name {
+    font-family: var(--font-paperlogy);
+    font-weight: 700;
+    font-size: clamp(13px, 1.04vw, 20px);
+    line-height: 1.3;
+    color: #452219;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: keep-all;
+  }
+
+  .brand-identity__color-hex {
+    font-family: var(--font-paperlogy);
+    font-weight: 500;
+    font-size: clamp(12px, 0.94vw, 18px);
+    line-height: 1.2;
+    color: #452219;
+    opacity: 0.85;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   메인 타이틀 — (593, 110)
+   Ria Sans ExtraBold 64 / #ED6325
+   ────────────────────────────────────────────────────────── */
+.brand-identity__title {
+  position: absolute;
+  left: 30.8854%;            /* 593/1920 */
+  top: 7.8571%;              /* 110/1400 */
+  width: auto;               /* responsive.css width:100% 덮어쓰기 */
+  text-align: left;          /* center 덮어쓰기 */
+  font-family: var(--font-ria);
+  font-weight: 800;
+  font-size: clamp(36px, 3.3333vw, 64px);    /* 64/1920 */
+  line-height: 1;
+  letter-spacing: 0;
+  color: #ED6325;
+  margin: 0;
+}
+
+/* ──────────────────────────────────────────────────────────
+   섹션 라벨 — Paperlogy 700 32 / #452219
+   LOGO (250,282) / TYPOGRAPHY (1025,282) / COLOR GUIDE (250,970)
+   ────────────────────────────────────────────────────────── */
+.brand-identity__label {
+  position: absolute;
+  font-family: var(--font-paperlogy);
+  font-weight: 700;
+  font-size: clamp(20px, 1.6667vw, 32px);    /* 32/1920 */
+  line-height: 1;
+  letter-spacing: 0;
+  color: #452219;
+  margin: 0;
+}
+.brand-identity__label--logo  { left: 13.0208%; top: 20.1429%; }  /* (250,282)  */
+.brand-identity__label--typo  { left: 53.3854%; top: 20.1429%; }  /* (1025,282) */
+.brand-identity__label--color { left: 13.0208%; top: 69.2857%; }  /* (250,970)  */
+
+/* ──────────────────────────────────────────────────────────
+   로고 박스 — (250, 380), 599×454, 배경 #f6f6f6, 내부 점선 가이드 + 곡선 + 각도 라벨
+   ────────────────────────────────────────────────────────── */
+/* 박스/배경/가이드 모두 제거 — 로고 이미지 599×400 으로 표시 */
+.brand-identity__logo-box {
+  position: absolute;
+  left: 13.0208%;            /* 250/1920 */
+  top: 27.1429%;             /* 380/1400 */
+  width: 31.1979%;           /* 599/1920 */
+  aspect-ratio: 599 / 400;
+  background: transparent;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* 로고 이미지 — wrapper(599×350) 를 가득 채움
+   object-position: left center 로 좌측 정렬해서 이미지의 시작 X 가
+   바로 아래 "LOGO" 라벨의 시작 X 와 정확히 일치하도록 한다
+   (이미지 비율이 599/400 과 다를 경우 가운데 정렬되는 letterbox 방지). */
+.brand-identity__logo-box .brand-identity__logo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+  margin: 0;
+  display: block;
+}
+.brand-identity__logo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 점선 가이드 공통 */
+.brand-identity__guide {
+  position: absolute;
+  pointer-events: none;
+}
+.brand-identity__guide--v-left,
+.brand-identity__guide--v-right {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-image: linear-gradient(to bottom, #a3a3a3 0 4px, transparent 4px 8px);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+}
+.brand-identity__guide--v-left  { left: 6.84%; }
+.brand-identity__guide--v-right { left: 92.82%; }
+
+.brand-identity__guide--h-top,
+.brand-identity__guide--h-bottom {
+  left: 0; right: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, #a3a3a3 0 4px, transparent 4px 8px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+}
+.brand-identity__guide--h-top    { top: 7.73%; }
+.brand-identity__guide--h-bottom { top: 92.71%; }
+
+.brand-identity__guide-curve {
+  position: absolute;
+  left: 1.34%;
+  top: 70.20%;
+  width: 98.33%;
+  height: 30.02%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* 각도 라벨 — Paperlogy 500 20 / #a3a3a3 */
+.brand-identity__angle {
+  position: absolute;
+  font-family: var(--font-paperlogy);
+  font-weight: 500;
+  font-size: clamp(11px, 1.0417vw, 20px);   /* 20/1920 */
+  line-height: 1;
+  color: #a3a3a3;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.brand-identity__angle--left  { left: 0;       top: calc(100% + 2.87%); }
+.brand-identity__angle--right { left: 101.17%; top: 88.30%; }
+
+/* ──────────────────────────────────────────────────────────
+   Aa 이미지 — 293×166
+   Ria  (1025, 380) / Paperlogy (1025, 646)
+   ────────────────────────────────────────────────────────── */
+.brand-identity__aa {
+  position: absolute;
+  width: 15.2604%;           /* 293/1920 */
+  height: auto;
+}
+.brand-identity__aa img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.brand-identity__aa--ria   { left: 53.3854%; top: 27.1429%; }    /* (1025,380) */
+.brand-identity__aa--paper { left: 53.3854%; top: 46.1429%; }    /* (1025,646) */
+
+/* ──────────────────────────────────────────────────────────
+   폰트 이름 라벨 — Bold 32 / #452219
+   Ria Sans (1417, 412) / Paperlogy (1417, 694)
+   ────────────────────────────────────────────────────────── */
+.brand-identity__font-name {
+  position: absolute;
+  font-weight: 700;
+  font-size: clamp(20px, 1.6667vw, 32px);
+  line-height: 1;
+  letter-spacing: 0;
+  color: #452219;
+  margin: 0;
+}
+.brand-identity__font-name--ria {
+  left: 73.8021%;            /* 1417/1920 */
+  top: 29.4286%;             /* 412/1400 */
+  font-family: var(--font-ria);
+}
+.brand-identity__font-name--paper {
+  left: 73.8021%;
+  top: 49.5714%;             /* 694/1400 */
+  font-family: var(--font-paperlogy);
+}
+
+/* ──────────────────────────────────────────────────────────
+   폰트 샘플 텍스트 — Regular 20 / #452219, 3줄
+   Ria Sans (1417, 468) / Paperlogy (1417, 742)
+   ────────────────────────────────────────────────────────── */
+.brand-identity__font-sample {
+  position: absolute;
+  left: 73.8021%;
+  font-weight: 400;
+  font-size: clamp(15px, 1.0417vw, 20px);
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: #452219;
+  margin: 0;
+}
+.brand-identity__font-sample p { margin: 0; }
+.brand-identity__font-sample--ria {
+  top: 33.4286%;             /* 468/1400 */
+  font-family: var(--font-ria);
+}
+.brand-identity__font-sample--paper {
+  top: 53.0000%;             /* 742/1400 */
+  font-family: var(--font-paperlogy);
+}
+
+.brand-identity__color-chip {
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(69, 35, 25, 0.07);
+}
+
+/* =========================================================
+   BRAND STORY — Application (Figma: 1920×1533, y=5033~6566)
+   • 시안: title (496,5124) 943×92 / image grid (247,5323) 1440×1159
+   • top-padding 91 (5124-5033) / title→grid gap 107 / bottom-padding 84
+   ========================================================= */
+.brand-application {
+  position: relative;
+  width: 100%;
+  height: clamp(720px, 72.9167vw, 1400px);                  /* 사용자 요청 — 섹션 1400px (1920 기준 vw 비례) */
+  background: #ffffff;
+  padding: clamp(56px, 7.2917vw, 140px) 0;                  /* 사용자 요청 — 상/하 패딩 140px (1920 기준 7.29vw) */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.brand-application__inner {
+  width: min(1440px, calc(100% - 40px));
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;                                      /* 좁아진 그리드 가운데 정렬 */
+  justify-content: flex-start;
+}
+
+/* Figma 1258:778 BRAND APPLICATION 943×92 → 64px 가운데 정렬 */
+.brand-application__title {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-ria);
+  font-size: clamp(36px, 3.33vw, 64px);
+  font-weight: 800;
+  color: var(--donut-orange);
+  margin: 0 auto clamp(40px, 5.2083vw, 100px);              /* 사용자 요청 — 타이틀 ↔ 이미지 100px (1920 기준 5.21vw) */
+  letter-spacing: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.brand-application__board {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: block;
+  object-fit: contain;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* =========================================================
+   BRAND APPLICATION — 5장 이미지 그리드
+   Figma 슬롯:
+     1) wide  (sign, 약 16:7.5)
+     2) row   (storefront 1:1  +  set 1:1)
+     3) wide  (paper,  약 16:8)
+     4) wide  (box,    약 16:8)
+   ========================================================= */
+/* 1400px 섹션 — Figma 레퍼런스 구도 그리드 (사용자 요청)
+   레이아웃:
+     ┌──────────────┬─────────────┐
+     │   sign       │ storefront  │  row 1 (가장 큼)
+     ├──────────────┼─────────────┤
+     │   paper      │             │  row 2
+     ├──────────────┤   set       │  set 가 row2+row3 세로 스팬
+     │   box        │             │  row 3
+     └──────────────┴─────────────┘
+   좌:우 컬럼 폭 = 1.5 : 1 / 행 높이 = 1.3 : 1.05 : 1 (레퍼런스 비율) */
+.brand-application__grid {
+  width: 100%;
+  max-width: 1440px;                                        /* 사용자 요청 — 행 가로폭 1440px */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1.3fr 1.05fr 1fr;
+  grid-template-areas:
+    "sign       storefront"
+    "paper      set"
+    "box        set";
+  gap: 8px;                                                 /* 사용자 요청 — 사진 사이 간격 8px 고정 */
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.brand-application__item {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                                        /* 셀 채우기 — 레퍼런스 구도와 동일 */
+  border-radius: 0;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.brand-application__item--sign       { grid-area: sign; }
+.brand-application__item--storefront { grid-area: storefront; }
+.brand-application__item--paper      { grid-area: paper; }
+.brand-application__item--box        { grid-area: box; }
+.brand-application__item--set        { grid-area: set; }
+
+/* =========================================================
+   Brand Story — Responsive (구 pages.css 하단 미디어쿼리 통합)
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1280px) {
+  /* 좁은 데스크탑·태블릿: 컨테이너 비율에 맞춰 폰트 축소, 위치 비율은 그대로 */
+  .brand-roadmap__year { font-size: clamp(18px, 2.2cqi, 28px); }
+  .brand-roadmap__desc { font-size: clamp(9px, 1.35cqi, 16px); }
+  .brand-roadmap__pin { height: clamp(28px, 3.2cqi, 50px); }
+}
+
+@media (max-width: 1024px) {
+  .support-voice__row { grid-template-columns: 1fr; }
+  .support-channels .support-channels__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* 타이틀 ↔ 로드맵 간격 — Figma 160px 비례 축소 */
+  .brand-roadmap { margin-top: clamp(72px, 8.85vw, 170px); }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .brand-roadmap__year { font-size: clamp(16px, 2.4cqi, 22px); }
+  .brand-roadmap__desc { font-size: clamp(9px, 1.3cqi, 14px); }
+  .brand-roadmap__pin { height: clamp(26px, 3.8cqi, 42px); }
+}
+
+@media (max-width: 768px) {
+  .brand-story-section {
+    padding-top: clamp(110px, 18vw, 180px);
+  }
+
+  .support-channels__grid,
+  .brand-identity__row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: auto;
+  }
+  .brand-identity__col--full { grid-column: auto; }
+
+  .support-channels .support-channels__grid { grid-template-columns: 1fr; }
+  .event-list__grid { grid-template-columns: 1fr; }
+  .event-list__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* =========================================================
+   Production spacing pass — Brand Story
+   - PC: 12col / gutter 24 / max 1440 기준
+   - fixed-height 섹션을 자연 높이로 변경해 콘텐츠 잘림 방지
+   - 섹션 시작/끝, 제목↔콘텐츠, 텍스트↔이미지 간격을 공통 토큰으로 통일
+   ========================================================= */
+.brand-hello,
+.brand-story-section,
+.brand-identity,
+.brand-application {
+  --brand-container: min(var(--site-max), calc(100% - (var(--site-gutter) * 2)));
+}
+
+/* HI, I'M POPPI 의 height/padding 고정은 데스크탑(≥1025px)에서만 적용.
+   태블릿/모바일에서는 미디어쿼리(≤1024px / ≤768px / ≤540px)에서
+   height: auto + flex 가운데 정렬을 유지해야 하므로 격리. */
+@media (min-width: 1025px) {
+  .brand-hello {
+    height: 666px;
+    min-height: 666px;
+    max-height: 666px;
+    padding: 0;
+    align-items: stretch;
+  }
+}
+
+.brand-story-section {
+  padding: clamp(110px, 10.94vw, 210px) 0 var(--section-y-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-story-section__title {
+  width: 100%;
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+}
+
+.brand-roadmap {
+  width: min(1440px, calc(100% - 48px));                      /* PC 그리드 1440 정렬 */
+  margin-top: clamp(130px, 16.15vw, 310px);
+  aspect-ratio: 1293 / 1410;
+}
+
+/* ⚠ .brand-identity / __inner / __title / __row / __col h3 / __typo-list
+   / __typo-item / __colors 의 production-pass override 블록은
+   상단 Figma 1200px-fit 규칙을 덮어써서 섹션이 1562px 로 렌더되게 함 →
+   2026-06-04 제거. 모든 .brand-identity 데스크탑 스펙은 line 393~ 의
+   "Figma 1323:243" 블록만 사용. */
+
+.brand-application {
+  /* 사용자 요청 — 섹션 1400px + 상/하 패딩 140px (1920 기준 vw 비례) */
+  height: clamp(720px, 72.9167vw, 1400px);
+  padding: clamp(56px, 7.2917vw, 140px) 0;
+  overflow: hidden;
+}
+
+.brand-application__inner {
+  width: var(--brand-container);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.brand-application__title {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+  margin: 0 auto clamp(40px, 5.2083vw, 100px);              /* 사용자 요청 — 타이틀 ↔ 이미지 100px */
+}
+
+.brand-application__board {
+  width: 100%;
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .brand-roadmap {
+    margin-top: clamp(72px, 8.85vw, 170px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 768px) {
+  .brand-roadmap {
+    width: min(1440px, calc(100% - 32px));
+    margin-top: clamp(48px, 12vw, 120px);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .brand-identity__row {
+    gap: var(--content-gap-xl);
+    margin-bottom: var(--content-gap-xl);
+  }
+
+  .brand-identity__typo-item {
+    align-items: flex-start;
+  }
+
+  .brand-application__inner,
+  .brand-identity__inner {
+    width: min(100% - 40px, var(--site-max));
+  }
+}
+
+/* =========================================================
+   Brand Story — Figma 반응형 정밀 매칭
+   - Tablet : node 1289:94  (768px ref)
+   - Mobile : node 1289:292 (402px ref)
+   ========================================================= */
+
+/* ---------- ≤1024px : COLOR 가이드 3-col + BRAND APPLICATION 모바일 그리드 ---------- */
+@media (max-width: 1024px) {
+  .brand-identity__colors {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: clamp(28px, 4vw, 48px);
+  }
+  .brand-identity__row {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3.5vw, 56px);
+  }
+
+  /* BRAND APPLICATION — 사용자 요청: 태블릿(541~1024) 도 모바일과 동일한 2x4 그리드 구조
+       (sign 풀폭) / (storefront 1:1 + set 1:1) / (paper 풀폭) / (box 풀폭)
+       폭만 태블릿에 맞춰 720px까지 허용. */
+  .brand-application {
+    height: auto;
+    padding: clamp(56px, 9vw, 80px) 0;
+    overflow: visible;
+  }
+  .brand-application__inner {
+    width: min(720px, calc(100% - 32px));
+    height: auto;
+  }
+  .brand-application__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "sign sign"
+      "storefront set"
+      "paper paper"
+      "box box";
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    margin: 0 auto;
+    flex: none;
+    min-height: 0;
+    gap: 8px;
+    align-items: start;
+    align-content: start;
+    box-sizing: border-box;
+  }
+  .brand-application__title {
+    font-size: clamp(40px, 7.3vw, 56px);
+    margin-bottom: clamp(36px, 6vw, 60px);
+    max-width: 100%;
+  }
+  .brand-application__board {
+    width: 100%;
+    border-radius: 0;
+  }
+  .brand-application__item {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    align-self: start;
+    justify-self: stretch;
+    line-height: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+  .brand-application__item--sign,
+  .brand-application__item--paper,
+  .brand-application__item--box {
+    grid-column: 1 / -1;
+  }
+  .brand-application__item--sign       { grid-area: sign; }
+  .brand-application__item--storefront,
+  .brand-application__item--set {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .brand-application__item--storefront { grid-area: storefront; }
+  .brand-application__item--set        { grid-area: set; }
+  .brand-application__item--paper      { grid-area: paper; }
+  .brand-application__item--box        { grid-area: box; }
+}
+
+/* ---------- ≤768px : 태블릿 (Figma 1289:94) ---------- */
+@media (max-width: 768px) {
+  /* KV 함 — 768×445 비율 */
+  .brand-title-section {
+    height: clamp(380px, 58vw, 460px);
+    min-height: 0;
+    max-height: none;
+  }
+  .brand-title {
+    top: clamp(60px, 11vw, 100px);
+    font-size: clamp(70px, 13vw, 110px);
+    letter-spacing: 0.03em;
+  }
+  .brand-title--stroke {
+    -webkit-text-stroke-width: clamp(5px, 1.1vw, 8px);
+  }
+  .brand-title--fill {
+    -webkit-text-stroke-width: clamp(3px, 0.7vw, 5px);
+  }
+  .brand-title__donut {
+    top: clamp(170px, 33vw, 260px);
+    width: clamp(420px, 78vw, 612px);
+    max-width: 612px;
+  }
+
+  /* HI, I'M POPPI — 노란 섹션 세로 스택 + 가운데 정렬 (Figma 768×707) */
+  .brand-hello {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: clamp(56px, 10vw, 96px) clamp(24px, 5vw, 40px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(28px, 5vw, 48px);
+    text-align: center;
+  }
+  .brand-hello__deco {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto !important;
+    width: clamp(280px, 64vw, 495px) !important;
+    max-width: 495px;
+    align-self: center;
+  }
+  .brand-hello__desc {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 650px !important;
+    font-size: clamp(15px, 2.6vw, 20px);
+    line-height: 1.6;
+    text-align: center !important;
+    letter-spacing: 0;
+    align-self: center;
+  }
+
+  /* BRAND STORY 타이틀 */
+  .brand-story-section {
+    padding-top: clamp(80px, 14vw, 120px);
+  }
+  .brand-story-section__title {
+    font-size: clamp(40px, 7.3vw, 56px);
+  }
+
+  /* BRAND IDENTITY — 태블릿: LOGO ↔ TYPO 2-col 유지 */
+  .brand-identity {
+    padding: clamp(80px, 13vw, 110px) 0;
+  }
+  .brand-identity__inner {
+    width: min(720px, calc(100% - 32px));
+  }
+  .brand-identity__title {
+    font-size: 32px;
+    margin-bottom: clamp(72px, 13vw, 110px);
+  }
+  .brand-identity__row {
+    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    gap: clamp(20px, 3vw, 36px);
+    margin-bottom: clamp(72px, 12vw, 100px);
+    height: auto;
+  }
+  .brand-identity__col--full {
+    grid-column: span 2;
+  }
+  .brand-identity__col h3 {
+    font-size: clamp(20px, 3.4vw, 26px);
+    margin-bottom: clamp(20px, 4vw, 37px);
+  }
+  .brand-identity__typo-list {
+    gap: clamp(20px, 4vw, 32px);
+  }
+  .brand-identity__typo-item {
+    align-items: flex-end;
+    gap: clamp(20px, 4vw, 32px);
+  }
+  .brand-identity__typo-aa {
+    width: clamp(96px, 17vw, 140px);
+  }
+  .brand-identity__typo-info h4 {
+    font-size: clamp(16px, 2.6vw, 20px);
+  }
+  .brand-identity__typo-info p {
+    font-size: clamp(11px, 1.8vw, 14px);
+    line-height: 1.3;
+  }
+
+  /* COLOR GUIDE — 3-col 그대로 */
+  .brand-identity__colors {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+    row-gap: clamp(24px, 4vw, 40px);
+  }
+  .brand-identity__color-swatch {
+    width: clamp(84px, 15.6vw, 120px);
+    height: clamp(84px, 15.6vw, 120px);
+  }
+  .brand-identity__color-name {
+    font-size: clamp(13px, 2vw, 16px);
+    line-height: 1.5;
+  }
+  .brand-identity__color-name small {
+    font-size: clamp(13px, 2vw, 16px);
+  }
+
+  /* BRAND APPLICATION 은 ≤1024 영역에서 이미 모바일과 동일한 그리드로 정의됨.
+     ≤768 에서 추가 조정 필요 없음. */
+}
+
+/* ---------- ≤540px : 모바일 (Figma 1289:292) ---------- */
+@media (max-width: 540px) {
+  /* KV 함 — 402×273 비율 */
+  .brand-title-section {
+    height: clamp(240px, 68vw, 320px);
+  }
+  .brand-title {
+    top: clamp(40px, 14vw, 72px);
+    font-size: clamp(40px, 13.7vw, 64px);
+    letter-spacing: 0.025em;
+  }
+  .brand-title--stroke {
+    -webkit-text-stroke-width: clamp(3px, 0.9vw, 5px);
+  }
+  .brand-title--fill {
+    -webkit-text-stroke-width: clamp(2px, 0.55vw, 3px);
+  }
+  .brand-title__donut {
+    top: clamp(110px, 33vw, 168px);
+    width: clamp(260px, 92vw, 400px);
+  }
+
+  /* HI, I'M POPPI — 402×382 */
+  .brand-hello {
+    padding: clamp(40px, 12vw, 60px) 20px !important;
+    gap: clamp(18px, 5vw, 24px);
+  }
+  .brand-hello__deco {
+    width: clamp(220px, 72vw, 300px);
+  }
+  .brand-hello__desc {
+    font-size: clamp(12px, 3.4vw, 14px);
+    line-height: 1.6;
+  }
+
+  .brand-story-section {
+    padding: clamp(48px, 14vw, 80px) 0 clamp(40px, 10vw, 64px);
+  }
+  .brand-story-section__title {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  /* BRAND IDENTITY — 모바일 브랜드북 세로 스택 (Figma 1289:292) */
+  .brand-identity {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: clamp(64px, 16vw, 100px) 0 clamp(80px, 18vw, 120px);
+  }
+
+  .brand-identity__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(360px, calc(100% - 32px));
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .brand-identity__title {
+    position: static;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-ria);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 clamp(48px, 12vw, 72px);
+  }
+
+  .brand-identity__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: clamp(80px, 22vw, 100px);
+  }
+
+  .brand-identity__group--logo {
+    gap: 0;
+  }
+
+  .brand-identity__logo-box {
+    position: static;
+    width: min(320px, 100%);
+    max-width: 320px;
+    aspect-ratio: 599 / 400;
+    margin: 0 auto;
+  }
+
+  .brand-identity__logo-box .brand-identity__logo-img {
+    position: static;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .brand-identity__label {
+    position: static;
+    font-size: clamp(18px, 4.8vw, 22px);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  .brand-identity__label--logo,
+  .brand-identity__label--typo,
+  .brand-identity__label--color {
+    margin-top: 0;
+    margin-bottom: 30px; /* 타이틀 ↔ 본문 간격 */
+  }
+
+  .brand-identity__label--logo {
+    order: 1;
+  }
+
+  .brand-identity__logo-box {
+    order: 2;
+  }
+
+  .brand-identity__group--typo {
+    gap: 0;
+  }
+
+  .brand-identity__typo-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 4.5vw, 24px);
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .brand-identity__aa,
+  .brand-identity__aa--ria,
+  .brand-identity__aa--paper {
+    position: static;
+    left: auto;
+    top: auto;
+    width: clamp(112px, 31vw, 140px);
+    flex: 0 0 clamp(112px, 31vw, 140px);
+    margin: 0;
+  }
+
+  .brand-identity__typo-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    text-align: left;
+    gap: 8px;
+  }
+
+  .brand-identity__font-name,
+  .brand-identity__font-name--ria,
+  .brand-identity__font-name--paper {
+    position: static;
+    left: auto;
+    top: auto;
+    display: block;
+    width: 100%;
+    font-size: clamp(18px, 4.8vw, 22px);
+    margin: 0;
+  }
+
+  .brand-identity__font-sample,
+  .brand-identity__font-sample--ria,
+  .brand-identity__font-sample--paper {
+    position: static;
+    left: auto;
+    top: auto;
+    display: block;
+    width: 100%;
+    font-size: clamp(10px, 2.6vw, 12px);
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  .brand-identity__font-sample p {
+    margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .brand-identity__typo-block--ria {
+    order: 2;
+  }
+
+  .brand-identity__typo-block--paper {
+    order: 3;
+    margin-top: clamp(60px, 14vw, 72px);
+  }
+
+  .brand-identity__label--typo {
+    order: 1;
+  }
+
+  .brand-identity__color-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 8vw, 48px) clamp(20px, 5vw, 28px);
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    order: 2;
+  }
+
+  .brand-identity__color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .brand-identity__color-chip {
+    display: block;
+    width: clamp(72px, 20vw, 88px);
+    height: clamp(72px, 20vw, 88px);
+    border-radius: 50%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .brand-identity__color-name {
+    font-family: var(--font-paperlogy);
+    font-weight: 700;
+    font-size: clamp(13px, 3.4vw, 15px);
+    line-height: 1.3;
+    color: #452219;
+  }
+
+  .brand-identity__color-hex {
+    font-family: var(--font-paperlogy);
+    font-weight: 500;
+    font-size: clamp(12px, 3.2vw, 14px);
+    line-height: 1.2;
+    color: #452219;
+    opacity: 0.85;
+  }
+
+  .brand-identity__label--color {
+    order: 1;
+  }
+
+  .brand-identity__group:last-child {
+    margin-bottom: 0;
+  }
+
+  /* BRAND APPLICATION — 모바일 5장 (Figma 1289:292)
+     (370) sign
+     (182)(182) storefront + set
+     (370) paper
+     (370) box */
+  .brand-application {
+    height: auto;
+    padding: clamp(40px, 10vw, 60px) 0;
+    overflow: visible;
+  }
+  .brand-application__inner {
+    width: min(370px, calc(100% - 32px));
+    height: auto;
+    overflow-x: hidden;
+  }
+  .brand-application__grid {
+    --app-gap: 8px;                                          /* 사용자 요청 — 사진 간 8px 고정 */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "sign sign"
+      "storefront set"
+      "paper paper"
+      "box box";
+    width: 100%;
+    max-width: 370px;
+    height: auto;
+    margin: 0 auto;
+    flex: none;
+    min-height: 0;
+    gap: var(--app-gap);
+    align-items: start;
+    align-content: start;
+    box-sizing: border-box;
+  }
+  .brand-application__title {
+    font-size: clamp(26px, 8vw, 36px);
+    line-height: 1.2;
+    margin-bottom: clamp(24px, 7vw, 40px);
+    max-width: min-content;
+    margin-inline: auto;
+  }
+  .brand-application__board {
+    width: 100%;
+    border-radius: 0;
+  }
+  .brand-application__item {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    align-self: start;
+    justify-self: stretch;
+    vertical-align: top;
+    line-height: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+  .brand-application__item--sign,
+  .brand-application__item--paper,
+  .brand-application__item--box {
+    grid-column: 1 / -1;
+  }
+  .brand-application__item--sign { grid-area: sign; }
+  .brand-application__item--storefront,
+  .brand-application__item--set {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .brand-application__item--storefront { grid-area: storefront; }
+  .brand-application__item--set { grid-area: set; }
+  .brand-application__item--paper { grid-area: paper; }
+  .brand-application__item--box { grid-area: box; }
+}
+
+/* ---------- ≤767px : 모바일 BRAND ROADMAP (Figma 1289:292 — 세로 타임라인) ----------
+   timeline-mo.png ↔ story 이미지 순서는 PC와 동일 (2010 → 2013 → 2017 → 2022 → 2025)
+   레이아웃: 점선 레일과 아이콘은 왼쪽 고정, 연도/설명 텍스트는 아이콘 오른쪽으로 정렬.
+   태블릿(768px+) 곡선 구도에는 영향 없음 */
+@media (max-width: 767px) {
+  .brand-roadmap {
+    --mo-rail: clamp(30px, 8vw, 40px);     /* 컨테이너 왼쪽 ↔ 점선 레일 시작 */
+    --mo-icon: clamp(56px, 15vw, 68px);    /* 마커 아이콘 폭 */
+    --mo-shift: 50px;                      /* 사용자 요청 — 타이틀 제외 타임라인 전체 오른쪽 이동 */
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    container-type: normal;
+    margin: clamp(40px, 11vw, 56px) 0 0;
+    aspect-ratio: auto;
+    padding: 0 clamp(16px, 4vw, 20px) clamp(16px, 5vw, 24px) calc(clamp(16px, 4vw, 20px) + var(--mo-shift));
+    gap: 0;
+    box-sizing: border-box;
+    align-self: stretch;
+  }
+
+  .brand-roadmap__path {
+    display: none;
+  }
+
+  .brand-roadmap__segment {
+    display: block;
+    width: 22px;
+    height: clamp(52px, 14vw, 64px);
+    margin-left: var(--mo-rail);
+    margin-right: 0;
+    object-fit: fill;
+    object-position: center;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .brand-roadmap__marker {
+    position: relative;
+    inset: auto;
+    display: grid;
+    /* 1열: 아이콘(레일 위 고정 폭) / 2열: 연도+설명(오른쪽 영역 전체) */
+    grid-template-columns: var(--mo-icon) 1fr;
+    column-gap: clamp(16px, 5vw, 24px);
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    /* 아이콘 중심 = 레일 중심: padding-left = (rail + 11) - icon/2 */
+    padding: clamp(10px, 3vw, 16px) 0 clamp(10px, 3vw, 16px) calc(var(--mo-rail) + 11px - var(--mo-icon) / 2);
+    pointer-events: auto;
+    overflow: visible;
+    box-sizing: border-box;
+    /* 기본 마커 초기 상태(opacity 0, translateY) 유지 → 스크롤 등장 애니메이션 */
+  }
+
+  .brand-roadmap__marker.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .brand-roadmap__marker:not(.is-visible) .brand-roadmap__media {
+    transform: translate3d(0, 28px, 0);
+  }
+
+  .brand-roadmap__media {
+    position: static;
+    left: auto;
+    top: auto;
+    width: var(--mo-icon);
+    height: auto;
+    margin: 0;
+    justify-self: start;
+  }
+
+  .brand-roadmap__label {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    min-width: 0;
+    align-items: flex-start;
+    text-align: left;
+    gap: 6px;
+    overflow: visible;
+    justify-self: start;
+  }
+
+  .brand-roadmap__pin {
+    display: none;
+  }
+
+  .brand-roadmap__year {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .brand-roadmap__desc {
+    font-size: clamp(11px, 3.1vw, 13px);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
+    align-items: flex-start;
+    width: auto;
+    max-width: none;
+    overflow: visible;
+  }
+
+  .brand-roadmap__desc-line {
+    text-align: left;
+    overflow: visible;
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- ≤380px : 초소형 단말 (iPhone SE, Galaxy S 미니 등) ----------
+   사용자 요청 — 초소형에서도 PC 곡선 path + 5개 마커 구도 유지.
+   roadmap 의 width/media 같은 스택용 오버라이드는 제거. identity 만 추가 보정. */
+@media (max-width: 380px) {
+  .brand-identity__typo-block {
+    gap: 12px;
+    max-width: 100%;
+  }
+  .brand-identity__aa,
+  .brand-identity__aa--ria,
+  .brand-identity__aa--paper {
+    width: clamp(96px, 26vw, 112px);
+    flex: 0 0 clamp(96px, 26vw, 112px);
+  }
+  .brand-identity__color-chip {
+    width: clamp(64px, 18vw, 76px);
+    height: clamp(64px, 18vw, 76px);
+  }
+  .brand-identity__color-name,
+  .brand-identity__color-hex {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   ★ KV 반응형 통일 — PC 디자인 비율 그대로 고정 + 화면 비례 축소 ★
+   PC(1920×750) 기준 비율을 모든 화면에서 동일하게 유지:
+     • 함 height       : 750/1920 = 39vw
+     • BRAND top       : 240/1920 = 12.5vw
+     • BRAND font-size : 154/1920 = 8vw
+     • BRAND stroke    :  10/1920 = 0.52vw
+     • BRAND fill      :   6/1920 = 0.31vw
+     • 도넛 top        : 410/1920 = 21.4vw
+     • 도넛 width      : 680/1920 = 35.4vw
+   결과:
+     - PC와 동일한 디자인 모양/위치/비율 유지 (KV "고정")
+     - 화면이 좁아질수록 비례 축소 (반응형)
+     - 도넛 위쪽 50% 컷 자동 유지 = (39 - 21.4) / 35.4 ≈ 49.7%
+   파일 끝에 위치 → 위쪽 ≤1000/≤900/≤850/≤768 등 KV 룰을 모두 오버라이드
+   ========================================================= */
+@media (max-width: 1024px) {
+  .brand-title-section {
+    height: clamp(280px, 39vw, 750px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  .brand-title {
+    top: clamp(48px, 12.5vw, 240px) !important;
+    font-size: clamp(36px, 8vw, 154px) !important;
+    letter-spacing: 0.019em !important;
+  }
+  .brand-title--stroke {
+    -webkit-text-stroke-width: clamp(2px, 0.52vw, 10px) !important;
+  }
+  .brand-title--fill {
+    -webkit-text-stroke-width: clamp(1.5px, 0.31vw, 6px) !important;
+  }
+  .brand-title__donut {
+    top: clamp(150px, 21.4vw, 410px) !important;
+    width: clamp(180px, 35.4vw, 680px) !important;
+    max-width: 680px !important;
+  }
+}
+
+/* ===== MERGED: brand-kv-fix.css -> brand-story.css ===== */
+@charset "utf-8";
+
+/* =========================================================
+   POPPI Brand Story KV — donut position stable fix
+   ---------------------------------------------------------
+   기존 brand-story.css / pro-spacing.css 안에 KV 위치 규칙이 여러 번 있어
+   1024px, 768px 근처에서 도넛 top/width가 갑자기 바뀌던 문제를
+   마지막 로드 CSS에서 한 번 더 정리합니다.
+   ========================================================= */
+
+.brand-title-section {
+  height: 750px !important;
+  min-height: 750px !important;
+  max-height: 750px !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.brand-title,
+.brand-title--fill,
+.brand-title--stroke {
+  top: 240px !important;
+  font-size: 154px !important;
+  line-height: 0.95 !important;
+}
+
+.brand-title__donut {
+  top: 410px !important;
+  left: 50% !important;
+  width: 680px !important;
+  max-width: none !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1;
+  transform: translate3d(-50%, 0, 0) !important;
+  transform-origin: center top;
+  object-fit: contain;
+  transition: none !important;
+  will-change: auto;
+}
+
+/* 1199px 이하: PC 원본 위치에서 태블릿 위치까지 부드럽게 보간 */
+@media (max-width: 1199px) {
+  .brand-title-section {
+    height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+    min-height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+    max-height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+  }
+
+  .brand-title,
+  .brand-title--fill,
+  .brand-title--stroke {
+    top: clamp(100px, calc(-150px + 32.5vw), 240px) !important;
+    font-size: clamp(100px, calc(4px + 12.5vw), 154px) !important;
+  }
+
+  .brand-title__donut {
+    top: clamp(253px, calc(-27px + 36.4vw), 410px) !important;
+    width: clamp(599px, calc(454px + 18.8vw), 680px) !important;
+  }
+}
+
+/* 768px 이하: 도넛이 갑자기 내려가거나 커지는 구간 없이 모바일로 자연스럽게 축소 */
+@media (max-width: 768px) {
+  .brand-title-section {
+    height: clamp(260px, 58vw, 445px) !important;
+    min-height: clamp(260px, 58vw, 445px) !important;
+    max-height: clamp(260px, 58vw, 445px) !important;
+  }
+
+  .brand-title,
+  .brand-title--fill,
+  .brand-title--stroke {
+    top: clamp(58px, 13vw, 100px) !important;
+    font-size: clamp(44px, 13vw, 100px) !important;
+    letter-spacing: 0.025em !important;
+  }
+
+  .brand-title--stroke {
+    -webkit-text-stroke-width: clamp(3px, 1vw, 6px) !important;
+  }
+
+  .brand-title--fill {
+    -webkit-text-stroke-width: clamp(2px, 0.65vw, 4px) !important;
+  }
+
+  .brand-title__donut {
+    top: clamp(128px, 33vw, 253px) !important;
+    width: clamp(300px, 78vw, 599px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-title-section {
+    height: 252px !important;
+    min-height: 252px !important;
+    max-height: 252px !important;
+  }
+
+  .brand-title__donut {
+    top: 122px !important;
+    width: 292px !important;
+  }
+}
+
+/* =========================================================
+   BRAND IDENTITY — 태블릿·모바일 세로 스택 (≤1023)
+   PC 절대좌표(로고/타이포/컬러 겹침) 해제
+   ========================================================= */
+@media (max-width: 1023px) {
+  .brand-identity {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: clamp(64px, 10vw, 100px) 0 clamp(80px, 12vw, 120px);
+  }
+
+  .brand-identity__inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: min(360px, calc(100% - 32px)) !important;
+    max-width: 360px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    gap: 0;
+  }
+
+  .brand-identity__title {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 32px !important;
+    line-height: 1;
+    margin: 0 0 clamp(48px, 8vw, 72px) !important;
+  }
+
+  .brand-identity__title br {
+    display: inline !important;
+  }
+
+  .brand-identity__group,
+  .brand-identity__typo-block,
+  .brand-identity__typo-info {
+    display: flex !important;
+  }
+
+  .brand-identity__group {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: clamp(72px, 12vw, 100px) !important;
+  }
+
+  .brand-identity__group--logo {
+    gap: 0;
+  }
+
+  .brand-identity__logo-box {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(320px, 100%) !important;
+    max-width: 320px !important;
+    aspect-ratio: 599 / 400;
+    margin: 0 auto !important;
+    order: 2;
+  }
+
+  .brand-identity__logo-box .brand-identity__logo-img {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
+
+  .brand-identity__label {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    font-size: clamp(18px, 4.8vw, 22px) !important;
+    text-align: center !important;
+    letter-spacing: 0.06em;
+  }
+
+  .brand-identity__label--logo,
+  .brand-identity__label--typo,
+  .brand-identity__label--color {
+    margin-top: 0 !important;
+    margin-bottom: 30px !important; /* 타이틀 ↔ 본문 간격 */
+  }
+
+  .brand-identity__label--logo {
+    order: 1;
+  }
+
+  .brand-identity__group--typo {
+    gap: 0;
+  }
+
+  .brand-identity__typo-block {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(16px, 4.5vw, 24px) !important;
+    width: 100% !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+  }
+
+  .brand-identity__aa,
+  .brand-identity__aa--ria,
+  .brand-identity__aa--paper {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: clamp(112px, 31vw, 140px) !important;
+    flex: 0 0 clamp(112px, 31vw, 140px) !important;
+    margin: 0 !important;
+  }
+
+  .brand-identity__typo-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    flex: 1 !important;
+    min-width: 0;
+    width: 100%;
+    text-align: left;
+    gap: 8px;
+  }
+
+  .brand-identity__font-name,
+  .brand-identity__font-name--ria,
+  .brand-identity__font-name--paper {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    display: block !important;
+    width: 100% !important;
+    font-size: clamp(18px, 4.8vw, 22px) !important;
+    margin: 0 !important;
+  }
+
+  .brand-identity__font-sample,
+  .brand-identity__font-sample--ria,
+  .brand-identity__font-sample--paper {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    display: block !important;
+    width: 100% !important;
+    font-size: clamp(10px, 2.6vw, 12px) !important;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    margin: 0 !important;
+  }
+
+  .brand-identity__font-sample p {
+    margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .brand-identity__typo-block--ria {
+    order: 2;
+  }
+
+  .brand-identity__typo-block--paper {
+    order: 3;
+    margin-top: clamp(48px, 10vw, 72px) !important;
+  }
+
+  .brand-identity__label--typo {
+    order: 1;
+  }
+
+  .brand-identity__color-grid {
+    display: grid !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(32px, 8vw, 48px) clamp(20px, 5vw, 28px) !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    order: 2;
+    list-style: none;
+    padding: 0;
+  }
+
+  .brand-identity__color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .brand-identity__color-chip {
+    display: block;
+    width: clamp(72px, 20vw, 88px) !important;
+    height: clamp(72px, 20vw, 88px) !important;
+    max-width: none !important;
+    aspect-ratio: auto;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin: 0 auto;
+  }
+
+  .brand-identity__color-name {
+    font-size: clamp(13px, 3.4vw, 15px) !important;
+    line-height: 1.3;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .brand-identity__color-hex {
+    font-size: clamp(12px, 3.2vw, 14px) !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .brand-identity__label--color {
+    order: 1;
+  }
+
+  .brand-identity__group:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* 태블릿 (768~1023) — 컨테이너·컬러 3열 확대 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .brand-identity__inner {
+    width: min(640px, calc(100% - 48px)) !important;
+    max-width: 640px !important;
+  }
+
+  .brand-identity__title {
+    font-size: clamp(40px, 5.5vw, 52px) !important;
+    margin-bottom: clamp(56px, 8vw, 80px) !important;
+  }
+
+  .brand-identity__logo-box {
+    max-width: 420px !important;
+    width: min(420px, 100%) !important;
+  }
+
+  .brand-identity__typo-block {
+    max-width: 520px !important;
+    align-items: flex-start !important;
+  }
+
+  .brand-identity__typo-info {
+    gap: 10px;
+  }
+
+  .brand-identity__aa,
+  .brand-identity__aa--ria,
+  .brand-identity__aa--paper {
+    width: clamp(130px, 16vw, 160px) !important;
+    flex: 0 0 clamp(130px, 16vw, 160px) !important;
+  }
+
+  .brand-identity__font-name,
+  .brand-identity__font-name--ria,
+  .brand-identity__font-name--paper {
+    font-size: clamp(20px, 2.6vw, 26px) !important;
+  }
+
+  .brand-identity__font-sample,
+  .brand-identity__font-sample--ria,
+  .brand-identity__font-sample--paper {
+    font-size: clamp(12px, 1.6vw, 14px) !important;
+  }
+
+  .brand-identity__color-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    max-width: 560px !important;
+    gap: clamp(28px, 4vw, 40px) clamp(18px, 3vw, 28px) !important;
+  }
+
+  .brand-identity__color-chip {
+    width: clamp(80px, 10vw, 100px) !important;
+    height: clamp(80px, 10vw, 100px) !important;
+  }
+
+  .brand-identity__color-name {
+    font-size: clamp(13px, 1.6vw, 16px) !important;
+  }
+
+  .brand-identity__color-hex {
+    font-size: clamp(12px, 1.4vw, 14px) !important;
+  }
+}
+
+/* =========================================================
+   COLOR GUIDE — 좁은 PC (1024~1360) 폰트만 축소
+   ---------------------------------------------------------
+   원 사이 간격(100px)·라벨 아래 간격(50px)은 위 PC 메인 규칙의
+   vw 비례를 그대로 따른다. 이 블록에서 gap/width 를 다시 잡으면
+   100px 시안이 깨지므로 더 이상 덮어쓰지 않는다.
+   ========================================================= */
+@media (min-width: 1024px) and (max-width: 1360px) {
+  .brand-identity__color-name {
+    font-size: clamp(10px, 0.82vw, 15px);
+    line-height: 1.2;
+  }
+
+  .brand-identity__color-hex {
+    font-size: clamp(9px, 0.72vw, 13px);
+  }
+}
+
+/* ---------- 모바일 로드맵 좌측 정렬 (최종 cascade — responsive.css 덮어쓰기) ----------
+   1열 block 레이아웃: 점선 레일·아이콘은 왼쪽 고정, 연도/설명은 오른쪽 */
+@media (max-width: 767px) {
+  .brand-story-section {
+    align-items: stretch;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .brand-story-section .brand-roadmap {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    align-self: stretch !important;
+    aspect-ratio: auto !important;
+  }
+
+  .brand-story-section .brand-roadmap > .brand-roadmap__marker {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =========================================================
+   ★ BRAND STORY / BRAND IDENTITY / TYPOGRAPHY — 모든 화면 중앙 정렬 ★
+   사용자 요청: 타이틀 텍스트를 가운데로
+   ========================================================= */
+
+/* ① BRAND STORY 타이틀 — 항상 중앙 */
+.brand-story-section__title {
+  width: 100% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ② BRAND IDENTITY 타이틀 — PC(1025+) absolute 좌표를 정중앙으로 보정 */
+@media (min-width: 1025px) {
+  .brand-identity__title {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    text-align: center !important;
+  }
+}
+
+/* 태블릿/모바일에서도 명확히 중앙 정렬 (responsive.css 등 다른 룰 덮어쓰기) */
+@media (max-width: 1024px) {
+  .brand-identity__title {
+    width: 100% !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ③ TYPOGRAPHY 라벨 — 모바일/태블릿에서는 중앙 정렬,
+   PC 에서는 Aa 이미지의 시작 X 와 같은 좌표로 좌측 정렬한다. */
+.brand-identity__label--typo {
+  text-align: center !important;
+}
+
+/* PC(1025+) absolute 위치 — Aa 이미지(left: 53.3854%) 와 동일한 X 에서 시작 */
+@media (min-width: 1025px) {
+  .brand-identity__label--typo {
+    left: 53.3854% !important;        /* (1025/1920) — Aa 이미지와 동일 */
+    transform: none !important;
+    width: auto !important;
+    text-align: left !important;
+  }
+}
+
+/* 태블릿/모바일에서는 컨테이너 안에서 100% 폭 + 가운데 정렬 */
+@media (max-width: 1024px) {
+  .brand-identity__label--typo {
+    width: 100% !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}

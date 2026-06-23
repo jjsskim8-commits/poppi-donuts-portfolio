@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>POPPI DONUTS — Business</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/images/favicon-64.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="../assets/css/commons.css?v=ria-regular-v1" />
+  <link rel="stylesheet" href="../assets/css/header.css" />
+  <link rel="stylesheet" href="../assets/css/footer.css?v=legal-modal-pc-height" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/pages-common.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="../assets/css/business.css?v=biz-submit-grid" />
+
+  <style>
+    /* business page only — pages-common.css sets .page-wrap to white, which
+       leaks as a white strip between the last section and the brown footer
+       (due to the footer-wrap's negative margin-top). Make page-wrap
+       transparent so the body's corn-bg shows through for a clean transition. */
+    body .page-wrap {
+      background: transparent !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div data-include="site-header"></div>
+
+    <main>
+
+      <!-- 00. BUSINESS KV — event-news .page-top 와 완전히 동일한 구조/스타일
+           (배경: 사용자 제공 business-kv-bg-v2.png, 최대 높이 572) -->
+      <header class="page-top" aria-label="BUSINESS 키비주얼">
+        <h1 class="kv-title" data-text="BUSINESS">BUSINESS</h1>
+      </header>
+
+      <!-- 01. 숫자 지표 카드 -->
+      <section class="business-graph site-section" aria-labelledby="business-graph-title">
+        <div class="site-container">
+          <header class="business-graph__head">
+            <h2 id="business-graph-title" class="h3-b business-graph__title text-brown-dark">
+              숫자로 마주하는 POPPI
+            </h2>
+          </header>
+
+          <ul class="content-grid business-graph__grid">
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_01.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">120</span>
+                  <span class="h4 business-graph__unit">M+</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">누적 도넛 판매량</p>
+              </div>
+            </li>
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_02.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">45</span>
+                  <span class="h4 business-graph__unit">개</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">전국 매장 운영 수</p>
+              </div>
+            </li>
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_03.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">100</span>
+                  <span class="h4 business-graph__unit">%</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">당일 생산·당일 판매</p>
+              </div>
+            </li>
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_04.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">210</span>
+                  <span class="h4 business-graph__unit">%</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">전년대비 매출 성장률</p>
+              </div>
+            </li>
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_05.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">98</span>
+                  <span class="h4 business-graph__unit">%</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">고객 브랜드 만족도</p>
+              </div>
+            </li>
+            <li class="business-graph__card" data-reveal>
+              <div class="business-graph__media">
+                <img src="../assets/images/business/card_img_06.png" alt="" width="200" height="200" />
+              </div>
+              <div class="business-graph__body">
+                <p class="business-graph__stat">
+                  <span class="h3-b business-graph__value">150</span>
+                  <span class="h4 business-graph__unit">K</span>
+                </p>
+                <p class="p2-r business-graph__label text-brown-dark">SNS 언급 수 돌파</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 02. POPPI 포인트 -->
+      <section class="business-point site-section" aria-label="POPPI 비즈니스 포인트">
+        <div class="site-container business-point__inner">
+
+          <div class="business-point__carousel" data-business-point-carousel aria-roledescription="carousel"
+            aria-label="POPPI 포인트 슬라이드">
+            <div class="business-point__viewport">
+              <div class="business-point__track" data-business-point-track>
+                <article class="business-point__slide is-active" data-business-point-slide="0">
+                  <div class="business-point__card">
+                    <div class="business-point__card-media">
+                      <img src="../assets/images/business/point_card_01.png" alt="" />
+                    </div>
+                    <div class="business-point__card-body">
+                      <h3 class="h3-b business-point__card-title text-brown-dark">운영 효율성</h3>
+                      <p class="p1-r business-point__card-desc text-brown-dark">
+                        복잡한 공정은 본사에서, 신선함은<br />
+                        매장에서. 누구나 고품질의 도넛을<br />
+                        제조할 수 있는 시스템을 제공합니다.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                <article class="business-point__slide" data-business-point-slide="1">
+                  <div class="business-point__card">
+                    <div class="business-point__card-media">
+                      <img src="../assets/images/business/point_card_02.png" alt="" />
+                    </div>
+                    <div class="business-point__card-body">
+                      <h3 class="h3-b business-point__card-title text-brown-dark">시즌 유연성</h3>
+                      <p class="p1-r business-point__card-desc text-brown-dark">
+                        분기별 제철 과일을 활용한<br />
+                        신메뉴 투입으로 고객에게 <br />
+                        매번 새로운 방문 목적을 제공합니다.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                <article class="business-point__slide" data-business-point-slide="2">
+                  <div class="business-point__card">
+                    <div class="business-point__card-media">
+                      <img src="../assets/images/business/point_card_03.png" alt="" />
+                    </div>
+                    <div class="business-point__card-body">
+                      <h3 class="h3-b business-point__card-title text-brown-dark">전문 마케팅</h3>
+                      <p class="p1-r business-point__card-desc text-brown-dark">
+                        인플루언서 협업 및 화려한 모션<br />
+                        그래픽 광고를 통해 본사가 직접<br />
+                        강력한 바이럴을 주도합니다.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                <article class="business-point__slide" data-business-point-slide="3">
+                  <div class="business-point__card">
+                    <div class="business-point__card-media">
+                      <img src="../assets/images/business/point_card_04.png" alt="" />
+                    </div>
+                    <div class="business-point__card-body">
+                      <h3 class="h3-b business-point__card-title text-brown-dark">스마트 물류</h3>
+                      <p class="p1-r business-point__card-desc text-brown-dark">
+                        전국 산지와의 파트너십을 통해<br />
+                        가장 싱싱한 제철 과일을 경쟁력 있는<br />
+                        단가로 안정적으로 공급합니다.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                <article class="business-point__slide" data-business-point-slide="4">
+                  <div class="business-point__card">
+                    <div class="business-point__card-media">
+                      <img src="../assets/images/business/point_card_05.png" alt="" />
+                    </div>
+                    <div class="business-point__card-body">
+                      <h3 class="h3-b business-point__card-title text-brown-dark">다각화 매출</h3>
+                      <p class="p1-r business-point__card-desc text-brown-dark">
+                        홀은 매장에서, 온라인은 전국으로<br />
+                        24시간 수익이 멈추지 않는<br />
+                        다채널 매출 구조를 제공합니다.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="business-point__dots" role="tablist" aria-label="슬라이드 진행 표시" data-business-point-dots>
+            <button type="button" class="business-point__dot is-active" data-business-point-dot="0" aria-label="슬라이드 1"
+              aria-current="true"></button>
+            <button type="button" class="business-point__dot" data-business-point-dot="1" aria-label="슬라이드 2"></button>
+            <button type="button" class="business-point__dot" data-business-point-dot="2" aria-label="슬라이드 3"></button>
+            <button type="button" class="business-point__dot" data-business-point-dot="3" aria-label="슬라이드 4"></button>
+            <button type="button" class="business-point__dot" data-business-point-dot="4" aria-label="슬라이드 5"></button>
+          </div>
+
+          <div class="content-grid business-point__footer">
+            <p class="h4 business-point__copy business-point__copy--left text-white">
+              POPPI와<br />
+              함께
+            </p>
+            <div class="business-point__visual media-frame">
+              <img src="../assets/images/business/point_img.png" alt="" width="480" height="320" />
+            </div>
+            <p class="h4 business-point__copy business-point__copy--right text-white">
+              당신의<br />
+              비즈니스에<br />
+              색을 입히세요
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 03. 창업 프로세스 -->
+      <section class="business-process site-section bg-donut" aria-labelledby="business-process-title">
+        <div class="site-container">
+          <header class="business-process__head">
+            <h2 id="business-process-title" class="h3-r business-process__title text-brown-dark">
+              How <span class="text-poppi-orange">POPPI</span> Begins
+            </h2>
+            <p class="p1-r business-process__desc text-brown-dark">
+              POPPI와 함께 달콤한 공간을 만들어가는 과정
+            </p>
+          </header>
+
+          <ol class="business-process__grid">
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">01</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">가맹 문의</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  상담 접수 후 브랜드 및<br />
+                  운영 방향을 안내합니다.
+                </p>
+              </div>
+            </li>
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">02</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">상권 분석</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  희망 지역 분석 후 예상안과<br />
+                  입지 조건을 검토합니다.
+                </p>
+              </div>
+            </li>
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">03</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">계약 진행</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  점포 확정 후 가맹 계약 및<br />
+                  오픈 일정을 조율합니다.
+                </p>
+              </div>
+            </li>
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">04</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">매장 시공</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  POPPI만의 키치스러운<br />
+                  인테리어를 시공합니다.
+                </p>
+              </div>
+            </li>
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">05</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">운영 교육</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  제조·서비스·운영 등의<br />
+                  체계적 교육을 제공합니다.
+                </p>
+              </div>
+            </li>
+            <li class="business-process__card" data-reveal>
+              <span class="h2 business-process__num text-yellow" aria-hidden="true">06</span>
+              <div class="business-process__body">
+                <h3 class="h4 business-process__step-title text-brown-dark">OPEN</h3>
+                <span class="business-process__rule" aria-hidden="true"></span>
+                <p class="p2-r business-process__step-desc text-brown-dark">
+                  최종 점검 후 POPPI<br />
+                  매장 오픈이 시작됩니다.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 04. 맞춤 창업 플랜 -->
+      <section class="business-plan site-section" aria-labelledby="business-plan-title">
+        <div class="site-container">
+          <header class="business-plan__head">
+            <p class="h4 business-plan__eyebrow text-poppi-orange">입맛대로 고르는</p>
+            <h2 id="business-plan-title" class="h3-b business-plan__title text-brown-dark">맞춤 창업 플랜</h2>
+          </header>
+
+          <div class="business-plan__grid" data-business-plan>
+            <article class="business-plan__card is-open" data-business-plan-card tabindex="0" aria-expanded="true">
+              <div class="business-plan__card-head">
+                <h3 class="h3-b business-plan__plan-name text-white">A안</h3>
+                <p class="p1-b business-plan__plan-type text-white">To-Go 전용</p>
+              </div>
+              <div class="business-plan__detail">
+                <div class="business-plan__panel">
+                  <p class="p2-r business-plan__subnote text-white">(부지 임차료 제외 기준)</p>
+                  <div class="business-plan__spec">
+                    <div class="business-plan__spec-row border-none">
+                      <span class="p2-b text-brown-dark">권장규모</span>
+                      <span class="p2-r text-brown-dark">약 10평 내외</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">가맹비</span>
+                      <span class="p2-r text-brown-dark">1,000만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">교육비</span>
+                      <span class="p2-r text-brown-dark">300만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">인테리어</span>
+                      <span class="p2-r text-brown-dark">2,500만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">주방 설비/집기</span>
+                      <span class="p2-r text-brown-dark">3,000만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">초기 초도물량</span>
+                      <span class="p2-r text-brown-dark">500만원</span>
+                    </div>
+                    <div class="business-plan__total-row">
+                      <span class="p1-b text-poppi-orange">합계(예상)</span>
+                      <span class="p1-b text-poppi-orange">약 7,300만원</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="business-plan__media" aria-hidden="true">
+                  <img src="../assets/images/business/img_goto.png" alt="" />
+                </div>
+              </div>
+            </article>
+
+            <article class="business-plan__card" data-business-plan-card tabindex="0" aria-expanded="false">
+              <div class="business-plan__card-head">
+                <h3 class="h3-b business-plan__plan-name text-white">B안</h3>
+                <p class="p1-b business-plan__plan-type text-white">Hall + To-Go</p>
+              </div>
+              <div class="business-plan__detail">
+                <div class="business-plan__panel">
+                  <p class="p2-r business-plan__subnote text-white">(부지 임차료 제외 기준)</p>
+                  <div class="business-plan__spec">
+                    <div class="business-plan__spec-row border-none">
+                      <span class="p2-b text-brown-dark">권장규모</span>
+                      <span class="p2-r text-brown-dark">약 14평 내외</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">가맹비</span>
+                      <span class="p2-r text-brown-dark">1,000만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">교육비</span>
+                      <span class="p2-r text-brown-dark">400만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">인테리어</span>
+                      <span class="p2-r text-brown-dark">3,100만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">주방 설비/집기</span>
+                      <span class="p2-r text-brown-dark">3,600만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">초기 초도물량</span>
+                      <span class="p2-r text-brown-dark">700만원</span>
+                    </div>
+                    <div class="business-plan__total-row">
+                      <span class="p1-b text-poppi-orange">합계(예상)</span>
+                      <span class="p1-b text-poppi-orange">약 8,800만원</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="business-plan__media" aria-hidden="true">
+                  <img src="../assets/images/business/img_standard.png" alt="" />
+                </div>
+              </div>
+            </article>
+
+            <article class="business-plan__card" data-business-plan-card tabindex="0" aria-expanded="false">
+              <div class="business-plan__card-head">
+                <h3 class="h3-b business-plan__plan-name text-white">C안</h3>
+                <p class="p1-b business-plan__plan-type text-white">Premium Hall</p>
+              </div>
+              <div class="business-plan__detail">
+                <div class="business-plan__panel">
+                  <p class="p2-r business-plan__subnote text-white">(부지 임차료 제외 기준)</p>
+                  <div class="business-plan__spec">
+                    <div class="business-plan__spec-row border-none">
+                      <span class="p2-b text-brown-dark">권장규모</span>
+                      <span class="p2-r text-brown-dark">약 18평 내외</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">가맹비</span>
+                      <span class="p2-r text-brown-dark">1,000만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">교육비</span>
+                      <span class="p2-r text-brown-dark">500만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">인테리어</span>
+                      <span class="p2-r text-brown-dark">4,200만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">주방 설비/집기</span>
+                      <span class="p2-r text-brown-dark">4,300만원</span>
+                    </div>
+                    <div class="business-plan__spec-row">
+                      <span class="p2-b text-brown-dark">초기 초도물량</span>
+                      <span class="p2-r text-brown-dark">900만원</span>
+                    </div>
+                    <div class="business-plan__total-row">
+                      <span class="p1-b text-poppi-orange">합계(예상)</span>
+                      <span class="p1-b text-poppi-orange">약 10,900만원</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="business-plan__media" aria-hidden="true">
+                  <img src="../assets/images/business/img_premium.png" alt="" />
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05. 창업 문의 접수 -->
+      <section id="franchise-inquiry" class="business-submit site-section" aria-labelledby="business-submit-title">
+        <div class="site-container">
+          <h2 id="business-submit-title" class="support-faq__title">창업 문의 접수</h2>
+          <div class="business-submit__box">
+            <header class="business-submit__head">
+              <p class="caption business-submit__required-note text-brown-dark">표시는 필수 입력 항목입니다.</p>
+            </header>
+
+            <form class="business-submit__form" data-business-submit-form aria-label="창업 문의 양식">
+              <div class="business-submit__columns">
+                <div class="business-submit__col">
+                  <div class="business-submit__row">
+                    <label class="business-submit__label required" for="submit-name">이름</label>
+                    <input type="text" id="submit-name" name="name" class="business-submit__input"
+                      placeholder="이름을 입력해 주세요." required />
+                  </div>
+                  <div class="business-submit__row">
+                    <label class="business-submit__label required" for="submit-phone-mid">연락처</label>
+                    <div class="business-submit__phone support-voice__phone" role="group" aria-label="연락처 입력">
+                      <select id="submit-phone-prefix" name="phone_prefix" class="support-voice__phone-select"
+                        aria-label="국번 선택" required>
+                        <option value="010">010</option>
+                        <option value="012">012</option>
+                        <option value="013">013</option>
+                      </select>
+                      <span class="support-voice__phone-sep" aria-hidden="true">-</span>
+                      <input type="text" id="submit-phone-mid" name="phone_mid" class="support-voice__phone-input"
+                        inputmode="numeric" pattern="\d*" maxlength="4" placeholder="0000" required />
+                      <span class="support-voice__phone-sep" aria-hidden="true">-</span>
+                      <input type="text" id="submit-phone-last" name="phone_last" class="support-voice__phone-input"
+                        inputmode="numeric" pattern="\d*" maxlength="4" placeholder="0000" required />
+                    </div>
+                  </div>
+                  <div class="business-submit__row">
+                    <label class="business-submit__label required" for="submit-email">이메일</label>
+                    <input type="email" id="submit-email" name="email" class="business-submit__input"
+                      placeholder="이메일을 입력해 주세요." required />
+                  </div>
+                </div>
+
+                <div class="business-submit__col">
+                  <div class="business-submit__row">
+                    <label class="business-submit__label required" for="submit-plan">선호 플랜 종류</label>
+                    <select id="submit-plan" name="plan" class="business-submit__input business-submit__select" required>
+                      <option value="" disabled selected>플랜 종류</option>
+                      <option value="a">A안 · To-Go 전용</option>
+                      <option value="b">B안 · Hall + To-Go</option>
+                      <option value="c">C안 · Premium Hall</option>
+                    </select>
+                  </div>
+                  <div class="business-submit__row">
+                    <label class="business-submit__label required" for="submit-region">창업 희망 지역</label>
+                    <select id="submit-region" name="region" class="business-submit__input business-submit__select" required>
+                      <option value="" disabled selected>지역명</option>
+                      <option value="seoul">서울특별시</option>
+                      <option value="incheon">인천광역시</option>
+                      <option value="busan">부산광역시</option>
+                      <option value="gyeonggi">경기도</option>
+                      <option value="etc">기타</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="business-submit__row business-submit__row--message">
+                <label class="business-submit__label" for="submit-message">문의 내용</label>
+                <textarea id="submit-message" name="message" class="business-submit__textarea" rows="4"
+                  placeholder="궁금한 점이나 전하고 싶은 이야기를 자유롭게 남겨주세요 :)"></textarea>
+              </div>
+
+              <div class="business-submit__privacy">
+                <label class="business-submit__privacy-label">
+                  <input type="checkbox" class="business-submit__privacy-check" name="privacy" required />
+                  <span class="caption text-brown-dark">개인정보취급방침을 읽었으며 이에 동의합니다.</span>
+                </label>
+                <button type="button" class="business-submit__privacy-link" data-open-modal="modal-privacy"
+                  aria-haspopup="dialog">전문보기</button>
+              </div>
+
+              <div class="business-submit__actions">
+                <button type="submit" class="p1-b business-submit__submit text-white">문의하기</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div data-include="site-footer"></div>
+  </div>
+
+  <div class="business-submit-modal" data-business-submit-modal role="dialog" aria-modal="true"
+    aria-labelledby="business-submit-modal-title" hidden>
+    <button type="button" class="business-submit-modal__backdrop" data-business-submit-modal-close
+      aria-label="닫기"></button>
+    <div class="business-submit-modal__panel" role="document">
+      <p class="business-submit-modal__eyebrow caption text-poppi-orange">POPPI DONUTS</p>
+      <h2 id="business-submit-modal-title" class="h4 text-brown-dark business-submit-modal__title">
+        문의가 접수되었습니다
+      </h2>
+      <p class="p1-r text-brown-dark business-submit-modal__message">
+        창업 문의가 정상적으로 접수되었습니다.<br />
+        담당자가 확인 후 빠른 시일 내에 연락드리겠습니다.
+      </p>
+      <button type="button" class="p1-b text-white business-submit-modal__confirm" data-business-submit-modal-close>
+        확인
+      </button>
+    </div>
+  </div>
+
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 공통 헤더/푸터 컴포넌트 — main.js 보다 먼저 로드 -->
+  <script src="../assets/js/components/site-header.js"></script>
+  <script src="../assets/js/components/site-ready-modal.js?v=ready-modal-v2"></script>
+  <script src="../assets/js/components/site-footer.js?v=legal-modal-ios"></script>
+  <script src="../assets/js/main.js?v=socials-v4"></script>
+  <script src="../assets/js/business.js?v=biz-point-simple-anim-fix"></script>
+</body>
+
+</html>

@@ -1,0 +1,1711 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — Business page styles
+   ========================================================= */
+
+/* =========================================================
+   00. BUSINESS KV — event-news 의 .page-top + .kv-title 구조/스타일과 1:1 동일.
+   - 배경: 사용자 제공 business-kv-bg-v2.png (오렌지 그리드 + 카라멜 도넛)
+   - 최대 높이 572px (1920 기준 29.79vw)
+   - 타이틀 회전/외곽선/그림자 모두 event-news 값과 일치
+   ========================================================= */
+.page-top {
+  --event-kv-bg: #FDE2CF;
+  /* Business 폴백 베이지 오렌지 */
+  --kv-height: clamp(219px, 29.79vw, 572px);
+  /* 1920 → 572 */
+  --kv-title-size: clamp(48px, 5.21vw, 100px);
+  --kv-title-stroke: clamp(2px, 0.26vw, 5px);
+  --kv-title-outline: clamp(6px, 0.78vw, 15px);
+  --kv-title-top: clamp(88px, 28%, 200px);
+
+  position: relative;
+  width: 100%;
+  min-height: var(--kv-height);
+  padding-top: 0;
+  overflow: hidden;
+  background-color: var(--event-kv-bg);
+  background-image: url("../images/business/business-kv-bg-v2.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+.kv-title {
+  position: absolute;
+  top: var(--kv-title-top);
+  left: 50%;
+  z-index: 2;
+  isolation: isolate;
+  max-width: calc(100% - 32px);
+  color: #452319;
+  font-family: var(--font-heading, var(--font-ria));
+  font-size: var(--kv-title-size);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: clamp(0.5px, 0.1vw, 2px);
+  transform: translate(-50%, -50%) rotate(-5deg);
+  transform-origin: center;
+  white-space: nowrap;
+  -webkit-text-stroke: var(--kv-title-stroke) #452219;
+  paint-order: stroke fill;
+  text-shadow:
+    -1px -2px 4px rgba(255, 235, 221, 0.75),
+    2px 3px 7px rgba(0, 0, 0, 0.42),
+    -4px 3px 8px rgba(69, 50, 31, 0.45),
+    0 6px 10px rgba(32, 18, 12, 0.2);
+  margin: 0;
+}
+
+.kv-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: inherit;
+  pointer-events: none;
+  -webkit-text-stroke: var(--kv-title-outline) #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95));
+}
+
+/* TABLET — event-news 와 동일한 비례 축소 */
+@media (max-width: 1024px) {
+  .page-top {
+    --kv-height: clamp(219px, 29.79vw, 282px);
+    --kv-title-size: clamp(44px, 7.8vw, 72px);
+    --kv-title-stroke: clamp(2px, 0.35vw, 4px);
+    --kv-title-outline: clamp(5px, 1vw, 12px);
+    --kv-title-top: clamp(80px, 26%, 160px);
+  }
+}
+
+/* MOBILE — event-news 와 동일한 비례 축소 */
+@media (max-width: 560px) {
+  .page-top {
+    --kv-height: 219px;
+    padding-top: 0;
+    --kv-title-size: clamp(36px, 10.5vw, 56px);
+    --kv-title-stroke: 3px;
+    --kv-title-outline: clamp(5px, 1.8vw, 9px);
+    --kv-title-top: clamp(72px, 24%, 120px);
+  }
+}
+
+/* =========================================================
+   Business main — KV 제외, 콘텐츠 1440px / 12-col / gutter 24px 비율
+   (1920 기준: span 4 = 464px, span 6 = 708px, span 3 = 342px)
+   responsive.css 의 calc(100% - gutter*2) 는 ~1473px 뷰포트에서 1425px 로 줄어듦 → 덮어씀
+   ========================================================= */
+.page-wrap>main .site-container {
+  width: min(var(--site-max), 100%);
+  max-width: var(--site-max);
+  margin-inline: auto;
+  box-sizing: border-box;
+
+  --biz-gutter: var(--grid-gutter);
+  --biz-cols: var(--grid-columns);
+  --biz-col-unit: calc((100% - (var(--biz-cols) - 1) * var(--biz-gutter)) / var(--biz-cols));
+  --biz-span-3: calc(3 * var(--biz-col-unit) + 2 * var(--biz-gutter));
+  --biz-span-4: calc(4 * var(--biz-col-unit) + 3 * var(--biz-gutter));
+  --biz-span-6: calc(6 * var(--biz-col-unit) + 5 * var(--biz-gutter));
+}
+
+@media (min-width: 1440px) {
+  .page-wrap>main .site-container {
+    width: var(--site-max);
+  }
+}
+
+@media (max-width: 1439px) {
+  .page-wrap>main .site-container {
+    width: min(var(--site-max), calc(100% - (var(--site-gutter) * 2)));
+  }
+}
+
+.page-wrap>main .content-grid {
+  gap: var(--biz-gutter);
+}
+
+/* ---------- 01. 숫자 지표 (business-graph) ---------- */
+.business-graph {
+  background: var(--color-white);
+}
+
+.business-graph__head {
+  margin: 0 0 var(--content-gap-md);
+  text-align: center;
+}
+
+.business-graph__title {
+  margin: 0;
+}
+
+.business-graph__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.business-graph__card {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.business-graph__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--content-gap-md);
+  box-sizing: border-box;
+}
+
+.business-graph__media img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.business-graph__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.business-graph__stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  margin: 0;
+}
+
+.business-graph__value,
+.business-graph__unit {
+  margin: 0;
+  color: var(--donut-orange);
+}
+
+.business-graph__label {
+  margin: 0;
+}
+
+/* Tablet: 3열 */
+@media (max-width: 1024px) {
+  .business-graph__card {
+    grid-column: span 4;
+  }
+}
+
+/* Mobile: 2열 */
+@media (max-width: 640px) {
+  .business-graph__card {
+    grid-column: span 6;
+  }
+
+  .business-graph__media {
+    padding: clamp(20px, 5vw, var(--content-gap-md));
+  }
+}
+
+/* Narrow: 1열 */
+@media (max-width: 400px) {
+  .business-graph__card {
+    grid-column: span 12;
+  }
+}
+
+/* Mobile 402px: 2줄(3개 + 3개) 배치 */
+@media (max-width: 402px) {
+  .business-graph__card {
+    grid-column: span 6;
+  }
+}
+
+/* ---------- 02. POPPI 포인트 (business-point) ---------- */
+.business-point {
+  background: var(--color-poppi-orange);
+}
+
+.business-point__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 캐러셀 — site-container(1440) 기준 full width */
+.business-point__carousel {
+  width: 100%;
+  max-width: var(--site-max);
+  margin-inline: auto;
+  outline: none;
+}
+
+.business-point__viewport {
+  --bp-card-pad: 36px;
+  --bp-card-gap: 8px;
+  --bp-media-text-gap: 16px;
+  --bp-slide-gap: 24px;
+  --bp-media-max: clamp(132px, 11.46vw, 220px);
+  --bp-text-max: clamp(200px, 22vw, 360px);
+  --bp-card-min-h: clamp(220px, 18vw, 340px);
+
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.business-point__viewport:active,
+.business-point__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.business-point__viewport.is-dragging,
+.business-point__viewport.is-dragging * {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.business-point__track {
+  display: flex;
+  align-items: center;
+  gap: var(--bp-slide-gap);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-point__slide {
+  --focus: 0;
+  flex: 0 0 auto;
+}
+
+.business-point__card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  height: auto;
+  min-height: var(--bp-card-min-h);
+  padding: var(--bp-card-pad);
+  gap: calc(var(--focus) * var(--bp-media-text-gap));
+  background: var(--color-white);
+  border-radius: clamp(18px, 1.56vw, 28px);
+  overflow: hidden;
+}
+
+.business-point__slide.is-active .business-point__card {
+  gap: var(--bp-media-text-gap);
+}
+
+.business-point__card-media {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-point__card-media img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: var(--bp-media-max);
+  max-height: var(--bp-media-max);
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.business-point__card-body {
+  flex: 0 0 auto;
+  width: calc(var(--focus) * var(--bp-text-max));
+  overflow: hidden;
+  text-align: left;
+  white-space: normal;
+  opacity: var(--focus);
+}
+
+.business-point__card-body>* {
+  width: var(--bp-text-max);
+  max-width: var(--bp-text-max);
+}
+
+.business-point__card-title {
+  margin: 0;
+}
+
+.business-point__card-desc {
+  margin: var(--bp-card-gap) 0 0;
+  opacity: 0.5;
+}
+
+/* PC (~tablet 768px 이전): br 강제 줄바꿈만 제거, 텍스트는 자연 줄바꿈·전체 노출 */
+@media (min-width: 769px) {
+  .business-point__card {
+    min-height: var(--bp-card-min-h);
+    height: auto;
+  }
+
+  .business-point__card-title,
+  .business-point__card-desc {
+    white-space: normal;
+  }
+
+  /* br 줄바꿈 대신 공백으로 이어 읽기 유지 */
+  .business-point__card-desc br {
+    display: inline;
+  }
+
+  .business-point__card-desc br::before {
+    content: ' ';
+  }
+
+  .business-point__slide.is-active .business-point__card-body {
+    overflow: visible;
+  }
+}
+
+/* 캐러셀 → dots: 40px */
+.business-point__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.25vw, 20px);
+  margin: var(--content-gap-md) 0 0;
+  padding: 0;
+}
+
+.business-point__dot {
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-cream-bg);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.business-point__dot.is-active {
+  border-radius: 0;
+  background: url("../images/business/dot-active.png") center / contain no-repeat;
+}
+
+/* dots → footer: 40px */
+.business-point__footer {
+  margin-top: var(--content-gap-md);
+  align-items: flex-end;
+}
+
+.business-point__copy {
+  margin: 0;
+  line-height: var(--lh-heading);
+}
+
+.business-point__copy--left {
+  grid-column: 1 / span 4;
+  text-align: right;
+}
+
+.business-point__visual {
+  grid-column: 5 / span 4;
+  border-radius: 24px;
+  background: transparent;
+}
+
+.business-point__visual img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.business-point__copy--right {
+  grid-column: 9 / span 4;
+  text-align: left;
+}
+
+/* Tablet — PC와 동일 3열(텍스트 | 이미지 | 텍스트), 중앙 이미지만 축소 */
+@media (max-width: 1024px) {
+  .business-point__footer {
+    align-items: center;
+    gap: var(--content-gap-sm);
+  }
+
+  .business-point__copy--left {
+    grid-column: 1 / span 4;
+    text-align: right;
+    align-self: center;
+  }
+
+  .business-point__visual {
+    grid-column: 5 / span 4;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    max-width: min(280px, 100%);
+  }
+
+  .business-point__visual img {
+    width: 100%;
+    max-width: 100%;
+    max-height: clamp(140px, 28vw, 200px);
+    height: auto;
+    object-fit: contain;
+  }
+
+  .business-point__copy--right {
+    grid-column: 9 / span 4;
+    text-align: left;
+    align-self: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .business-point__viewport {
+    --bp-text-max: clamp(240px, 36vw, 400px);
+    --bp-card-min-h: clamp(220px, 30vw, 300px);
+  }
+}
+
+@media (max-width: 768px) {
+  .business-point {
+    --bp-card-w-simple: clamp(280px, 92vw, 640px);
+  }
+
+  /* 모바일(402)과 동일: 뷰포트 기준 full-bleed + 슬라이드·카드 중앙 고정 */
+  .business-point__carousel {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .business-point__viewport {
+    --bp-card-pad: clamp(20px, 5vw, 28px);
+    --bp-slide-gap: clamp(16px, 4vw, 24px);
+    --bp-text-max: clamp(200px, 48vw, 340px);
+    --bp-card-min-h: clamp(210px, 42vw, 280px);
+    overflow: visible;
+  }
+
+  .business-point__slide {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Tablet: focus 아코디언 없이 단순 캐러셀(모바일과 동일 노출) */
+  .business-point__card {
+    width: var(--bp-card-w-simple);
+    max-width: min(var(--bp-card-w-simple), 100%);
+    gap: var(--bp-media-text-gap);
+    min-height: var(--bp-card-min-h);
+    height: auto;
+  }
+
+  .business-point__card-body {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    opacity: 1;
+    overflow: visible;
+  }
+
+  .business-point__card-body>* {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .business-point__slide .business-point__card-body {
+    opacity: 1;
+  }
+
+  .business-point__card-title,
+  .business-point__card-desc {
+    white-space: normal;
+  }
+
+  .business-point__card-desc br {
+    display: none;
+  }
+
+  .business-point__visual {
+    max-width: min(220px, 38vw);
+  }
+
+  .business-point__visual img {
+    max-height: clamp(120px, 24vw, 168px);
+  }
+
+  .business-point__copy {
+    font-size: var(--type-h4);
+  }
+}
+
+/* 560~403px: 가로 카드 — 슬라이드·카드 동일 너비(중앙 계산 오차 방지) */
+@media (max-width: 560px) and (min-width: 403px) {
+  .business-point {
+    --bp-card-w-simple: clamp(280px, 86vw, 360px);
+  }
+
+  .business-point__slide {
+    flex: 0 0 var(--bp-card-w-simple);
+    width: var(--bp-card-w-simple);
+    max-width: min(var(--bp-card-w-simple), 100%);
+  }
+
+  .business-point__card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .business-point__viewport {
+    --bp-media-max: clamp(88px, 22vw, 120px);
+    --bp-card-pad: clamp(16px, 4vw, 22px);
+  }
+}
+
+/* Mobile — 세로 스택 */
+@media (max-width: 560px) {
+
+  .business-point__copy--left,
+  .business-point__visual,
+  .business-point__copy--right {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .business-point__visual {
+    max-width: min(320px, 88vw);
+  }
+
+  .business-point__visual img {
+    max-height: none;
+    object-fit: cover;
+  }
+
+  .business-point__footer {
+    gap: var(--content-gap-md);
+  }
+}
+
+/* Mobile 402px: 카드 내부를 세로(이미지 위, 텍스트 아래)로 전환 */
+@media (max-width: 402px) {
+  .business-point {
+    --bp-card-w-mobile: clamp(300px, 86vw, 340px);
+    --bp-card-body-w-mobile: clamp(250px, 74vw, 300px);
+  }
+
+  .business-point__viewport {
+    --bp-slide-gap: 14px;
+  }
+
+  .business-point__slide {
+    flex: 0 0 var(--bp-card-w-mobile);
+    width: var(--bp-card-w-mobile);
+    max-width: var(--bp-card-w-mobile);
+  }
+
+  .business-point__card {
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    min-height: clamp(300px, 88vw, 340px);
+    height: auto;
+  }
+
+  .business-point__slide.is-active .business-point__card {
+    gap: 12px;
+  }
+
+  .business-point__card-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: clamp(120px, 32vw, 150px);
+    min-height: clamp(120px, 32vw, 150px);
+  }
+
+  .business-point__card-media img {
+    width: auto;
+    height: auto;
+    max-width: clamp(150px, 42vw, 170px);
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .business-point__card-body {
+    width: var(--bp-card-body-w-mobile);
+    max-width: var(--bp-card-body-w-mobile);
+    text-align: center;
+    opacity: 1;
+    min-height: var(--bp-mobile-body-min-h, auto);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .business-point__card-body>* {
+    width: var(--bp-card-body-w-mobile);
+    max-width: var(--bp-card-body-w-mobile);
+  }
+
+  .business-point__slide .business-point__card-body {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .business-point__track {
+    transition: none;
+  }
+}
+
+/* ---------- 03. 창업 프로세스 (business-process) ---------- */
+
+.text-yellow {
+  color: var(--poppi-yellow);
+}
+
+.business-process__head {
+  margin: 0;
+  text-align: center;
+}
+
+.business-process__title {
+  margin: 0;
+}
+
+.business-process__desc {
+  margin: var(--content-gap-xs) 0 0;
+  opacity: 0.5;
+}
+
+.business-process__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--biz-gutter);
+  margin: var(--content-gap-md) 0 0;
+  padding: 0;
+  list-style: none;
+  justify-items: center;
+}
+
+.business-process__card {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  width: min(100%, 464px);
+  max-width: 464px;
+  min-width: 0;
+  margin-inline: auto;
+  padding-block: var(--content-gap-md);
+  gap: var(--content-gap-md);
+}
+
+.business-process__num {
+  flex: 0 0 122px;
+  width: 122px;
+  max-width: 122px;
+  min-width: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1;
+  transition: color 0.35s ease;
+}
+
+.business-process__body {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--content-gap-xs);
+  width: auto;
+  min-width: 0;
+}
+
+.business-process__step-title {
+  margin: 0;
+}
+
+.business-process__rule {
+  display: block;
+  width: 25%;
+  height: 3px;
+  background: var(--poppi-yellow);
+  border-radius: 999px;
+  transition: width 0.35s ease, background-color 0.35s ease;
+}
+
+.business-process__card:hover .business-process__num {
+  color: var(--color-poppi-orange);
+}
+
+.business-process__card:hover .business-process__rule {
+  width: 100%;
+  background: var(--color-poppi-orange);
+}
+
+.business-process__step-desc {
+  margin: 0;
+}
+
+/* Tablet: 2열 (span 6) — 카드 폭 축소로 숫자·텍스트 간격 유지 */
+@media (max-width: 1024px) {
+  .business-process__card {
+    grid-column: span 6;
+    width: min(100%, 400px);
+    max-width: 400px;
+    padding-left: 0;
+    gap: var(--content-gap-sm);
+  }
+
+  .business-process__num {
+    flex: 0 0 96px;
+    width: 96px;
+    max-width: 96px;
+    font-size: clamp(36px, 7.5vw, var(--type-h2));
+  }
+}
+
+/* Mobile: 1열 */
+@media (max-width: 640px) {
+  .business-process__card {
+    grid-column: span 12;
+    width: min(100%, 360px);
+    max-width: 360px;
+  }
+
+  .business-process__num {
+    flex: 0 0 88px;
+    width: 88px;
+    max-width: 88px;
+  }
+}
+
+/* Mobile 402px: 화면 중앙에 온 단계 1개씩 순차 강조 */
+@media (max-width: 402px) {
+  .business-process__card.is-active-step .business-process__num {
+    color: var(--color-poppi-orange);
+  }
+
+  .business-process__card.is-active-step .business-process__rule {
+    width: 100%;
+    background: var(--color-poppi-orange);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .business-process__num,
+  .business-process__rule {
+    transition: none;
+  }
+}
+
+/* ---------- 04. 맞춤 창업 플랜 (business-plan) ---------- */
+.business-plan__head {
+  margin: 0;
+  text-align: center;
+}
+
+.business-plan__eyebrow {
+  margin: 0;
+}
+
+.business-plan__title {
+  margin: 0;
+}
+
+.business-plan__grid {
+  --bp-card-gap: var(--biz-gutter);
+  --bp-card-closed: var(--biz-span-3);
+  --bp-card-open: var(--biz-span-6);
+
+  display: flex;
+  gap: var(--bp-card-gap);
+  width: 100%;
+  margin-top: var(--content-gap-md);
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+.business-plan__card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--bp-card-closed);
+  width: var(--bp-card-closed);
+  box-sizing: border-box;
+  padding: 24px;
+  background: color-mix(in srgb, var(--color-poppi-orange) 50%, transparent);
+  border-radius: var(--radius-md);
+  min-width: 0;
+  cursor: pointer;
+  transition:
+    width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    flex-basis 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.35s ease;
+}
+
+.business-plan__card:focus-visible {
+  outline: 2px solid var(--color-brown-dark);
+  outline-offset: 4px;
+}
+
+.business-plan__card.is-open {
+  flex: 0 0 var(--bp-card-open);
+  width: var(--bp-card-open);
+  background: var(--color-poppi-orange);
+}
+
+.business-plan__card-head {
+  margin-inline: -24px;
+  padding-inline: 32px;
+}
+
+.business-plan__plan-name,
+.business-plan__plan-type {
+  margin: 0;
+}
+
+.business-plan__detail {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: var(--business-plan-detail-height, auto);
+}
+
+.business-plan__panel {
+  width: 100%;
+  margin-top: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+}
+
+.business-plan__card.is-open .business-plan__panel {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0.08s, 0s;
+}
+
+.business-plan__card:not(.is-open) .business-plan__panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  height: auto;
+}
+
+.business-plan__media {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+}
+
+.business-plan__card.is-open .business-plan__media {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 0s, 0.2s;
+}
+
+.business-plan__media img {
+  display: block;
+  width: min(100%, 240px);
+  height: auto;
+  object-fit: contain;
+}
+
+.business-plan__subnote {
+  margin: 0;
+  text-align: right;
+  opacity: 0.5;
+}
+
+.business-plan__spec {
+  margin-top: 8px;
+  padding: 0 40px 16px 40px;
+  background: var(--color-donut-bg);
+  border-radius: var(--radius-sm);
+}
+
+.business-plan__spec-row,
+.business-plan__total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.business-plan__spec-row {
+  border-top: 1px solid var(--color-poppi-orange);
+}
+
+.border-none {
+  border: none;
+}
+
+.business-plan__spec-row>*,
+.business-plan__total-row>* {
+  margin: 0;
+}
+
+.business-plan__total-row {
+  background: var(--color-cream-bg);
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+  .business-plan__grid {
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .business-plan__card,
+  .business-plan__card.is-open {
+    flex: none;
+    width: 100%;
+  }
+
+  .business-plan__media,
+  .business-plan__card.is-open .business-plan__media {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .business-plan__card {
+    padding: 16px;
+    transition: background-color 0.25s ease;
+  }
+
+  .business-plan__card-head {
+    position: relative;
+    margin-inline: -16px;
+    padding-inline: 16px 44px;
+  }
+
+  /* 닫힌 카드: 헤더 우측에 아래 화살표 표시 */
+  .business-plan__card:not(.is-open) .business-plan__card-head::after {
+    content: "";
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--color-white);
+    border-bottom: 2px solid var(--color-white);
+    transform: translateY(-65%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  /* 닫힘 상태: 상단 헤더만 보이도록 상세 영역 접기 */
+  .business-plan__detail {
+    position: relative;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .business-plan__panel,
+  .business-plan__card:not(.is-open) .business-plan__panel,
+  .business-plan__card.is-open .business-plan__panel {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  .business-plan__card.is-open .business-plan__detail {
+    max-height: calc(var(--business-plan-detail-height, 0px) + 32px);
+  }
+
+  .business-plan__spec {
+    padding: 0 16px 12px;
+  }
+
+  .business-plan__spec-row,
+  .business-plan__total-row {
+    padding: 12px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .business-plan__card,
+  .business-plan__panel,
+  .business-plan__media {
+    transition: none;
+  }
+}
+
+/* ---------- 05. 창업 문의 접수 (business-submit) ---------- */
+.business-submit {
+  background: url("../images/business/submit_bg.png") center / cover no-repeat;
+}
+
+.business-submit__box {
+  box-sizing: border-box;
+  width: 100%;
+  /* 1280px 초과 해상도에서도 흰색 카드가 컨테이너 내에서 안정적으로 유지되도록 max-width 제한 */
+  max-width: min(var(--site-max), 100%);
+  margin-inline: auto;
+  /* support-voice__card 와 동일한 비주얼 스펙 */
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.business-submit__head {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+  gap: var(--content-gap-sm);
+  margin: 0;
+}
+
+.business-submit__title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.business-submit__required-note {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.business-submit__required-note::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-poppi-orange);
+  flex-shrink: 0;
+}
+
+.business-submit__form {
+  margin-top: var(--content-gap-md);
+}
+
+.business-submit__columns {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--content-gap-sm);
+  /* 자식 col이 flex 비율로 분배되어 박스를 절대 초과하지 않도록 */
+  min-width: 0;
+}
+
+.business-submit__col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* 라벨(좌) · 입력(우) 2열 그리드 — 시안처럼 글자와 인풋 분리 */
+.business-submit__row {
+  display: grid;
+  grid-template-columns: minmax(108px, 148px) minmax(0, 1fr);
+  column-gap: clamp(16px, 2.5vw, 40px);
+  align-items: center;
+  min-width: 0;
+}
+
+.business-submit__row--message {
+  align-items: start;
+  margin-top: 20px;
+}
+
+.business-submit__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: var(--type-b1);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-brown-dark);
+  white-space: nowrap;
+}
+
+.business-submit__label.required::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-poppi-orange);
+  flex-shrink: 0;
+}
+
+/* 선택 항목 — 필수 도트 없이 텍스트 시작선 맞춤 */
+.business-submit__label:not(.required) {
+  padding-left: 11px;
+}
+
+.business-submit__input,
+.business-submit__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-brown-dark);
+  background: var(--color-white);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.business-submit__phone {
+  min-width: 0;
+  width: 100%;
+}
+
+/* =========================================================
+   placeholder — support 와 동일 폰트/컬러 동기화
+   부모 선택자(.business-submit__box)를 앞에 명시해 specificity 상승 → !important 불필요
+   크로스 브라우징: Chrome/Safari(webkit), Firefox(moz), IE/Edge(ms) 전 벤더 포함
+   ========================================================= */
+
+/* 표준 */
+.business-submit__box .business-submit__input::placeholder,
+.business-submit__box .business-submit__textarea::placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+  /* Firefox 기본 opacity(0.54) 덮어쓰기 */
+}
+
+/* WebKit 계열 (Chrome, Safari, 구버전 Edge) */
+.business-submit__box .business-submit__input::-webkit-input-placeholder,
+.business-submit__box .business-submit__textarea::-webkit-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* Firefox */
+.business-submit__box .business-submit__input::-moz-placeholder,
+.business-submit__box .business-submit__textarea::-moz-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* IE 10–11 / 구버전 Edge */
+.business-submit__box .business-submit__input:-ms-input-placeholder,
+.business-submit__box .business-submit__textarea:-ms-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+}
+
+
+/* 표준 */
+.business-submit__box .business-submit__col .support-voice__phone .support-voice__phone-input::placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* WebKit 계열 */
+.business-submit__box .business-submit__col .support-voice__phone .support-voice__phone-input::-webkit-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* Firefox */
+.business-submit__box .business-submit__col .support-voice__phone .support-voice__phone-input::-moz-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+  opacity: 1;
+}
+
+/* IE 10–11 / 구버전 Edge */
+.business-submit__box .business-submit__col .support-voice__phone .support-voice__phone-input:-ms-input-placeholder {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  color: rgba(69, 35, 25, 0.4);
+}
+
+.business-submit__select {
+  padding-right: 38px;
+  background-color: var(--color-white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23452219' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.business-submit__input:focus,
+.business-submit__select:focus,
+.business-submit__textarea:focus {
+  border-color: var(--color-poppi-orange);
+}
+
+.business-submit__box .business-submit__select:required:invalid {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(69, 35, 25, 0.4);
+}
+
+/* Safari 보조: value="" disabled 옵션이 선택된 상태를 attribute selector로 추가 보강 */
+.business-submit__box .business-submit__select option[value=""][disabled] {
+  color: rgba(69, 35, 25, 0.4);
+}
+
+.business-submit__box .business-submit__select:required:valid {
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  /* font-size: 16px; */
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-brown-dark);
+}
+
+.business-submit__textarea {
+  height: 114px;
+  min-height: 114px;
+  padding: 12px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.business-submit__privacy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--content-gap-sm);
+  width: 100%;
+  margin-top: clamp(36px, 3.333vw, 48px);
+  /* support-voice__agree 스펙 */
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+}
+
+.business-submit__privacy-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  cursor: pointer;
+  /* support-voice__agree-left 폰트 스펙 */
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-brown-dark);
+}
+
+.business-submit__privacy-check {
+  position: relative;
+  flex-shrink: 0;
+  /* support-voice__agree-check 스펙: 20×20, orange border, 원형 */
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 2px solid var(--color-poppi-orange);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: background 0.2s ease;
+}
+
+.business-submit__privacy-check::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%) rotate(45deg);
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+}
+
+.business-submit__privacy-check:checked {
+  background: var(--color-poppi-orange);
+}
+
+.business-submit__privacy-check:focus-visible {
+  outline: 2px solid var(--color-poppi-orange);
+  outline-offset: 2px;
+}
+
+.business-submit__privacy-link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  /* support-voice__agree-more 폰트 스펙 */
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--color-poppi-orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-poppi-orange);
+  cursor: pointer;
+}
+
+.business-submit__privacy-link:hover {
+  opacity: 0.75;
+}
+
+.business-submit__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.business-submit__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 300px;
+  max-width: 100%;
+  margin: 0;
+  /* support-voice__submit 스펙 */
+  padding: 16px 16px;
+  border: none;
+  border-radius: 90px;
+  background: var(--color-brown-dark);
+  color: var(--color-white);
+  font-family: var(--font-ria);
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.business-submit__submit:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.support-faq__title {
+  font-family: var(--font-ria);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  color: var(--color-brown-dark);
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.support-voice__phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 340px;
+  min-width: 0;
+  /* 부모 넘침 방지 */
+  box-sizing: border-box;
+}
+
+/* 하이픈 */
+.support-voice__phone-sep {
+  flex-shrink: 0;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: #888888;
+  line-height: 48px;
+  user-select: none;
+}
+
+/* select + input 공통 리셋 & 공통 스타일 */
+.support-voice__phone-select,
+.support-voice__phone-input {
+  /* 브라우저 기본 스타일 초기화 */
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-sizing: border-box;
+  /* 패딩이 너비를 초과하지 않도록 */
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: var(--color-brown-dark);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.support-voice__phone-select:focus,
+.support-voice__phone-input:focus {
+  border-color: var(--color-poppi-orange);
+}
+
+/* 국번 select: 고정 너비 + 커스텀 화살표 */
+.support-voice__phone-select {
+  flex: 0 0 84px;
+  width: 84px;
+  /* flex-basis 보조 — 구형 브라우저 안전망 */
+  padding-right: 26px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23452219' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+/* 번호 input 두 칸: 남은 너비를 50/50 균등 분배 */
+.support-voice__phone-input {
+  flex: 1 1 0;
+  /* flex-basis: 0 → 패딩·보더 영향 없이 순수 비율 분배 */
+  width: 0;
+  /* min-content 팽창 차단 */
+  min-width: 0;
+}
+
+.support-voice__phone {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 국번 select — 작은 화면에서 너비 축소, 절대 줄지 않도록 고정 */
+.support-voice__phone-select {
+  flex: 0 0 72px;
+  width: 100px;
+}
+
+/* 번호 입력 두 칸 — flex: 1 + width: 0 으로 남은 공간 균등 분배, 절대 넘치지 않음 */
+.support-voice__phone-input {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 하이픈 — 어떤 상황에서도 찌그러지지 않도록 */
+.support-voice__phone-sep {
+  flex-shrink: 0;
+}
+
+/* 제출 완료 모달 */
+.business-submit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--content-gap-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.business-submit-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.business-submit-modal[hidden] {
+  display: none !important;
+}
+
+.business-submit-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(69 34 25 / 0.55);
+  cursor: pointer;
+}
+
+.business-submit-modal__panel {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: min(100%, 440px);
+  padding: var(--content-gap-md);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  text-align: center;
+  transform: translateY(12px);
+  transition: transform 0.3s ease;
+}
+
+.business-submit-modal.is-open .business-submit-modal__panel {
+  transform: translateY(0);
+}
+
+.business-submit-modal__eyebrow {
+  margin: 0 0 8px;
+}
+
+.business-submit-modal__title {
+  margin: 0 0 var(--content-gap-xs);
+}
+
+.business-submit-modal__message {
+  margin: 0 0 var(--content-gap-sm);
+  opacity: 0.85;
+}
+
+.business-submit-modal__confirm {
+  box-sizing: border-box;
+  min-width: 160px;
+  margin: 0;
+  padding: var(--content-gap-xs) 32px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-brown-dark);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.business-submit-modal__confirm:hover {
+  opacity: 0.88;
+}
+
+body.is-business-submit-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 1280px) {
+  .business-submit__columns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .business-submit__col {
+    flex: none;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .business-submit__head {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--content-gap-xs);
+  }
+
+  .business-submit__title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .business-submit__required-note {
+    position: static;
+  }
+
+  .business-submit__row,
+  .business-submit__row--message {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+
+  .business-submit__label:not(.required) {
+    padding-left: 0;
+  }
+
+  .business-submit__privacy {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .business-submit__privacy-label {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .business-submit__privacy-link {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}

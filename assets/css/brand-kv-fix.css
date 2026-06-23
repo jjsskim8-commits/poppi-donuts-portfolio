@@ -1,0 +1,103 @@
+﻿@charset "utf-8";
+
+/* =========================================================
+   POPPI Brand Story KV — donut position stable fix
+   ---------------------------------------------------------
+   기존 brand-story.css / pro-spacing.css 안에 KV 위치 규칙이 여러 번 있어
+   1024px, 768px 근처에서 도넛 top/width가 갑자기 바뀌던 문제를
+   마지막 로드 CSS에서 한 번 더 정리합니다.
+   ========================================================= */
+
+.brand-title-section {
+  height: 750px !important;
+  min-height: 750px !important;
+  max-height: 750px !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.brand-title,
+.brand-title--fill,
+.brand-title--stroke {
+  top: 240px !important;
+  font-size: 154px !important;
+  line-height: 0.95 !important;
+}
+
+.brand-title__donut {
+  top: 410px !important;
+  left: 50% !important;
+  width: 680px !important;
+  max-width: none !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1;
+  transform: translate3d(-50%, 0, 0) !important;
+  transform-origin: center top;
+  object-fit: contain;
+  transition: none !important;
+  will-change: auto;
+}
+
+/* 1199px 이하: PC 원본 위치에서 태블릿 위치까지 부드럽게 보간 */
+@media (max-width: 1024px) {
+  .brand-title-section {
+    height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+    min-height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+    max-height: clamp(445px, calc(-98px + 70.7vw), 750px) !important;
+  }
+
+  .brand-title,
+  .brand-title--fill,
+  .brand-title--stroke {
+    top: clamp(100px, calc(-150px + 32.5vw), 240px) !important;
+    font-size: clamp(100px, calc(4px + 12.5vw), 154px) !important;
+  }
+
+  .brand-title__donut {
+    top: clamp(253px, calc(-27px + 36.4vw), 410px) !important;
+    width: clamp(599px, calc(454px + 18.8vw), 680px) !important;
+  }
+}
+
+/* 768px 이하: 도넛이 갑자기 내려가거나 커지는 구간 없이 모바일로 자연스럽게 축소 */
+@media (max-width: 768px) {
+  .brand-title-section {
+    height: clamp(260px, 58vw, 445px) !important;
+    min-height: clamp(260px, 58vw, 445px) !important;
+    max-height: clamp(260px, 58vw, 445px) !important;
+  }
+
+  .brand-title,
+  .brand-title--fill,
+  .brand-title--stroke {
+    top: clamp(58px, 13vw, 100px) !important;
+    font-size: clamp(44px, 13vw, 100px) !important;
+    letter-spacing: 0.025em !important;
+  }
+
+  .brand-title--stroke {
+    -webkit-text-stroke-width: clamp(3px, 1vw, 6px) !important;
+  }
+
+  .brand-title--fill {
+    -webkit-text-stroke-width: clamp(2px, 0.65vw, 4px) !important;
+  }
+
+  .brand-title__donut {
+    top: clamp(128px, 33vw, 253px) !important;
+    width: clamp(300px, 78vw, 599px) !important;
+  }
+}
+
+@media (max-width: 402px) {
+  .brand-title-section {
+    height: 252px !important;
+    min-height: 252px !important;
+    max-height: 252px !important;
+  }
+
+  .brand-title__donut {
+    top: 122px !important;
+    width: 292px !important;
+  }
+}

@@ -1,0 +1,1154 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — Responsive layout (mobile / tablet / desktop)
+   ========================================================= */
+
+/* --- Global --- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* --- 01. Donut hero — 1920×1024 비율 유지 % 기반 스테이지 (style.css에서 처리) --- */
+
+/* --- 02. Flavor slider --- */
+.spring-slider .vscroll-drive__pin {
+  touch-action: pan-y pinch-zoom;
+  height: 100dvh;
+  height: 100svh;
+}
+
+@media (max-width: 1024px) {
+  .vscroll-drive {
+    --step-vh: 92;
+  }
+
+  .flavor-marquee {
+    gap: clamp(28px, 4vw, 44px);
+  }
+
+  .marquee-row--top { transform: translateX(-6vw); }
+  .marquee-row--middle { transform: translateX(-14vw); }
+  .marquee-row--bottom { transform: translateX(-4vw); }
+
+  .donut-visual {
+    width: min(var(--flavor-donut-width), 78vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .vscroll-drive {
+    --step-vh: 82;
+    --spring-slider-wheel-cooldown: 0.85s;
+  }
+
+  .flavor-marquee { gap: clamp(24px, 5vw, 34px); }
+
+  .donut-visual {
+    top: 53%;
+    width: min(92vw, 420px);
+  }
+
+  .flavor-hero--corn .donut-visual img,
+  .flavor-hero--peach .donut-visual img,
+  .flavor-hero--melon .donut-visual img,
+  .flavor-hero--blueberry .donut-visual img {
+    filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.18));
+  }
+}
+
+@media (max-width: 480px) {
+  .vscroll-drive {
+    --step-vh: 72;
+  }
+
+  .donut-visual {
+    top: 54%;
+    width: min(96vw, 360px);
+  }
+}
+
+/* --- 03. POPPI text hero (Figma 1153:247 — 브랜드 가치관) --- */
+
+/* 1280px 이하: 컨텐츠 좌측 패딩만 점진적으로 축소, 이미지는 우측 그대로 */
+@media (max-width: 1280px) {
+  .poppi-hero {
+    padding-left: clamp(40px, 9vw, 180px);
+  }
+}
+
+/* 1024px 이하: 도넛 공장 이미지가 잘리기 시작 → 약간 커지면서 우상단 고정 */
+@media (max-width: 1024px) {
+  .poppi-hero {
+    background-size: 75% auto;
+    background-position: 100% 0%;
+  }
+}
+
+/* 768px 이하: 이미지가 너무 작아져 cover 로 전환, 모바일 본문은 좁게 */
+@media (max-width: 768px) {
+  .poppi-hero {
+    background-size: cover;
+    background-position: 70% top;
+    padding-left: clamp(24px, 6vw, 60px);
+    padding-right: clamp(24px, 6vw, 60px);
+  }
+
+  .hero-content {
+    /* 모바일에서는 더 좁게 */
+    max-width: 100%;
+  }
+
+  .hero-content p {
+    line-height: 1.4;
+  }
+
+  .hero-content p br {
+    display: none;
+  }
+
+  .hero-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+
+  .hero-button img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-button {
+    padding: 12px 22px;
+    gap: 8px;
+  }
+}
+
+/* --- 04. Event receipt --- */
+@media (max-width: 1280px) {
+  .event-section {
+    background-size: 100% var(--event-bakery-bg-height);
+  }
+}
+
+@media (max-width: 900px) {
+  .event-sticky {
+    min-height: 0;
+    height: 100dvh;
+    height: 100svh;
+  }
+
+  .event-title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .receipt-stage {
+    width: min(var(--slot-width), calc(100vw - 32px));
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .event-content {
+    padding-top: max(var(--content-top), env(safe-area-inset-top, 0px));
+  }
+
+  .receipt-stage {
+    width: min(var(--slot-width), calc(100vw - 24px));
+  }
+}
+
+/* --- Tablet landscape / small laptop --- */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .donut-visual {
+    width: min(640px, 70vw);
+  }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-duration: 120s;
+  }
+}
+
+
+/* =========================================================
+   04-B. Event Calendar - responsive
+   ========================================================= */
+
+@media (max-width: 1280px) {
+  .poppi-event__inner {
+    gap: 32px;
+    width: min(100% - 48px, 1200px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .poppi-event {
+    padding: 96px 0 96px;
+  }
+
+  .poppi-event__inner {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .event-slide-card__viewport { --slide-width: 78%; --slide-gap: 16px; }
+
+  .event-slide-card,
+  .event-calendar-card {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .poppi-event {
+    padding: 64px 0 72px;
+  }
+
+  .poppi-event__inner {
+    width: min(100% - 32px, 600px);
+    gap: 22px;
+  }
+
+  .event-slide-card {
+    padding: 18px 18px 22px;
+    aspect-ratio: auto;
+  }
+
+  .event-slide-card__more { font-size: 14px; }
+  .event-slide-card__viewport { aspect-ratio: 16 / 11; --slide-width: 88%; --slide-gap: 12px; }
+  .event-slide-card__dots { gap: 14px; margin-top: 14px; }
+
+  .event-calendar-card {
+    padding: 16px 12px 16px;
+    aspect-ratio: auto;
+  }
+
+  .event-calendar-card__month { font-size: 20px; }
+  .event-calendar-card__nav-btn { width: 26px; height: 26px; }
+  .event-calendar-card__weekdays {
+    font-size: 12px;
+    height: 44px;
+    padding: 0 6px;
+  }
+
+  .cal-cell {
+    font-size: 13px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .cal-week-label { font-size: 10px; }
+}
+
+
+/* =========================================================
+   05. Business Banner - responsive
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .business-banner__inner {
+    width: min(720px, calc(100% - 48px));
+    gap: 20px;
+    height: 240px;
+  }
+
+  .business-banner__character {
+    width: 240px;
+    height: 270px;
+  }
+
+  .business-banner__title {
+    font-size: 24px;
+  }
+
+  .business-banner__desc {
+    font-size: 16px;
+  }
+
+  .business-banner__divider {
+    height: 100px;
+  }
+
+  .business-banner__cta {
+    padding: 16px 48px;
+    gap: 16px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .business-banner__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: auto;
+    padding: 24px 0 0;
+    text-align: center;
+  }
+
+  .business-banner__character {
+    width: 180px;
+    height: 200px;
+    align-self: center;
+    margin-bottom: 0;
+    order: 1;
+  }
+
+  .business-banner__text {
+    flex: 1 1 100%;
+    order: 2;
+  }
+
+  .business-banner__divider {
+    display: none;
+  }
+
+  .business-banner__cta {
+    order: 3;
+    margin-bottom: 24px;
+    padding: 10px 48px;
+  }
+
+  .business-banner__title {
+    font-size: 20px;
+  }
+
+  .business-banner__desc {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+}
+
+
+/* =========================================================
+   06. Main Choice - responsive
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .main-choice__inner {
+    width: min(720px, calc(100% - 48px));
+  }
+
+  .main-choice__cards {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .main-choice-card,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--online:hover) .main-choice-card--store,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--online,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice-card--store {
+    flex: 1;
+  }
+
+  .main-choice:has(.main-choice-card--online:hover) .main-choice__bg-curve,
+  .main-choice:has(.main-choice-card--store:hover) .main-choice__bg-curve {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-choice {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .main-choice__inner {
+    width: min(100% - 32px, 560px);
+    padding: 100px 0 56px;
+  }
+
+  .main-choice .h1 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .main-choice__desc {
+    margin-top: 16px;
+  }
+
+  .main-choice .p2-r.main-choice__desc {
+    font-size: 16px;
+  }
+
+  .main-choice__cards {
+    margin-top: 32px;
+  }
+
+  .main-choice-card {
+    padding: 40px 16px 48px;
+  }
+
+  /* PC 와 동일한 hover 효과 유지 — image animation/transform 비활성화 룰 제거.
+     CTA 버튼도 PC base 룰의 lift + shine sweep 그대로 사용. */
+  .main-choice-card:hover .main-choice-card__label::before {
+    width: 44px;
+  }
+
+  .main-choice-card__image-wrap {
+    min-height: 180px;
+    height: auto;
+    padding: 0;
+    margin-bottom: 24px;
+  }
+
+  .main-choice-card--online {
+    overflow-x: visible;
+  }
+
+  .main-choice-card__image {
+    width: min(240px, 100%);
+  }
+
+  .main-choice-card__label {
+    font-size: 15px;
+  }
+
+  .main-choice .main-choice-card__title.h3-b {
+    font-size: 24px;
+  }
+
+  .main-choice .main-choice-card__text.p2-r {
+    font-size: 15px;
+  }
+
+  .main-choice-card__button {
+    min-width: 220px;
+    min-height: 52px;
+    margin-top: 28px;
+  }
+}
+
+
+/* =========================================================
+   07. Review Slider - responsive
+   ========================================================= */
+
+@media (max-width: 1280px) {
+  .poppi-review-section {
+    --review-card-width: 20.5%;
+    --review-phone-width: 24%;
+  }
+
+  .review-stage {
+    height: 760px;
+  }
+
+  .gallery-thumbs {
+    top: 27%;
+  }
+
+  .phone-slider {
+    top: 8.8%;
+  }
+}
+
+@media (max-width: 760px) {
+  .poppi-review-section {
+    --review-card-width: 72vw;
+    --review-phone-width: 72vw;
+  }
+
+  .review-stage {
+    height: 920px;
+    min-height: 920px;
+  }
+
+  .phone-slider {
+    top: 30px;
+    width: min(72vw, 340px);
+  }
+
+  .gallery-thumbs {
+    top: 545px;
+    height: 340px;
+  }
+
+  .thumb-track {
+    gap: 18px;
+  }
+
+  .thumb-slide {
+    flex-basis: min(72vw, 330px);
+    width: min(72vw, 330px);
+  }
+
+  .thumb-slide.is-center-hidden {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+/* =========================================================
+   08. Footer - responsive
+   ========================================================= */
+
+@media (max-width: 629px) {
+  .poppi-footer {
+    --footer-pad-top: clamp(48px, 14vw, 72px);
+    --footer-pad-x: 20px;
+    --footer-pad-bottom: clamp(28px, 7vw, 36px);
+    border-radius: clamp(24px, 8.53vw, 32px) clamp(24px, 8.53vw, 32px) 0 0;
+  }
+
+  .footer-info,
+  .footer-rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(16px, 4vw, 22px);
+  }
+
+  .footer-info {
+    margin: 0;
+    padding: 0;
+    gap: clamp(18px, 5vw, 24px);
+  }
+
+  .footer-rights {
+    padding: clamp(20px, 5vw, 28px) 0 0;
+  }
+
+  .footer-menu,
+  .footer-tagline,
+  .footer-brand-copy {
+    display: none !important;
+  }
+
+  .footer-legal {
+    display: flex;
+  }
+
+  .footer-contact h2 {
+    display: none;
+  }
+
+  .footer-contact,
+  .footer-center,
+  .footer-copyright,
+  .footer-socials {
+    justify-self: center;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .footer-center {
+    margin-bottom: 0;
+  }
+
+  .footer-logo {
+    width: min(168px, 52vw);
+  }
+
+  .footer-contact li,
+  .footer-contact a {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .footer-socials {
+    gap: clamp(20px, 6vw, 28px);
+  }
+
+  .footer-socials img {
+    height: 22px;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   STORE — Figma 1176-750 반응형
+   ========================================================= */
+@media (max-width: 1280px) {
+  .interior-carousel__viewport { --slide-width: 70%; }
+  .store-search__list { width: 340px; top: 24px; left: 16px; }
+}
+
+@media (max-width: 1024px) {
+  .store-interior {
+    padding: clamp(90px, 10vw, 160px) 0 clamp(60px, 5vw, 90px);
+  }
+  .interior-carousel__viewport { --slide-width: 80%; --slide-gap: 14px; }
+  .interior-carousel__dots { gap: 18px; }
+
+  .store-search {
+    padding: clamp(60px, 7vw, 110px) clamp(20px, 3vw, 48px);
+  }
+  .store-search__filters { gap: 8px; }
+  .store-search__select select,
+  .store-search__btn { padding: 9px 22px; font-size: 16px; }
+
+  .store-search__map-wrap { aspect-ratio: auto; height: clamp(320px, 38vw, 460px); }
+  .store-search__list { width: 300px; top: 16px; left: 16px; padding: 16px 16px 24px; }
+  .store-search__store-name { font-size: 20px; gap: 18px; }
+  .store-search__store-addr { font-size: 16px; gap: 16px; }
+  .store-search__search-input input { font-size: 16px; padding: 9px 44px 9px 16px; }
+}
+
+@media (max-width: 768px) {
+  .store-interior__blob { transform: scale(0.65); opacity: 0.6; }
+  .interior-carousel__viewport { --slide-width: 86%; --slide-gap: 10px; aspect-ratio: 1180 / 800; }
+  .interior-carousel__dots { gap: 14px; margin-top: 28px; }
+  .interior-carousel__dot { width: 13px; height: 13px; }
+  .interior-carousel__dot.is-active { width: 20px; height: 20px; }
+
+  .store-search { padding: 60px 16px; }
+  .store-search__filters {
+    gap: 8px;
+    justify-content: stretch;
+  }
+  .store-search__select { flex: 1 1 calc(50% - 8px); min-width: 0; }
+  .store-search__select select { width: 100%; }
+  .store-search__btn { flex: 1 1 calc(50% - 8px); }
+
+  .store-search__body { display: flex; flex-direction: column; gap: 16px; }
+  .store-search__map-wrap { aspect-ratio: auto; height: clamp(240px, 60vw, 360px); }
+  .store-search__list {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    top: auto;
+    left: auto;
+  }
+  .store-search__store-name { font-size: 18px; gap: 14px; }
+  .store-search__store-addr { font-size: 14px; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .store-interior__head { gap: 8px; }
+  .store-interior .store-interior__title { font-size: 28px; }
+  .store-interior__sub { font-size: 14px; }
+  .store-search .store-search__title { font-size: 28px; }
+  .interior-carousel__viewport { --slide-width: 90%; }
+}
+
+
+/* =========================================================
+   INDEX.HTML — MOBILE
+   Figma 시안 1252:42 (Mo-main, 402×5566) 1:1 매핑
+   - 적용 범위: 모든 모바일 디바이스 (max-width: 480px)
+   - 정밀 보정: max-width: 402px (시안 폭 기준)
+   - 기존 산재된 480/767/760px 규칙들을 보완/덮어씌움
+   ========================================================= */
+
+/* ---------- 01. Donut motion hero ----------
+   시안: 상단 중앙에 "A LITTLE SWEET FACTORY" + 큰 POPPI 로고
+   (Frame 7730 @ y=174, 360×223) */
+@media (max-width: 480px) {
+  .donut-motion-section {
+    min-height: 100svh;
+    height: auto;
+  }
+  .donut-hero-stage {
+    aspect-ratio: 402 / 720;
+    min-height: 100svh;
+  }
+  .donut-logo-block {
+    /* Figma: 상단 중앙 (y=174 of 402×ヒーロー), 큰 로고 + 작은 tagline */
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .donut-logo-tagline {
+    font-size: clamp(12px, 3.4vw, 16px);
+    letter-spacing: 0.04em;
+  }
+  .donut-logo-image {
+    width: clamp(180px, 56vw, 230px);
+    height: auto;
+  }
+}
+
+/* ---------- 02. Flavor slider (vscroll-drive) ----------
+   시안: BLUEBERRY marquee 1 장 (실제론 4 flavor 스크롤). 가로 마퀴는 유지 */
+@media (max-width: 480px) {
+  .vscroll-drive { --step-vh: 70; }
+
+  .donut-visual {
+    top: 56%;
+    width: min(92vw, 330px);
+  }
+
+  .flavor-marquee { gap: clamp(20px, 6vw, 30px); }
+
+  .marquee-track span {
+    font-size: clamp(72px, 22vw, 96px);
+  }
+}
+
+/* ---------- 03. POPPI hero (A LITTLE SWEET FACTORY) ----------
+   Figma 1252:69 (402×315) — 좌측 정렬 2줄 타이틀 + 본문 2줄 + 풀폭 외곽선 버튼 */
+@media (max-width: 480px) {
+  .poppi-hero {
+    min-height: 360px;
+    padding: clamp(40px, 12vw, 56px) 20px clamp(28px, 8vw, 40px);
+    background-size: cover;
+    background-position: 50% top;
+    background-color: var(--apricot-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .poppi-hero .hero-content {
+    width: 100%;
+    max-width: 362px;
+    text-align: left;
+  }
+  .poppi-hero .hero-content h1 {
+    font-size: clamp(36px, 11vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .poppi-hero .hero-content p {
+    font-size: clamp(13px, 3.4vw, 15px);
+    line-height: 1.55;
+    margin: 14px 0 0;
+  }
+  .poppi-hero .hero-content p br { display: none; }
+  .poppi-hero .hero-button {
+    margin-top: 22px;
+    width: 100%;
+    max-width: 294px;
+    min-height: 56px;
+    justify-content: center;
+    padding: 14px 24px;
+    border: 2px solid var(--donut-brown-dark, #452319);
+    background: transparent;
+    color: var(--donut-brown-dark, #452319);
+    border-radius: 999px;
+    font-size: 15px;
+    gap: 12px;
+  }
+  .poppi-hero .hero-button img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ---------- 04. EVENT (타이틀 + 슬라이드 카드 + 캘린더) ----------
+   Figma 1252:93 / 1252:77 / 1252:94 — 세로 스택, 카드 흰 배경, 큰 EVENT 타이틀 */
+@media (max-width: 480px) {
+  .poppi-event {
+    padding: clamp(40px, 11vw, 56px) 0 clamp(48px, 12vw, 64px);
+  }
+  .poppi-event__head {
+    padding: 0 16px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  /* 디자인 시스템 h3 토큰 사용 — 별도 font-size 강제 X */
+  .poppi-event__title {
+    text-align: center;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.02em;
+  }
+  .poppi-event__subtitle br { display: none; }
+  .poppi-event__inner {
+    flex-direction: column;
+    gap: 18px;
+    width: min(100% - 32px, 400px);
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* event slide card (370×496) */
+  .event-slide-card {
+    padding: 16px 16px 20px;
+    aspect-ratio: auto;
+    min-height: 460px;
+  }
+  .event-slide-card__head {
+    margin-bottom: 8px;
+  }
+  .event-slide-card__more {
+    font-size: 13px;
+    gap: 8px;
+  }
+  .event-slide-card__viewport {
+    aspect-ratio: 334 / 352;
+    --slide-width: 100%;
+    --slide-gap: 0px;
+    border-radius: 18px;
+  }
+  .event-slide-card__dots { gap: 14px; margin-top: 14px; }
+  .event-slide-card__dot { width: 14px; height: 14px; }
+  .event-slide-card__dot.is-active { width: 22px; height: 22px; }
+
+  /* event calendar card (342×496) */
+  .event-calendar-card {
+    padding: 18px 14px 22px;
+    aspect-ratio: auto;
+    min-height: 480px;
+  }
+  .event-calendar-card__month { font-size: 22px; }
+  .event-calendar-card__nav-btn { width: 24px; height: 24px; }
+  .event-calendar-card__weekdays {
+    font-size: 12px;
+    height: 44px;
+    padding: 0 4px;
+    border-radius: 12px;
+    background: #FCE0CC;
+  }
+  .event-calendar-card__grid { padding-top: 8px; }
+  .cal-cell {
+    font-size: 13px;
+    width: 38px;
+    height: 38px;
+  }
+  .cal-week-label { font-size: 10px; line-height: 1.25; }
+}
+
+/* ---------- 05. Business banner ----------
+   Figma 1252:149 (409×344) — 캐릭터 상단 중앙, 텍스트/CTA 하단 중앙, 핑크 라운드 박스 */
+@media (max-width: 480px) {
+  .business-banner {
+    margin: 0 auto;
+    width: min(100% - 16px, 420px);
+    padding: clamp(28px, 7vw, 36px) 20px clamp(32px, 8vw, 44px);
+    border-radius: clamp(20px, 6vw, 28px);
+  }
+  .business-banner__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+    padding: 0;
+    height: auto;
+    flex-wrap: nowrap;
+  }
+  .business-banner__character {
+    width: clamp(110px, 30vw, 132px);
+    height: auto;
+    margin: 0 auto 4px;
+    order: 0;
+    position: static;
+    align-self: center;
+  }
+  .business-banner__text { order: 1; flex: 0 0 auto; }
+  .business-banner__action {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .business-banner__divider { display: none; }
+  .business-banner__title {
+    font-size: clamp(17px, 4.8vw, 20px);
+    line-height: 1.4;
+    color: #ffffff;
+    margin: 0;
+  }
+  .business-banner__desc {
+    font-size: clamp(13px, 3.7vw, 15px);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 6px 0 0;
+  }
+  .business-banner__cta {
+    margin: 14px auto 0;
+    padding: 12px 36px;
+    background: #6E2F1A;
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 14px;
+    gap: 12px;
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+  }
+}
+
+/* ---------- 06. Main choice (Online order / Visit our store) ----------
+   Figma 1252:163 / 1252:174 (390×362, 390×363) — 카드 세로 스택, 베이지 배경 */
+@media (max-width: 480px) {
+  .main-choice {
+    min-height: 0;
+    height: auto;
+    padding: clamp(48px, 13vw, 72px) 0 clamp(56px, 15vw, 80px);
+  }
+  .main-choice__inner {
+    width: min(100% - 24px, 420px);
+    padding: 0;
+    margin: 0 auto;
+  }
+  .main-choice .h1 {
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.18;
+  }
+  .main-choice__desc { margin-top: 14px; }
+  .main-choice .p2-r.main-choice__desc {
+    font-size: clamp(13px, 3.7vw, 15px);
+    line-height: 1.55;
+  }
+  .main-choice__cards {
+    margin-top: clamp(28px, 8vw, 40px);
+    flex-direction: column;
+    gap: clamp(24px, 7vw, 36px);
+    width: 100%;
+  }
+  .main-choice-card {
+    padding: clamp(20px, 6vw, 28px) clamp(16px, 4vw, 24px) clamp(24px, 7vw, 32px);
+    background: #FDE7D5;
+    border-radius: 24px;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+  .main-choice-card__image-wrap {
+    min-height: 120px;
+    height: auto;
+    padding: 0;
+    margin-bottom: 18px;
+  }
+  .main-choice-card__image {
+    width: clamp(150px, 44vw, 200px);
+    height: auto;
+  }
+  .main-choice-card__label {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    padding-top: 16px;
+    position: relative;
+    display: inline-block;
+  }
+  .main-choice-card__label::before {
+    width: 40px !important;
+    height: 1.5px;
+  }
+  .main-choice .main-choice-card__title.h3-b {
+    font-size: clamp(20px, 6vw, 26px);
+    margin-top: 10px;
+  }
+  .main-choice .main-choice-card__text.p2-r {
+    font-size: clamp(13px, 3.5vw, 15px);
+    margin-top: 6px;
+  }
+  .main-choice-card__button {
+    margin-top: 22px;
+    min-width: 240px;
+    min-height: 56px;
+    border-radius: 999px;
+    padding: 16px 36px;
+    font-size: 15px;
+    background: #ED6325;
+    color: #ffffff;
+    border: 0;
+  }
+  /* store 카드 버튼 별도 색상 오버라이드 제거 — HTML 의 .main-choice-card__button--light
+     클래스가 PC base 룰(흰 배경 + 오렌지 텍스트) 그대로 적용. */
+}
+
+/* ---------- 07. Review (인스타) ----------
+   Figma 1252:43 / 1252:186 (304×505) — 단일 인스타 카드. 썸네일 무한슬라이더는 숨김 */
+@media (max-width: 480px) {
+  .poppi-review-section {
+    padding: clamp(40px, 11vw, 56px) 16px clamp(48px, 12vw, 64px);
+  }
+  .review-stage {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
+  .gallery {
+    display: block;
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+  .gallery-thumbs { display: none; }
+  .phone-slider {
+    position: static;
+    width: min(100%, 340px);
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+  .phone-frame-wrap { aspect-ratio: 304 / 505; }
+}
+
+/* ---------- 정밀 모바일 (~402px) — Figma 시안 1:1 미세조정 ---------- */
+@media (max-width: 402px) {
+  .donut-logo-image { width: 200px; }
+  .donut-logo-tagline { font-size: 13px; }
+
+  .poppi-hero .hero-content h1 { font-size: 40px; }
+  .poppi-hero .hero-content p { font-size: 13px; }
+
+  /* .poppi-event__title — 디자인 시스템 --type-h3 가 처리 */
+
+  .business-banner__title { font-size: 17px; }
+  .business-banner__desc { font-size: 13px; }
+  .business-banner__cta { font-size: 13px; padding: 11px 32px; }
+
+  .main-choice .h1 { font-size: 26px; }
+  .main-choice .main-choice-card__title.h3-b { font-size: 22px; }
+  .main-choice-card__button { min-width: 220px; font-size: 14px; padding: 14px 32px; }
+
+  .cal-cell { width: 36px; height: 36px; font-size: 12px; }
+}
+
+
+/* =========================================================
+   Production responsive refinement
+   - 768~403 태블릿/모바일 구간에서 공통 gutter와 section gap 사용
+   ========================================================= */
+@media (max-width: 1024px) {
+  .poppi-event__inner,
+  .business-banner,
+  .main-choice__inner {
+    width: min(720px, calc(100% - (var(--site-gutter) * 2)));
+  }
+
+  .business-banner__inner {
+    padding: 28px clamp(24px, 4vw, 48px);
+    min-height: 240px;
+  }
+
+  .main-choice {
+    min-height: auto;
+  }
+
+  .main-choice__inner {
+    padding-top: var(--section-y-sm);
+    padding-bottom: var(--section-y-sm);
+  }
+
+  .main-choice__cards {
+    gap: var(--content-gap-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .poppi-event,
+  .main-choice,
+  .poppi-review-section {
+    padding-top: var(--section-y-sm);
+    padding-bottom: var(--section-y-sm);
+  }
+
+  .business-banner {
+    margin-top: var(--section-gap-tight);
+    margin-bottom: var(--section-gap-tight);
+    width: min(600px, calc(100% - 32px));
+  }
+
+  .business-banner__inner {
+    padding: 28px 20px 24px;
+  }
+
+  .main-choice__cards {
+    margin-top: var(--content-gap-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .poppi-event,
+  .main-choice,
+  .poppi-review-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .business-banner {
+    width: calc(100% - 32px);
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .main-choice__inner {
+    width: calc(100% - 32px);
+  }
+}
+
+
+/* =========================================================
+   FINAL — spacing/grid sync for Brand & Store pages
+   responsive.css가 페이지 CSS 뒤에 로드되므로, 실무용 간격 기준은 여기서 최종 보정합니다.
+   ========================================================= */
+@media (max-width: 1280px) {
+  .interior-carousel__viewport { --slide-width: 70%; }
+}
+
+@media (max-width: 1024px) {
+  .store-interior,
+  .store-search {
+    padding-top: var(--section-y-md);
+    padding-bottom: var(--section-y-md);
+  }
+
+  .store-interior__head {
+    gap: var(--heading-sub-gap);
+    margin-bottom: var(--heading-media-gap);
+  }
+
+  .interior-carousel__viewport {
+    --slide-width: 74%;
+    --slide-gap: 14px;
+  }
+
+  .store-search__head { margin-bottom: var(--section-gap-tight); }
+  .store-search__filters { margin-bottom: var(--content-gap-md); }
+}
+
+@media (max-width: 768px) {
+  .store-interior,
+  .store-search {
+    padding-top: var(--section-y-md);
+    padding-bottom: var(--section-y-md);
+  }
+
+  .store-search { padding-left: var(--site-gutter); padding-right: var(--site-gutter); }
+  .store-interior__head { padding-inline: var(--site-gutter); }
+
+  .interior-carousel__viewport {
+    --slide-width: 82%;
+    --slide-gap: 14px;
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .interior-carousel__dots { gap: 16px; margin-top: var(--content-gap-sm); }
+
+  .store-search__select,
+  .store-search__select select,
+  .store-search__keyword,
+  .store-search__keyword input {
+    width: 100%;
+  }
+
+  .store-search__list {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: 360px;
+    margin-top: var(--content-gap-sm);
+  }
+}

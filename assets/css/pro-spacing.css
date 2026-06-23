@@ -1,0 +1,656 @@
+﻿@charset "utf-8";
+
+/* =========================================================
+   POPPI Professional Spacing System
+   ---------------------------------------------------------
+   1) 섹션 시작/끝 여백 통일
+   2) 제목↔설명, 텍스트↔이미지, 카드↔카드 간격 토큰화
+   3) 고정 height 클리핑 최소화: min-height + 콘텐츠 기준
+   4) 공통 footer 섹션 크기 정리
+   ========================================================= */
+
+:root {
+  --pro-max: 1440px;
+  --pro-narrow: 1180px;
+  --pro-text: 680px;
+  --pro-gutter: max(24px, calc((100vw - var(--pro-max)) / 2));
+  --pro-col-gap: 24px;
+
+  --pro-visual-hero-h: clamp(420px, 38.073vw, 731px);
+  --pro-section-h-sm: clamp(420px, 28vw, 540px);
+  --pro-section-h-md: clamp(640px, 46vw, 880px);
+  --pro-section-h-lg: clamp(780px, 57vw, 1090px);
+
+  --pro-section-y-xs: clamp(56px, 4.17vw, 80px);
+  --pro-section-y-sm: clamp(72px, 5.21vw, 100px);
+  --pro-section-y-md: clamp(88px, 6.25vw, 120px);
+  --pro-section-y-lg: clamp(104px, 7.29vw, 140px);
+  --pro-section-y-xl: clamp(120px, 8.33vw, 160px);
+
+  --pro-title-desc-gap: clamp(16px, 1.25vw, 24px);
+  --pro-head-content-gap: clamp(40px, 3.33vw, 64px);
+  --pro-text-image-gap: clamp(48px, 4.17vw, 80px);
+  --pro-block-gap: clamp(64px, 5.21vw, 100px);
+  --pro-component-gap: clamp(24px, 2.08vw, 40px);
+  --pro-small-gap: clamp(10px, 0.83vw, 16px);
+
+  --pro-footer-h: calc(min(100vw, 1920px) * 595 / 1920);
+  --pro-footer-top: clamp(72px, 11.05vw, 212px);
+  --pro-footer-x: var(--pro-gutter);
+  --pro-footer-bottom: clamp(32px, 5vw, 96px);
+
+}
+
+.pro-container,
+.site-container,
+.brand-identity__inner,
+.brand-application__inner,
+.store-search__filters,
+.store-search__stage,
+.store-search__body,
+.main-choice__inner,
+.poppi-event__inner,
+.business-banner {
+  width: min(var(--pro-max), calc(100% - (var(--pro-gutter) * 2)));
+  margin-inline: auto;
+}
+
+main > section { box-sizing: border-box; }
+
+.brand-title-section {
+  height: 750px;
+  min-height: 750px;
+  max-height: 750px;
+  aspect-ratio: auto;
+}
+
+.store-title-section {
+  height: 750px;
+  min-height: 750px;
+  max-height: 750px;
+  aspect-ratio: auto;
+}
+
+.brand-title,
+.brand-title--fill,
+.brand-title--stroke,
+.store-title,
+.store-title--fill,
+.store-title--stroke {
+  font-size: clamp(61px, 7.99vw, 154px);
+  line-height: 0.95;
+}
+
+/* Brand Story */
+/* Brand Story — brand-hello 데스크탑 고정 레이아웃 (≥1025px 전용).
+   769~1024px / ≤768px / ≤540px 에서는 brand-story.css 미디어쿼리가
+   세로 스택 + 가운데 정렬을 담당하므로 이 글로벌 고정 룰을 격리한다. */
+@media (min-width: 1025px) {
+  .brand-hello {
+    height: 666px;
+    min-height: 666px;
+    max-height: 666px;
+    padding: 0;
+    display: block;
+  }
+}
+
+.brand-story-section {
+  padding: 210px 0 clamp(60px, 5.21vw, 100px);
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-story-section__title {
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.store-search .store-search__title {
+  margin: 0;
+  font-family: var(--font-ria);
+  font-weight: 800;
+  font-size: var(--type-h3);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #ED6325;
+  text-align: center;
+}
+
+/* INTERIOR 타이틀 — 48px Bold (요청) */
+.store-interior .store-interior__title {
+  margin: 0;
+  font-family: var(--font-ria);
+  font-weight: 700;
+  font-size: clamp(28px, 2.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  color: #ED6325;
+  text-align: center;
+}
+
+/* BRAND IDENTITY / BRAND APPLICATION — 64px 가운데 정렬 (요청) */
+.brand-identity__title,
+.brand-application__title {
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-ria);
+  font-weight: 800;
+  font-size: clamp(36px, 3.33vw, 64px);
+  line-height: 1;
+  letter-spacing: 0;
+  color: #ED6325;
+  text-align: center;
+}
+
+.brand-roadmap {
+  width: min(1293px, calc(100% - (var(--pro-gutter) * 2)));
+  margin: 170px auto 0;
+  aspect-ratio: 1293 / 1410;
+}
+
+.brand-roadmap__label { gap: 10px; }
+.brand-roadmap__desc { font-family: var(--font-paperlogy); line-height: 1.2; }
+
+.brand-identity {
+  height: auto;
+  min-height: var(--pro-section-h-lg);
+  padding: var(--pro-section-y-lg) 0 var(--pro-section-y-xl);
+  overflow: visible;
+}
+
+.brand-identity__inner { display: flex; flex-direction: column; height: auto; }
+.brand-identity__title { margin-bottom: calc(var(--pro-head-content-gap) + 100px); }
+
+.brand-identity__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--pro-text-image-gap);
+  margin-bottom: var(--pro-block-gap);
+}
+
+.brand-identity__col h3 {
+  margin: 0 0 var(--pro-component-gap);
+  font-family: var(--font-paperlogy);
+  font-size: clamp(20px, 1.67vw, 32px);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+/* logo-box 삭제됨 — .brand-identity__logo-img 가 직접 표시 */
+
+.brand-identity__typo-list { gap: var(--pro-component-gap); }
+.brand-identity__typo-item { gap: var(--pro-component-gap); }
+.brand-identity__typo-info h4 { margin-bottom: var(--pro-small-gap); }
+
+.brand-identity__typo-info p {
+  font-family: inherit;
+  font-size: clamp(15px, 1.04vw, 20px);
+  line-height: 1.4;
+}
+
+.brand-identity__color-name,
+.brand-identity__color-name small {
+  font-family: var(--font-paperlogy);
+  font-size: clamp(15px, 1.04vw, 20px);
+  line-height: 1.5;
+}
+
+.brand-identity__colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  align-items: start;
+  gap: clamp(16px, 1.46vw, 28px);
+}
+.brand-identity__color {
+  width: 100%;
+  max-width: 200px;
+  gap: var(--pro-small-gap);
+}
+.brand-identity__color-name { white-space: nowrap; }
+.brand-identity__color-swatch {
+  width: clamp(80px, 7.29vw, 140px);
+  height: clamp(80px, 7.29vw, 140px);
+}
+
+/* 사용자 요청 — BRAND APPLICATION 섹션을 850px 로 고정하고 이미지 그리드를 축소 */
+.brand-application {
+  height: 850px;
+  min-height: 850px;
+  max-height: 850px;
+  padding: clamp(40px, 3.65vw, 70px) 0 clamp(36px, 3.13vw, 60px);
+  overflow: hidden;
+}
+
+.brand-application__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.brand-application__title {
+  margin-bottom: clamp(28px, 2.4vw, 46px);
+}
+.brand-application__board { width: 100%; height: auto; flex: 0 0 auto; object-fit: contain; }
+
+/* 이미지 그리드 — 가로 길이 유지(컨테이너 폭), 2-row 사이드바이사이드 레이아웃은 brand-story.css 에서 정의 */
+.brand-application__grid {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: clamp(8px, 0.83vw, 16px);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.brand-application__row { gap: clamp(8px, 0.83vw, 16px); }
+
+/* 태블릿/모바일은 콘텐츠 잘림 방지를 위해 자동 높이 + 단일 컬럼으로 복귀 */
+@media (max-width: 1024px) {
+  .brand-application {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: clamp(56px, 9vw, 80px) 0;
+    overflow: visible;
+  }
+  .brand-application__grid {
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+  /* Row 1 을 단일 컬럼으로 풀어 배너 + 정사각 2장이 자연 높이로 펼쳐지게 */
+  .brand-application__row--lead {
+    flex: 0 0 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+  .brand-application__row--tail {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .brand-application__row--lead .brand-application__item--banner,
+  .brand-application__row--tail .brand-application__item--paper,
+  .brand-application__row--tail .brand-application__item--box {
+    height: auto;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  .brand-application__col {
+    width: 100%;
+    height: auto;
+    flex-direction: row;                                    /* 정사각 2장 가로 배치 (태블릿 기존 형태) */
+  }
+  .brand-application__col .brand-application__item--square {
+    height: auto;
+    width: 100%;
+    flex: 1 1 0;
+  }
+}
+
+/* Store — INTERIOR 850px (모바일 548px) */
+.store-interior {
+  height: 850px;
+  min-height: 850px;
+  max-height: 850px;
+  margin-top: 0;
+  padding-top: 54px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 540px) {
+  .store-interior {
+    height: 548px;
+    min-height: 548px;
+    max-height: 548px;
+  }
+
+  .interior-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 263px;
+    min-height: 263px;
+    aspect-ratio: unset;
+    --slide-width: 242px;
+    --slide-gap: 12px;
+  }
+
+  .interior-carousel__track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .interior-carousel__slide {
+    flex: 0 0 242px;
+    width: 242px;
+    height: 263px;
+    aspect-ratio: unset;
+    border-radius: 22px;
+  }
+}
+
+/* 헤드/타이틀/서브카피 위치는 store.css 의 절대좌표 정의 사용 — 오버라이드 안 함 */
+
+.store-search {
+  min-height: var(--pro-section-h-lg);
+  max-height: none;
+  padding: var(--pro-section-y-lg) var(--pro-gutter) var(--pro-section-y-xl);
+  overflow: visible;
+}
+
+.store-search__head { margin: 0 auto var(--pro-head-content-gap); }
+.store-search__filters { margin-bottom: var(--pro-component-gap); gap: var(--pro-small-gap); }
+.store-search__stage,
+.store-search__body { width: min(var(--pro-max), 100%); }
+.store-search__map-wrap { border-radius: var(--radius-md); max-height: none; }
+
+.store-search__list {
+  left: var(--pro-component-gap);
+  top: var(--pro-component-gap);
+  width: clamp(300px, 24vw, 380px);
+  max-height: calc(100% - (var(--pro-component-gap) * 2));
+  padding: clamp(16px, 1.25vw, 24px);
+  border-radius: var(--radius-md);
+}
+
+/* 태블릿 — 매장 리스트: 지도 grid-area 기준 오버레이 (stage 그리드와 함께 동작) */
+@media (min-width: 541px) and (max-width: 1024px) {
+  .store-search__list {
+    grid-area: map;
+    top: 12px;
+    left: 16px;
+    width: min(300px, calc(100% - 32px));
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 24px);
+  }
+}
+
+.store-search__search-input { margin-bottom: var(--pro-small-gap); }
+.store-search__store-item { gap: var(--pro-small-gap); padding: clamp(14px, 1.04vw, 20px) 0; }
+.store-search__store-name { font-family: var(--font-paperlogy); font-size: var(--type-b2); line-height: 1.35; font-weight: 700; }
+.store-search__store-addr { font-family: var(--font-paperlogy); font-size: var(--type-caption); line-height: 1.45; font-weight: 500; }
+
+/* Main page sections */
+.poppi-event { padding: var(--pro-section-y-lg) 0 var(--pro-section-y-lg); }
+.poppi-event__head { margin-bottom: var(--pro-head-content-gap); }
+.poppi-event__inner { gap: var(--pro-component-gap); }
+
+.business-banner { margin: var(--pro-block-gap) auto; border-radius: var(--radius-md); }
+.business-banner__inner { min-height: clamp(220px, 13vw, 250px); padding: clamp(32px, 3.33vw, 64px) clamp(48px, 8.33vw, 160px); gap: var(--pro-text-image-gap); }
+.business-banner__text { gap: var(--pro-title-desc-gap); }
+
+.main-choice { min-height: var(--pro-section-h-md); height: auto; overflow: hidden; }
+.main-choice__inner { padding: var(--pro-section-y-md) 0 var(--pro-section-y-sm); }
+.main-choice__desc { margin-top: var(--pro-title-desc-gap); line-height: var(--lh-body); }
+.main-choice__cards { margin-top: var(--pro-head-content-gap); gap: var(--pro-component-gap); }
+.main-choice-card__image-wrap { margin-bottom: var(--pro-component-gap); }
+.main-choice-card__label { margin-bottom: var(--pro-small-gap); }
+.main-choice-card__title { margin-bottom: var(--pro-small-gap); }
+
+.poppi-review-section {
+  padding-top: var(--pro-section-y-xs);
+  padding-bottom: calc(var(--pro-section-y-xs) + var(--review-footer-bleed, 0px));
+}
+.review-stage { min-height: 560px; height: clamp(560px, 46.875vw, 900px); }
+
+/* Common footer — index(리뷰 섹션)는 style.css에서 푸터 겹침 처리 */
+body:not(:has(.poppi-review-section)) .poppi-footer-wrap,
+body:not(:has(.poppi-review-section)) .poppi-footer-wrap[data-common-footer] {
+  margin-top: 0;
+  overflow: visible;
+}
+
+.poppi-footer {
+  width: 100%;
+  max-width: 1920px;
+  min-height: var(--pro-footer-h);
+  aspect-ratio: auto;
+  padding: var(--pro-footer-top) var(--pro-footer-x) var(--pro-footer-bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(28px, 2.5vw, 48px);
+}
+
+.footer-info {
+  width: min(var(--pro-max), 100%);
+  margin-inline: auto;
+  grid-template-columns: minmax(220px, 1fr) minmax(240px, 1.2fr) minmax(220px, 1fr);
+  gap: clamp(48px, 8vw, 154px);
+  align-items: end;
+}
+
+.footer-rights {
+  width: min(var(--pro-max), 100%);
+  margin-inline: auto;
+  padding-top: 0;
+  grid-template-columns: minmax(240px, 1fr) auto minmax(240px, 1fr);
+  gap: clamp(32px, 6vw, 120px);
+}
+
+.footer-contact li,
+.footer-contact a,
+.menu-grid a,
+.footer-brand-copy,
+.footer-tagline,
+.footer-copyright { font-size: var(--type-caption); line-height: 1.75; }
+
+.poppi-footer h2 { font-size: clamp(16px, 1.04vw, 20px); margin-bottom: var(--pro-small-gap); }
+
+@media (max-width: 1024px) {
+  :root {
+    --pro-gutter: clamp(32px, 6vw, 64px);
+    --pro-section-y-lg: 96px;
+    --pro-section-y-xl: 112px;
+    --pro-head-content-gap: 48px;
+    --pro-text-image-gap: 56px;
+    --pro-block-gap: 72px;
+  }
+
+  .brand-roadmap { width: min(1293px, calc(100% - (var(--pro-gutter) * 2))); margin-top: clamp(72px, 8.85vw, 170px); }
+  .brand-identity__row { gap: var(--pro-component-gap); }
+  .interior-carousel__viewport { --slide-width: clamp(520px, 61.5vw, 640px); --slide-gap: 20px; }
+}
+
+@media (max-width: 1200px) and (min-width: 630px) {
+  body:not(:has(.poppi-review-section)) .poppi-footer-wrap,
+  body:not(:has(.poppi-review-section)) .poppi-footer-wrap[data-common-footer] {
+    margin-top: clamp(-56px, -6vw, -84px);
+    overflow: hidden;
+  }
+
+  body:has(.poppi-review-section) > .poppi-footer-wrap,
+  body:has(.poppi-review-section) > .poppi-footer-wrap[data-common-footer] {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 630px) {
+  /* 레이아웃은 footer.css — 타이포·간격만 동기 */
+  .poppi-footer h2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  .footer-contact li,
+  .footer-contact a,
+  .menu-grid a,
+  .footer-tagline,
+  .footer-brand-copy,
+  .footer-copyright {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2.1;
+  }
+
+  .footer-tagline,
+  .footer-brand-copy,
+  .footer-copyright {
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 629px) {
+  .poppi-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: clamp(400px, 105vw, 480px);
+    padding: clamp(48px, 14vw, 72px) 20px clamp(28px, 7vw, 36px);
+  }
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: clamp(18px, 5vw, 24px);
+  }
+
+  .footer-rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 5vw, 28px) 0 0;
+    gap: clamp(16px, 4vw, 22px);
+  }
+
+  .footer-info,
+  .footer-rights { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 28px; }
+  .footer-contact,
+  .footer-center,
+  .footer-menu,
+  .footer-brand-copy,
+  .footer-copyright { justify-self: center; text-align: center; align-items: center; width: min(360px, 100%); }
+  .footer-menu h2 { text-align: center; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pro-gutter: 24px;
+    --pro-section-y-sm: 56px;
+    --pro-section-y-md: 64px;
+    --pro-section-y-lg: 72px;
+    --pro-section-y-xl: 80px;
+    --pro-title-desc-gap: 14px;
+    --pro-head-content-gap: 32px;
+    --pro-text-image-gap: 36px;
+    --pro-block-gap: 48px;
+    --pro-component-gap: 24px;
+  }
+
+  .brand-title-section {
+    height: clamp(420px, 110vw, 750px);
+    min-height: 420px;
+    max-height: 750px;
+  }
+
+  .store-title-section { height: clamp(420px, 70vw, 600px); min-height: 420px; max-height: 600px; }
+  .brand-hello {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .brand-identity__row { display: grid; grid-template-columns: 1fr; }
+
+  .store-title-section { height: clamp(360px, 80vw, 480px); min-height: 360px; max-height: 480px; }
+
+  .brand-story-section,
+  .brand-identity,
+  .brand-application,
+  .store-search,
+  .main-choice,
+  .poppi-event { min-height: auto; }
+
+  .brand-roadmap { width: 100%; margin-top: clamp(48px, 12vw, 120px); aspect-ratio: auto; }
+  .brand-identity__colors { grid-template-columns: repeat(3, 1fr); }
+  .store-interior__head,
+  .store-search__head { width: min(var(--pro-max), calc(100% - (var(--pro-gutter) * 2))); }
+
+  .business-banner__inner,
+  .main-choice__cards { flex-direction: column; }
+  .business-banner__action { width: 100%; justify-content: space-between; gap: 24px; }
+  .business-banner__divider { display: none; }
+}
+
+/* 태블릿 INTERIOR 캐러셀 (541~768px) */
+@media (max-width: 768px) and (min-width: 541px) {
+  .interior-carousel__viewport {
+    --slide-width: clamp(360px, 61.46vw, 472px);
+    --slide-gap: 14px;
+    aspect-ratio: 472 / 216.5;
+  }
+}
+
+/* 모바일 STORE SEARCH — store.css 540px 규칙 유지 (768px 태블릿 규칙 덮어쓰기 방지) */
+@media (max-width: 540px) {
+  .store-search {
+    padding: 0;
+  }
+
+  .business-banner__inner,
+  .main-choice__cards { flex-direction: column; }
+  .business-banner__action { width: 100%; justify-content: space-between; gap: 24px; }
+  .business-banner__divider { display: none; }
+
+  .footer-drip { max-height: 48%; }
+  .poppi-footer { min-height: auto; padding: 96px 24px 40px; }
+  .menu-grid { grid-template-columns: 1fr 1fr; column-gap: 28px; }
+  .store-search__stage {
+    height: clamp(580px, 86svh, 820px);
+    min-height: 580px;
+  }
+
+  .store-search__map-body {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    height: 100%;
+  }
+
+  .store-search__map-wrap {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .store-search__filters {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .store-search__list {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .store-search__keyword {
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  :root { --pro-gutter: 20px; --pro-section-y-lg: 64px; --pro-section-y-xl: 72px; }
+  .brand-identity__typo-item { flex-direction: column; align-items: flex-start; }
+  .brand-identity__typo-aa { width: min(220px, 100%); }
+  .menu-grid { grid-template-columns: 1fr; gap: 0; }
+}

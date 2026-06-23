@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>POPPI DONUTS — Event &amp; News</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/images/favicon-64.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="../assets/css/commons.css?v=ria-regular-v1" />
+  <link rel="stylesheet" href="../assets/css/header.css" />
+  <link rel="stylesheet" href="../assets/css/footer.css?v=legal-modal-pc-height" />
+  <link rel="stylesheet" href="../assets/css/pages-common.css" />
+  <link rel="stylesheet" href="../assets/css/support.css" />
+  <link rel="stylesheet" href="../assets/css/event-news.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+
+  <style>
+    /* event-news page only — make the page background (the area behind the
+       footer's rounded top corners) white. The footer itself keeps its
+       original brown + drip image. */
+    body.event-news-page { background: #FFFFFF !important; }
+    body.event-news-page .site-wrap { background: #FFFFFF !important; }
+  </style>
+</head>
+<body class="event-news-page">
+  <div class="site-wrap">
+    <div data-include="site-header"></div>
+    <header class="page-top" aria-label="EVENT 키비주얼">
+      <h1 class="kv-title" data-text="EVENT">EVENT</h1>
+    </header>
+
+    <main>
+      <section class="event-news-section" id="eventNews" aria-label="이벤트 및 공지사항">
+        <div class="container">
+          <div class="event-news-head">
+            <nav class="event-news-tabs" aria-label="이벤트 및 공지사항 탭">
+              <div class="event-news-tabs__main" role="tablist" aria-label="카테고리">
+                <button
+                  type="button"
+                  class="event-news-tab is-active"
+                  role="tab"
+                  id="eventTabEvent"
+                  aria-selected="true"
+                  aria-controls="eventPanelEvent"
+                  data-main-tab="event"
+                >
+                  이벤트
+                </button>
+                <button
+                  type="button"
+                  class="event-news-tab"
+                  role="tab"
+                  id="eventTabNotice"
+                  aria-selected="false"
+                  aria-controls="eventPanelNotice"
+                  data-main-tab="notice"
+                >
+                  공지사항
+                </button>
+              </div>
+
+              <div
+                class="event-news-tabs__filters"
+                id="eventStatusFilters"
+                role="group"
+                aria-label="이벤트 상태 필터"
+              >
+                <button
+                  type="button"
+                  class="event-news-filter is-active"
+                  data-status-filter="all"
+                  aria-pressed="true"
+                >
+                  전체
+                </button>
+                <button
+                  type="button"
+                  class="event-news-filter"
+                  data-status-filter="ongoing"
+                  aria-pressed="false"
+                >
+                  진행중
+                </button>
+                <button
+                  type="button"
+                  class="event-news-filter"
+                  data-status-filter="ended"
+                  aria-pressed="false"
+                >
+                  종료
+                </button>
+              </div>
+            </nav>
+
+            <form class="event-search" id="eventSearchForm" role="search">
+              <label class="sr-only" for="eventSearch">이벤트 검색</label>
+              <input
+                id="eventSearch"
+                type="search"
+                name="q"
+                placeholder="검색어를 입력하세요."
+                autocomplete="off"
+              />
+              <button type="submit" aria-label="검색하기">
+                <img src="../assets/images/event-news/icon/search.svg" alt="" width="20" height="20" />
+              </button>
+            </form>
+          </div>
+
+          <div id="eventPanelEvent" role="tabpanel" aria-labelledby="eventTabEvent">
+            <p class="event-search-empty" id="eventSearchEmpty" hidden>검색 결과가 없습니다.</p>
+
+            <div class="event-card-grid" id="eventCardGrid" aria-label="이벤트 목록">
+            <article
+              class="event-card"
+              data-event-type="peach-donut"
+              data-keywords="복숭아 도넛 peach summer taste"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="10,000원 쿠폰(5명)"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-peach-donut.webp" alt="팝피 복숭아 도넛 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="maluu-goods"
+              data-keywords="말루 굿즈 MALUU 콜라보 구매 이벤트"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="단체주문 10% 할인"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-maluu-goods.webp" alt="팝피 말루 굿즈 증정 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="corn-cream-donut"
+              data-keywords="초당옥수수 크림 도넛 corn cream"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="10,000원 쿠폰(5명)"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-corn-cream-donut.webp" alt="팝피 초당옥수수 크림 도넛 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="penguin"
+              data-event-status="ended"
+              data-keywords="펭귄 penguin 도넛 이벤트"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="단체주문 10% 할인"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-penguin.webp" alt="팝피 펭귄 도넛 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="strawberry-donut"
+              data-event-status="ended"
+              data-keywords="딸기 러브 도넛 strawberry love donut"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="10,000원 쿠폰(5명)"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-strawberry-donut.webp" alt="팝피 딸기 러브 도넛 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="mulberry-donut"
+              data-event-status="ended"
+              data-keywords="오디 도넛 mulberry donut 신메뉴"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="단체주문 10% 할인"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-mulberry-donut.webp" alt="팝피 오디 도넛 신메뉴 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="hashtag"
+              data-keywords="해시태그 hashtag sns 인스타그램"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="10,000원 쿠폰(5명)"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-hashtag.webp" alt="팝피 도넛 해시태그 이벤트" />
+              </a>
+            </article>
+            <article
+              class="event-card"
+              data-event-type="group-order"
+              data-keywords="단체주문 할인 단체 주문"
+              data-event-period="2026.07.01~27"
+              data-event-announce="2026.08.01"
+              data-event-prize="단체주문 10% 할인"
+            >
+              <a href="#">
+                <img src="../assets/images/event-news/event-group-order.webp" alt="팝피 도넛 단체주문 할인 이벤트" />
+              </a>
+            </article>
+            </div>
+            <nav class="event-pagination" aria-label="이벤트 페이지 이동">
+              <button type="button" class="event-pagination__arrow event-pagination__arrow--prev" aria-label="이전 페이지">
+                <img src="../assets/images/event-news/icon/icon_arrow.svg" alt="" width="36" height="36" />
+              </button>
+              <button
+                type="button"
+                class="event-pagination__num is-active"
+                aria-current="page"
+                aria-label="1페이지"
+              >
+                1
+              </button>
+              <button type="button" class="event-pagination__arrow event-pagination__arrow--next" aria-label="다음 페이지">
+                <img src="../assets/images/event-news/icon/icon_arrow.svg" alt="" width="36" height="36" />
+              </button>
+            </nav>
+          </div>
+
+          <div
+            class="event-notice-panel"
+            id="eventPanelNotice"
+            role="tabpanel"
+            aria-labelledby="eventTabNotice"
+            hidden
+          >
+            <div class="event-notice-faq" aria-label="공지사항 목록">
+              <ul class="support-faq__list" role="list" data-notice-accordion>
+                <li class="support-faq__item">
+                  <button type="button" class="support-faq__question" aria-expanded="false" aria-controls="notice-answer-5">
+                    <span class="support-faq__q-num" aria-hidden="true">5</span>
+                    <span class="support-faq__q-text">SNS 인증 이벤트</span>
+                    <span class="support-faq__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="support-faq__answer" id="notice-answer-5" role="region" hidden>
+                    <p>
+                      POPPI DONUTS SNS 인증 이벤트 안내입니다. 인스타그램에 방문 인증 후 해시태그를 남겨 주시면
+                      추첨을 통해 기프티콘을 드립니다. 자세한 참여 방법은 매장 안내를 참고해 주세요.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="support-faq__item">
+                  <button type="button" class="support-faq__question" aria-expanded="false" aria-controls="notice-answer-4">
+                    <span class="support-faq__q-num" aria-hidden="true">4</span>
+                    <span class="support-faq__q-text">시즌 메뉴 종료 일정 안내</span>
+                    <span class="support-faq__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="support-faq__answer" id="notice-answer-4" role="region" hidden>
+                    <p>
+                      시즌 한정 메뉴 판매가 종료됩니다. 이용 고객 여러분께 감사드리며, 종료 일정 이후에는
+                      해당 메뉴 주문이 불가합니다. 매장별 재고 상황에 따라 조기 종료될 수 있습니다.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="support-faq__item">
+                  <button type="button" class="support-faq__question" aria-expanded="false" aria-controls="notice-answer-3">
+                    <span class="support-faq__q-num" aria-hidden="true">3</span>
+                    <span class="support-faq__q-text">공휴일 운영시간 안내</span>
+                    <span class="support-faq__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="support-faq__answer" id="notice-answer-3" role="region" hidden>
+                    <p>
+                      공휴일 기간 POPPI DONUTS 매장 운영시간이 평일과 다르게 운영됩니다. 방문 전 가까운
+                      매장의 운영 시간을 확인해 주시기 바랍니다. 문의사항은 고객센터로 연락 주세요.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="support-faq__item">
+                  <button type="button" class="support-faq__question" aria-expanded="false" aria-controls="notice-answer-2">
+                    <span class="support-faq__q-num" aria-hidden="true">2</span>
+                    <span class="support-faq__q-text">개인정보처리방침 변경 안내</span>
+                    <span class="support-faq__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="support-faq__answer" id="notice-answer-2" role="region" hidden>
+                    <p>POPPi DONUTS 개인정보처리방침 개정에 대해 안내 드립니다.</p>
+                    <p>
+                      주요 개정 내용은 아래 항목을 참고하여 주시기 바라며, 이용약관 페이지에서 보다 상세한
+                      내용 확인이 가능합니다.
+                    </p>
+                    <p>서비스 이용에 불편이 없으시길 바랍니다.</p>
+                    <p>항상 POPPi DONUTS를 사랑해주시는 고객님께 감사드립니다.</p>
+                    <p><strong>1. 일시</strong></p>
+                    <ul>
+                      <li>공지일 : 2026년 1월 12일 (월)</li>
+                      <li>시행일 : 2026년 1월 19일 (월)</li>
+                    </ul>
+                    <p><strong>2. 개정 항목 및 개정 내용</strong></p>
+                    <p>
+                      [개인정보처리방침] 11. 개인정보의 위탁처리 : 수탁, 재수탁 업체 및 위탁하는 업무의
+                      내용에 대한 추가
+                    </p>
+                  </div>
+                </li>
+
+                <li class="support-faq__item">
+                  <button type="button" class="support-faq__question" aria-expanded="false" aria-controls="notice-answer-1">
+                    <span class="support-faq__q-num" aria-hidden="true">1</span>
+                    <span class="support-faq__q-text">홈페이지, 앱 서비스 점검 공지</span>
+                    <span class="support-faq__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="support-faq__answer" id="notice-answer-1" role="region" hidden>
+                    <p>
+                      보다 안정적인 서비스 제공을 위해 홈페이지 및 앱 점검이 진행됩니다. 점검 시간 동안
+                      일부 기능 이용이 제한될 수 있으니 양해 부탁드립니다. 점검 완료 후 정상 이용 가능합니다.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-include="site-footer"></div>
+  </div>
+
+  <div
+    class="event-modal"
+    id="eventModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="eventModalTitle"
+    hidden
+  >
+    <div class="event-modal__backdrop" aria-hidden="true"></div>
+
+    <div class="event-modal__scroller" data-event-modal-close>
+      <div class="event-modal__content">
+        <button
+          type="button"
+          class="event-modal__close"
+          aria-label="이벤트 닫기"
+          data-event-modal-close
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="event-modal__dialog" role="document">
+          <h2 class="sr-only" id="eventModalTitle">이벤트 상세 보기</h2>
+
+          <img
+            class="event-modal__image"
+            id="eventModalImage"
+            src=""
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 공통 헤더/푸터 컴포넌트 — main.js 보다 먼저 로드 -->
+  <script src="../assets/js/components/site-header.js"></script>
+  <script src="../assets/js/components/site-ready-modal.js?v=ready-modal-v2"></script>
+  <script src="../assets/js/components/site-footer.js?v=legal-modal-ios"></script>
+  <script src="../assets/js/main.js?v=socials-v4"></script>
+  <script src="../assets/js/event-news.js"></script>
+  </body>
+</html>

@@ -1,0 +1,733 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI COMMONS
+   - reset
+   - font registration
+   - color / typography tokens
+   ========================================================= */
+
+/* Ria Sans (리아체) — 타이틀/디스플레이용
+   롯데GRS 공식 배포 3종(Regular / Bold / ExtraBold)을 그대로 등록합니다.
+   weight 400 = Regular, 700 = Bold, 800 이상 = ExtraBold 로 매칭됩니다. */
+@font-face {
+  font-family: "Ria Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Ria Sans Regular"),
+       local("RiaSans Regular"),
+       local("RiaSans-Regular"),
+       local("Ria Sans"),
+       local("RiaSans"),
+       url("../fonts/RiaSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ria Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Ria Sans Bold"),
+       local("RiaSans Bold"),
+       local("RiaSans-Bold"),
+       url("../fonts/RiaSans-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ria Sans";
+  font-style: normal;
+  font-weight: 800 900;
+  font-display: swap;
+  src: local("Ria Sans ExtraBold"),
+       local("Ria Sans Extra Bold"),
+       local("RiaSans ExtraBold"),
+       local("RiaSans-ExtraBold"),
+       url("../fonts/RiaSans-ExtraBold.woff2") format("woff2");
+}
+
+/* Paperlogy — 본문/캡션/푸터/버튼용
+   중요: 기존 ZIP에는 폰트 파일이 들어있지 않아 ../fonts 경로만 두면 적용되지 않습니다.
+   그래서 로컬 파일 → CDN 순서로 폴백을 걸어 실무 배포/로컬 확인 모두 가능하게 수정했습니다. */
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Paperlogy Regular"),
+       local("Paperlogy"),
+       url("../fonts/Paperlogy-4Regular.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-4Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Paperlogy Medium"),
+       url("../fonts/Paperlogy-5Medium.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-5Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local("Paperlogy SemiBold"),
+       url("../fonts/Paperlogy-6SemiBold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-6SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Paperlogy Bold"),
+       url("../fonts/Paperlogy-7Bold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-7Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: local("Paperlogy ExtraBold"),
+       url("../fonts/Paperlogy-8ExtraBold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-8ExtraBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Paperlogy";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local("Paperlogy Black"),
+       url("../fonts/Paperlogy-9Black.woff2") format("woff2"),
+       url("../fonts/Paperlogy-9Block.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff2") format("woff2");
+}
+
+/* 기존 프로젝트에서 var(--font-block)이 참조하던 별칭 유지 */
+@font-face {
+  font-family: "Paperlogy-9Block";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local("Paperlogy Black"),
+       url("../fonts/Paperlogy-9Block.woff2") format("woff2"),
+       url("../fonts/Paperlogy-9Black.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff2") format("woff2");
+}
+
+:root {
+  /* Breakpoints (reference) */
+  --bp-xs: 480px;
+  --bp-sm: 768px;
+  --bp-md: 1024px;
+  --bp-lg: 1280px;
+  --bp-xl: 1920px;
+
+  /* Font families */
+  --font-ria: "Ria Sans", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-block: "Paperlogy-9Block", "Paperlogy", "Arial Black", "Impact", system-ui, sans-serif;
+  --font-paperlogy: "Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  --font-pretendard: "Pretendard", "Paperlogy", "Noto Sans KR", system-ui, sans-serif;
+  --font-system: "Pretendard", "Paperlogy", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* main-choice / business-banner aliases (POPPI_Donut 시안 호환) */
+  --font-heading: "Ria Sans", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-body: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+
+  /* =====================================================
+     POPPI Color System (D1) — 사용자 컬러 가이드
+     기준: Poppi Orange / Poppi Yellow / Apricot BG / Ivory BG / Poppi Pink / Brown Dark
+     각 컬러는 50–500 스케일로 정리. 모든 신규 코드는 이 토큰을 사용.
+     ===================================================== */
+  --poppi-orange: #ED6325;
+  --poppi-yellow: #FBA720;
+  --apricot-bg:   #FDE2CF;
+  --ivory-bg:     #FDFAFA;
+  --poppi-pink:   #FFADC7;
+  --brown-dark:   #452319;
+
+  /* Poppi Orange (50→500) */
+  --poppi-orange-50:  #FFF0E9;
+  --poppi-orange-100: #FFDCCF;
+  --poppi-orange-200: #FFBCA8;
+  --poppi-orange-300: #FF935F;
+  --poppi-orange-400: #ED6325;
+  --poppi-orange-500: #C24814;
+
+  /* Poppi Yellow (50→500) */
+  --poppi-yellow-50:  #FFF6E2;
+  --poppi-yellow-100: #FFEAB3;
+  --poppi-yellow-200: #FFD480;
+  --poppi-yellow-300: #FFC24D;
+  --poppi-yellow-400: #FBA720;
+  --poppi-yellow-500: #C9850D;
+
+  /* Apricot BG (50→500) */
+  --apricot-bg-50:  #FFF6F0;
+  --apricot-bg-100: #FDEEDD;
+  --apricot-bg-200: #FBDDBF;
+  --apricot-bg-300: #F8CFA0;
+  --apricot-bg-400: #FDE2CF;
+  --apricot-bg-500: #D9B98F;
+
+  /* Ivory BG (50→500) */
+  --ivory-bg-50:  #FDFAFA;
+  --ivory-bg-100: #FFF9E8;
+  --ivory-bg-200: #FFF2CD;
+  --ivory-bg-300: #FFE7A6;
+  --ivory-bg-400: #F6DA8C;
+  --ivory-bg-500: #E6CF88;
+
+  /* Poppi Pink (50→500) */
+  --poppi-pink-50:  #FFF3F6;
+  --poppi-pink-100: #FFE3EB;
+  --poppi-pink-200: #FFCADA;
+  --poppi-pink-300: #FFADC7;
+  --poppi-pink-400: #FF89AE;
+  --poppi-pink-500: #E96D94;
+
+  /* Brown Dark (50→500) */
+  --brown-dark-50:  #F6EFED;
+  --brown-dark-100: #EADFD8;
+  --brown-dark-200: #D6C4B9;
+  --brown-dark-300: #B7917E;
+  --brown-dark-400: #845241;
+  --brown-dark-500: #452319;
+
+  /* ----- Legacy alias 호환 — 컬러 가이드 토큰으로 통일 -----
+     기존 변수 이름을 유지하되 값은 가이드와 정합되도록 리매핑.
+     - --color-poppi-orange #f26b21 → #ED6325 (가이드 Orange 400)
+     - --color-brown-dark   #452219 → #452319 (가이드 Brown 500)
+     - --color-poppi-brown  #6b2a17 → Brown 500 으로 통합
+     ----------------------------------------------------- */
+  --color-poppi-orange: var(--poppi-orange);
+  --color-poppi-brown:  var(--brown-dark);
+  --color-donut-brown:  var(--brown-dark);
+  --color-cream-bg:     var(--apricot-bg);
+  --color-donut-bg:     var(--apricot-bg-100);
+  --color-brown-light:  var(--brown-dark-400);
+  --color-brown-dark:   var(--brown-dark);
+  --color-white:        #ffffff;
+
+  /* Fluid typography & layout */
+  --type-poppi-hero-title: clamp(2.25rem, 4.2vw + 1rem, 4rem);
+  --type-poppi-hero-body: clamp(1rem, 1.2vw + 0.75rem, 1.5rem);
+  --type-poppi-hero-button: clamp(1.125rem, 1vw + 0.85rem, 1.5rem);
+  --weight-poppi-hero-title: 900;
+  --weight-poppi-hero-body: 500;
+  --weight-poppi-hero-button: 800;
+
+  --type-donut-poppi: clamp(4.5rem, 12vw, 12.5rem);
+  --type-donut-arc: clamp(2.5rem, 5vw, 6rem);
+  --type-donut-line: clamp(2rem, 4.5vw, 4rem);
+  --weight-brand-heavy: 800;
+
+  /* 1920px 기준 200px (= 12.5rem) Paperlogy-9Block */
+  --type-flavor-marquee: clamp(4rem, 14vw, 12.5rem);
+  --weight-flavor-marquee: 900;
+
+  /* Flavor colors — 시각 순서: melon(1) / corn(2) / peach(3) / blueberry(4) */
+  --melon-bg: #F5F3A4;
+  --melon-text: #7ED75E;
+  --corn-bg: #FFF2CF;
+  --corn-text: #FFC01C;
+  --peach-bg: #FFEEF7;
+  --peach-text: #FF8CC9;
+  --bb-bg: #F3DEFF;
+  --bb-text: #CA69FF;
+
+  --poppi-hero-height: clamp(520px, 88dvh, 662px);
+  --donut-stage-w: 1920px;
+  --donut-stage-h: 850px;
+  --flavor-donut-width: min(830px, 92vw);
+
+  /* =====================================================
+     Mobile-only background image slots
+     실제 이미지 받으면 변수에 url("...") 만 넣으면 됨.
+     비어있으면(none) fallback color 만 노출.
+     ===================================================== */
+  --poppi-hero-mobile-bg: none;       /* 예: url("../images/main-image/poppi-hero-mobile.png") */
+  --main-choice-mobile-bg: none;      /* 예: url("../images/main-image/main-choice-mobile.png") */
+
+  /* =====================================================
+     Typography System — Style Guide (PC / TA / MO)
+     PC  : default (:root)
+     TA  : max-width 1024px
+     MO  : max-width 768px
+
+     Ria Sans     h1 ExtraBold(800) / h2–h4 Bold(700)
+     Paperlogy    b1·b2 Bold(700) / Regular(400) / caption Regular(400)
+     Heading LH   1.10 ~ 1.30  → --lh-heading: 1.20
+     Body·Caption LH              → --lh-body: 1.60
+     ===================================================== */
+  /* PC */
+  --type-h1:      80px;
+  --type-h2:      64px;
+  --type-h3:      48px;
+  --type-h4:      32px;
+  --type-b1:      24px;
+  --type-b2:      20px;
+  --type-caption: 16px;
+
+  --weight-h1:       800;
+  --weight-h2:       700;
+  --weight-h3:       700;
+  --weight-h4:       700;
+  --weight-body-bold: 700;
+  --weight-body-reg:  400;
+
+  --lh-heading: 1.2;
+  --lh-body:    1.6;
+}
+
+
+/* =========================================================
+   Production layout tokens
+   - 섹션/컨테이너/콘텐츠 간격을 한 곳에서 조정합니다.
+   - 새 섹션을 만들 때는 .site-section + .site-container 조합을 기본으로 사용하세요.
+   ========================================================= */
+:root {
+  /* Desktop grid guide
+     - 1920 기준 12 columns
+     - column gutter: 24px
+     - 1920 viewport 기준 page margin: 약 240px
+     - usable max width: 1440px
+     이 값만 바꾸면 Brand / Store / 공통 섹션 간격이 함께 조정됩니다. */
+  --site-max: 1440px;
+  --site-wide: 1720px;
+  --site-gutter: max(24px, calc((100vw - var(--site-max)) / 2));
+  --grid-gutter: 24px;
+  --grid-columns: 12;
+
+  /* Section vertical rhythm */
+  --section-y-xs: clamp(48px, 4.5vw, 86px);
+  --section-y-sm: clamp(72px, 6.25vw, 120px);
+  --section-y-md: clamp(96px, 7.5vw, 144px);
+  --section-y-lg: clamp(110px, 8.333vw, 160px);
+  --section-y-xl: clamp(120px, 9.375vw, 180px);
+
+  /* Between title / description / media */
+  --section-gap-tight: clamp(40px, 4.1667vw, 80px);
+  --section-gap-base: clamp(64px, 6.25vw, 120px);
+  --section-gap-loose: clamp(88px, 8.333vw, 160px);
+  --heading-sub-gap: clamp(24px, 2.45vw, 47px);
+  --heading-media-gap: clamp(36px, 3.125vw, 60px);
+
+  --content-gap-xs: clamp(10px, 0.833vw, 16px);
+  --content-gap-sm: clamp(16px, 1.25vw, 24px);
+  --content-gap-md: clamp(24px, 2.083vw, 40px);
+  --content-gap-lg: clamp(40px, 3.333vw, 64px);
+  --content-gap-xl: clamp(64px, 5.208vw, 100px);
+
+  --radius-sm: 14px;
+  --radius-md: clamp(18px, 1.56vw, 30px);
+  --radius-lg: clamp(24px, 2.604vw, 50px);
+}
+
+.site-container {
+  width: min(var(--site-max), calc(100% - (var(--site-gutter) * 2)));
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.site-container--wide {
+  width: min(var(--site-wide), calc(100% - (var(--site-gutter) * 2)));
+}
+
+.site-section {
+  position: relative;
+  padding-block: var(--section-y-md);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--content-gap-xs);
+  margin-bottom: var(--content-gap-lg);
+  text-align: center;
+}
+
+.section-kicker {
+  font-family: var(--font-body);
+  font-size: var(--type-caption);
+  font-weight: 700;
+  line-height: var(--lh-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: var(--type-h2);
+  font-weight: var(--weight-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+}
+
+.section-desc {
+  max-width: 680px;
+  font-family: var(--font-body);
+  font-size: var(--type-b2);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--content-gap-md);
+}
+
+.flow > * + * {
+  margin-top: var(--flow-gap, var(--content-gap-sm));
+}
+
+.media-frame {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.media-frame > img,
+.media-frame > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+@media (max-width: 1024px) {
+  :root {
+    /* TA — Typography */
+    --type-h1:      56px;
+    --type-h2:      44px;
+    --type-h3:      36px;
+    --type-h4:      26px;
+    --type-b1:      20px;
+    --type-b2:      16px;
+    --type-caption: 14px;
+
+    --site-gutter: clamp(32px, 6vw, 64px);
+    --section-y-sm: 72px;
+    --section-y-md: 88px;
+    --section-y-lg: 104px;
+    --section-gap-base: 72px;
+    --heading-sub-gap: 24px;
+    --heading-media-gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    /* MO — Typography */
+    --type-h1:      40px;
+    --type-h2:      32px;
+    --type-h3:      26px;
+    --type-h4:      20px;
+    --type-b1:      18px;
+    --type-b2:      15px;
+    --type-caption: 13px;
+
+    --site-gutter: 24px;
+    --grid-gutter: 16px;
+    --section-y-xs: 40px;
+    --section-y-sm: 56px;
+    --section-y-md: 64px;
+    --section-y-lg: 72px;
+    --section-gap-tight: 32px;
+    --section-gap-base: 48px;
+    --section-gap-loose: 64px;
+    --heading-sub-gap: 16px;
+    --heading-media-gap: 28px;
+    --content-gap-lg: 32px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  /* 앵커 이동 시 부드러운 스크롤 — GSAP ScrollTrigger와 무관한 페이지 간 hash 이동에만 적용됨 */
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: var(--font-body);
+  line-height: var(--lh-body);
+  background: var(--corn-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.35s ease;
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   섹션 최대 크기 캡 — 1920 × 850
+   - 모든 index 메인 섹션은 최대 850px 까지만 표시(콘텐츠가 더 길면 클립).
+   - 자연 높이가 850보다 짧은 섹션(예: 창업 배너)은 자기 높이 유지 → 빈 공간 없음.
+   - 강제 비율(aspect-ratio) 은 KV(.donut-motion-section) 처럼 내부 %로
+     절대 좌표 배치를 사용하는 섹션에만 별도 지정.
+   - 예외(캡 해제, 자연 높이 100%):
+     · .vscroll-drive(맛 슬라이더 핀 영역, 415vh 필요)
+     · .brand-roadmap(브랜드 타임라인 1920×1420 캔버스)
+     · 서브 페이지 콘텐츠 섹션(support-*, store-*, brand-*)
+   ========================================================= */
+main > section,
+.poppi-footer-wrap {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+main > section {
+  max-width: 1920px;
+}
+
+/* 기존 전역 max-height 클리핑 제거.
+   섹션이 잘리는 문제를 막고, 높이는 각 섹션/반응형 규칙에서 관리합니다. */
+.poppi-footer-wrap {
+  overflow: visible;
+}
+
+/* =========================================================
+   Utility classes (token shortcuts)
+   - HTML에서 클래스로 바로 적용
+   ========================================================= */
+
+/* Font family */
+.font-ria { font-family: var(--font-ria); }
+.font-paperlogy { font-family: var(--font-paperlogy); }
+.font-block { font-family: var(--font-block); }
+.font-system { font-family: var(--font-system); }
+
+/* Font size (fixed) */
+.text-32 { font-size: 32px; }
+
+/* Stage-relative font size — 1920px 기준값, 작은 화면에서 비례 축소 */
+.text-stage-32 { font-size: clamp(11px, 1.67vw, 32px); }
+.text-stage-48 { font-size: clamp(18px, 2.5vw, 48px); }
+.text-stage-24 { font-size: clamp(12px, 1.25vw, 24px); }
+
+/* Font weight */
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-700 { font-weight: 700; }
+.fw-800 { font-weight: 800; }
+.fw-900 { font-weight: 900; }
+
+/* Text color */
+.text-poppi-brown { color: var(--color-poppi-brown); }
+.text-donut-brown { color: var(--color-donut-brown); }
+.text-poppi-orange { color: var(--color-poppi-orange); }
+.text-brown-light { color: var(--color-brown-light); }
+.text-brown-dark { color: var(--color-brown-dark); }
+.text-white { color: var(--color-white); }
+
+/* Background color */
+.bg-cream { background-color: var(--color-cream-bg); }
+.bg-donut { background-color: var(--color-donut-bg); }
+.bg-white { background-color: var(--color-white); }
+
+/* Text align */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Letter spacing */
+.tracking-tight { letter-spacing: -0.02em; }
+.tracking-normal { letter-spacing: 0; }
+.tracking-wide { letter-spacing: 0.04em; }
+
+/* Line height */
+.leading-none { line-height: 1; }
+.leading-tight { line-height: 1.15; }
+
+/* =========================================================
+   ORDER 04. Event receipt tokens
+   ========================================================= */
+
+:root {
+  /* event 섹션 높이 = bakery-bg 이미지 높이와 동일 (반응형 비율) */
+  --event-section-height: var(--event-bakery-bg-height);
+  --event-bakery-bg-height: clamp(580px, calc(1793 * 100vw / 1920), 1793px);
+
+  --color-brown: #742b17;
+
+  --font-display: "Ria Sans", "RiaSans", "Ria Sans Bold", "Pretendard", "Noto Sans KR", Arial, sans-serif;
+
+  --event-title-size: clamp(4.5rem, 12vw, 12.5rem);
+  --event-title-weight: 700;
+
+  --content-top: clamp(4rem, 10vw, 9.375rem);
+  --event-title-slot-gap: clamp(3rem, 6vw, 6.875rem);
+  --event-pin-offset: clamp(7rem, 22vw, 22.5rem);
+  /* 영수증 전체 출력 자동 재생 시간(초) — 스크롤과 무관, 값이 클수록 느림 */
+  --event-receipt-auto-duration-sec: 8.5;
+  /* 자동 출력 완료 후, 이 만큼 스크롤하면 영수증이 다시 위로 들어감(되감기) */
+  --event-receipt-retract-scroll: clamp(480px, 85vw, 1100px);
+  /* 트리거보다 위로 이만큼 올라가면 자동 출력 리셋(다시 내려오면 재생) */
+  --event-trigger-reset-gap: 140px;
+
+  --slot-width: min(54vw, 1040px);
+  --slot-min-width: 0px;
+
+  --receipt-width-ratio: 0.58;
+  --receipt-max-width: min(520px, 72vw);
+  --receipt-start-height: 0px;
+  --receipt-max-visible: min(1181px, 72vh);
+  --receipt-step-duration: 0.22s;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --slot-width: min(88vw, 520px);
+    --event-receipt-auto-duration-sec: 7.5;
+    --event-pin-offset: clamp(5rem, 18vw, 12.5rem);
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --slot-width: min(94vw, 400px);
+    --receipt-max-visible: min(749px, 68vh);
+    --event-receipt-auto-duration-sec: 7s;
+    --event-receipt-retract-scroll: clamp(360px, 120vw, 520px);
+  }
+}
+
+/* =========================================================
+   POPPI_Donut 시안 호환용 타이포 유틸 클래스
+   (main-choice 섹션의 .h1/.h3-b/.p2-r 등에서 사용)
+   * 기존 h1, h2 셀렉터는 건드리지 않고 클래스만 정의
+   ========================================================= */
+
+/* Figma 1212:829 타이포그래피 시스템 토큰 사용 (PC/TA/MO)
+   기존 .h1 ~ .p2-r 유틸리티를 시스템 토큰에 매핑 */
+.h1 {
+  font-family: var(--font-heading);
+  font-size: var(--type-h1);
+  font-weight: var(--weight-h1);
+  line-height: var(--lh-heading);
+}
+
+.h2 {
+  font-family: var(--font-heading);
+  font-size: var(--type-h2);
+  font-weight: var(--weight-h2);
+  line-height: var(--lh-heading);
+}
+
+.h3-b {
+  font-family: var(--font-heading);
+  font-size: var(--type-h3);
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-heading);
+}
+
+.h3-r {
+  font-family: var(--font-heading);
+  font-size: var(--type-h3);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-heading);
+}
+
+.h4 {
+  font-family: var(--font-heading);
+  font-size: var(--type-h4);
+  font-weight: var(--weight-h4);
+  line-height: var(--lh-heading);
+}
+
+.p1-b {
+  font-family: var(--font-body);
+  font-size: var(--type-b1);
+  font-weight: var(--weight-body-bold);
+  line-height: var(--lh-body);
+}
+
+.p1-r {
+  font-family: var(--font-body);
+  font-size: var(--type-b1);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-body);
+}
+
+.p2-b {
+  font-family: var(--font-body);
+  font-size: var(--type-b2);
+  font-weight: var(--weight-body-bold);
+  line-height: var(--lh-body);
+}
+
+.p2-r {
+  font-family: var(--font-body);
+  font-size: var(--type-b2);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-body);
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: var(--type-caption);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-body);
+}
+
+/* =========================================================
+   PLATE NAV / PAGE HEADER  -> assets/css/header.css 로 분리됨
+   ========================================================= */
+

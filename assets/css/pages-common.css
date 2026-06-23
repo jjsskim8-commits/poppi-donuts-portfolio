@@ -1,0 +1,90 @@
+﻿@charset "utf-8";
+
+/* =========================================================
+   POPPI Sub Pages — Common
+   - 모든 서브 페이지(.page-wrap, [data-reveal], [data-fade], .sr-only)에서 공유
+   - 색상/폰트 토큰
+   - 헤더(.page-header)는 header.css 에서 처리됨
+   ========================================================= */
+
+:root {
+  --donut-orange: #ED6325;
+  --donut-brown-dark: #452219;
+  --donut-brown-light: #823c1d;
+  --donut-bg-cream: #fde2cf;
+  --donut-ivory: #fffcf6;
+  --donut-yellow: #fef3d7;
+  --donut-pink-hero: #fdaec0;
+  --donut-brown-qa: #8f5a46;
+  --font-ria: "Ria Sans", "Paperlogy", sans-serif;
+  --font-paperlogy: "Paperlogy", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-pretendard: "Pretendard", "Paperlogy", "Noto Sans KR", sans-serif;
+}
+
+/* ---------- 페이지 공통 ---------- */
+.page-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+.page-title {
+  text-align: center;
+  font-family: var(--font-ria);
+  font-weight: 700;
+  letter-spacing: 0.012em;
+  margin: 0;
+}
+
+/* =========================================================
+   Reveal on scroll — 모든 서브 페이지 공유
+   ========================================================= */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal][data-reveal-direction="left"] {
+  transform: translateX(-40px);
+}
+
+[data-reveal][data-reveal-direction="right"] {
+  transform: translateX(40px);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* 순수 페이드인 (이동 없음) — 브랜드스토리 타임라인 마커/타이틀 전용 */
+[data-fade] {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity;
+}
+
+[data-fade].is-revealed {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-fade] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

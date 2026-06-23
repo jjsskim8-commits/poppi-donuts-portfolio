@@ -1,0 +1,611 @@
+@charset "utf-8";
+
+/* =========================================================
+   POPPI — sections-new.css
+   03. STORE EXPERIENCE
+   04. EVENT 캐러셀 (분리 섹션)
+   04b. EVENT 캘린더 (분리 섹션)
+   05. MEMBERSHIP BANNER
+========================================================= */
+
+
+/* =========================================================
+   03. BRAND STORY (구 STORE EXPERIENCE)
+   PC : 브랜드 키비주얼(베이지 그리드 + 도넛) 배경, 텍스트 좌측, 부드러운 톤
+   MO : min-height 360px, 텍스트+CTA 중앙
+========================================================= */
+
+.store-xp {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* poppi-brand 키비주얼 풀폭 배경 — 텍스트는 정중앙 오버레이 */
+  background-color: #FFE9DD;
+  background-image: url("../images/hero/poppi-brand.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* 배경 dim — 키비주얼 위 살짝 어둡게 깔아 텍스트 가독성 확보
+   상단·하단을 더 강하게(컨텐츠 영역 중앙은 약하게) 한 vertical gradient 로
+   이미지의 디테일을 죽이지 않으면서 다크 브라운 텍스트가 또렷이 떠오르게 함. */
+.store-xp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 12, 10, 0.18) 0%,
+    rgba(255, 248, 234, 0.55) 35%,
+    rgba(255, 248, 234, 0.65) 65%,
+    rgba(20, 12, 10, 0.18) 100%
+  );
+}
+
+.store-xp__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* 위·아래 마진 정확히 0 으로 잡고, 부모(.store-xp) flex 가 수직 중앙으로 보냄
+     gap 으로만 요소 간격 조절 → 위아래 어느 쪽으로도 쏠리지 않음 */
+  gap: clamp(10px, 1.2vw, 16px);
+  margin: 0 auto;
+  padding: 0;
+  width: min(1280px, calc(100% - 80px));
+}
+
+.store-xp__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  /* 디자인 시스템 caption 토큰: PC 16 / TA 14 / MO 13 */
+  font-size: var(--type-caption);
+  font-weight: var(--weight-body-bold);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--poppi-orange, #ED6325);
+}
+
+.store-xp__title {
+  margin: 0; /* 위아래 마진 0 — gap 만으로 간격 제어 */
+  font-family: var(--font-heading);
+  /* 디자인 시스템 h3 토큰: PC 48 / TA 36 / MO 26 — 다른 메인 섹션 헤딩과 통일 */
+  font-size: var(--type-h3);
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.025em;
+  color: #452219;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.store-xp__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  /* 디자인 시스템 b2 토큰: PC 20 / TA 16 / MO 15 */
+  font-size: var(--type-b2);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-body);
+  color: #6B4A3D;
+}
+
+/* CTA: 브랜드 스토리 톤 — 따뜻한 브라운 fill 버튼 */
+.store-xp__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: clamp(8px, 1vw, 14px) 0 0;
+  padding: 14px 40px;
+  border-radius: 999px;
+  border: 2px solid #452219;
+  background: #452219;
+  color: #FFF8EA;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.04vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(69, 35, 25, 0.18);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+  width: 100%;
+  max-width: 320px;
+}
+
+.store-xp__cta:hover {
+  background: #FFFFFF;
+  color: #452219;
+  border-color: #452219;
+  box-shadow: 0 10px 22px rgba(69, 35, 25, 0.22);
+  transform: translateY(-1px);
+}
+
+.store-xp__cta-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.store-xp__cta:hover .store-xp__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ---- PC + TA (≥769px): 좌측 정렬
+   - 배경 키비주얼의 도넛/POPPI DONUTS 레터링이 우측에 위치 → 텍스트는 좌측에 배치
+   - 1280 inner 컨테이너는 그대로 가운데 정렬, 그 안에서만 좌측 정렬
+   - 텍스트/CTA 가 우측 비주얼을 가리지 않도록 폭 제한 (최대 50% / 520px)
+   - dim 도 horizontal 그라데이션으로 변경 → 좌측 더 밝은 크림(텍스트 가독성), 우측은 비주얼 노출 */
+@media (min-width: 769px) {
+  .store-xp__inner {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .store-xp__eyebrow,
+  .store-xp__title,
+  .store-xp__desc {
+    max-width: min(52%, 520px);
+  }
+
+  .store-xp__cta {
+    align-self: flex-start;
+    width: auto;
+    max-width: none;
+    padding: 14px 36px;
+  }
+
+  /* dim — 텍스트(좌)는 살짝 더 밝은 크림 워시, 우측은 비주얼 노출 */
+  .store-xp::before {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 248, 234, 0.62) 0%,
+      rgba(255, 248, 234, 0.42) 40%,
+      rgba(255, 248, 234, 0.18) 70%,
+      rgba(255, 248, 234, 0.05) 100%
+    );
+  }
+}
+
+/* MO (≤768px) */
+@media (max-width: 768px) {
+  .store-xp {
+    height: auto;
+    min-height: 420px;
+    padding: 48px 0 60px;
+    /* PC와 동일한 풀폭 배경 + 텍스트 정중앙 (align-items/justify-content 는 base 에서 상속) */
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .store-xp__inner {
+    width: calc(100% - 40px);
+    gap: 12px;
+  }
+
+  .store-xp__title {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+
+  .store-xp__desc br {
+    display: none;
+  }
+
+  .store-xp__cta {
+    margin-top: 14px;
+    max-width: 260px;
+    font-size: 14px;
+    padding: 13px 32px;
+  }
+}
+
+
+/* =========================================================
+   04. EVENT 섹션
+   - "EVENT" 헤더 좌 + "전체보기" 우 (기존 center → flex로 전환)
+   - 캐러셀: style.css 원본 peek 슬라이더 유지
+   - 캘린더 날짜 hover 원 효과
+========================================================= */
+
+/* 헤더: 기존 text-align:center 오버라이드 → 타이틀 좌 / 전체보기 우 */
+/* EVENT 타이틀 정중앙 (이제 head 안에는 타이틀만) */
+.poppi-event__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* "전체보기" 링크 row — 카드 영역 폭과 동일하게 잡고 우측 정렬
+   (PC/TA 가로 2열 배치 시 캘린더 카드 우측 모서리에 자연스럽게 붙음) */
+.poppi-event__more-row {
+  width: min(1202px, calc(100% - 80px));
+  margin: 0 auto clamp(10px, 1vw, 16px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 전체보기 링크 — 일반 흐름 inline-flex */
+.poppi-event__more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 600;
+  color: #ED6325;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.poppi-event__more-link:hover {
+  transform: translateX(3px);
+}
+
+/* 카드 내부 전체보기: flex 레이아웃 유지하며 숨김 (height:0으로 공간 제거) */
+.event-slide-card__head {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* =========================================================
+   캘린더 날짜 셀 hover 원 효과 (JS 렌더링 클래스: .cal-cell)
+========================================================= */
+.event-calendar-card__grid .cal-cell {
+  border-radius: 50%;
+  cursor: default;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.15s ease;
+}
+
+.event-calendar-card__grid .cal-cell:not(.cal-cell--empty) {
+  cursor: pointer;
+}
+
+.event-calendar-card__grid .cal-cell:not(.cal-cell--empty):hover {
+  background-color: rgba(237, 99, 37, 0.14);
+  color: #ED6325;
+  transform: scale(1.12);
+}
+
+.event-calendar-card__grid [class*="cal-cell--event-"]:hover {
+  background-color: rgba(237, 99, 37, 0.22);
+  transform: scale(1.12);
+}
+
+
+/* =========================================================
+   05. MEMBERSHIP BANNER — Refresh 2026
+   - 라운드 카드 (좌우 여백 + radius)
+   - 다층 그라디언트 (135deg pink → coral) + 코너 highlight
+   - 데코 도트(pseudo) — 도넛 토핑 무드
+   - 타이틀 강조 (옐로우 하이라이트)
+   - 알약형 CTA with text + arrow
+   - 캐릭터 살짝 raise + drop-shadow
+========================================================= */
+
+/* PC/TA/MO 공통 — banner는 풀폭 배경, .membership-banner__inner가 max-width 컨테이너.
+   banner padding-block: 0 → character가 align-self:flex-end + inner padding-bottom: 0으로 banner 바닥에 정확히 닿음 */
+.membership-banner {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  /* PC/TA: overflow visible — 캐릭터 머리(모자)가 banner 박스 위로 살짝 튀어나오는 효과 허용
+     (MO 미디어쿼리에서 hidden 으로 오버라이드 → 모바일은 박스 안에서만 노출) */
+  overflow: visible;
+  box-shadow: none;
+  /* 다층 그라디언트: 코너 highlight + 핑크→코랄 base */
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.42) 0%, transparent 48%),
+    radial-gradient(circle at 88% 90%, rgba(255, 138, 165, 0.45) 0%, transparent 55%),
+    linear-gradient(135deg, #FFC8DA 0%, #FF9DBE 55%, #FFA999 100%);
+  isolation: isolate;
+  padding-block: 0;
+}
+
+/* 데코 도트(스프링클) — 가벼운 토핑 무드 */
+.membership-banner__deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+  background:
+    radial-gradient(circle 4px at 14% 22%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(circle 3px at 28% 78%, #FFE066 0%, transparent 100%),
+    radial-gradient(circle 5px at 65% 22%, rgba(255, 255, 255, 0.85) 0%, transparent 100%),
+    radial-gradient(circle 3px at 78% 70%, #452219 0%, transparent 100%),
+    radial-gradient(circle 4px at 90% 24%, #FFE066 0%, transparent 100%),
+    radial-gradient(circle 3px at 50% 92%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(circle 3.5px at 38% 12%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(circle 2.5px at 58% 60%, #452219 0%, transparent 100%),
+    radial-gradient(circle 3px at 82% 48%, #FFFFFF 0%, transparent 100%);
+}
+
+/* 캐릭터: PC/TA에서 inner 안 flex item — 좌측, banner 바닥에 정렬(align-self:flex-end)
+   PNG 하단 ~12% 투명 여백 때문에 발/허리 라인이 banner 바닥에 안 닿는 문제 해결 →
+   aspect-ratio: 1 / 1 + object-fit:cover + object-position:top 로 하단 투명영역 크롭. */
+.membership-banner__character {
+  position: relative;
+  flex-shrink: 0;
+  /* PC: 사이즈 키움 — banner height(약 280px)보다 캐릭터 height가 커야 머리가 위로 튀어나옴 */
+  width: clamp(180px, 22vw, 320px);
+  aspect-ratio: 1 / 1;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  object-fit: cover;
+  object-position: top center;
+  filter: drop-shadow(0 12px 18px rgba(190, 60, 100, 0.28));
+  margin-right: clamp(28px, 4vw, 64px);
+  margin-bottom: 0;
+  /* inner의 padding-bottom: 0 + align-self: flex-end → 캐릭터 발(허리/엉덩이 라인)이 banner 박스 바닥에 정확히 닿음 */
+  align-self: flex-end;
+}
+
+/* inner: max-width 1200 컨테이너 — banner 풀폭 안에서 콘텐츠 영역 가운데 정렬.
+   padding-bottom: 0 으로 character가 banner 바닥과 매칭되도록. */
+.membership-banner__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, calc(100% - clamp(40px, 6vw, 96px)));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  /* PC/TA: 고정 height — 이보다 큰 캐릭터(aspect 1:1, width 320 → height 320)가 align-self:flex-end 로
+     bottom 정렬되면 머리가 banner 위로 튀어나옴 (overflow:visible) */
+  height: clamp(220px, 18vw, 280px);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.membership-banner__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* CTA를 우측 끝으로 밀어내기 위해 — text가 남은 폭 차지 */
+  margin-right: auto;
+}
+
+.membership-banner__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  /* 디자인 시스템 caption 토큰 (다른 섹션 eyebrow 와 통일) */
+  font-size: var(--type-caption);
+  font-weight: var(--weight-body-bold);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(190, 60, 100, 0.25);
+}
+
+.membership-banner__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  /* 디자인 시스템 h3 토큰: PC 48 / TA 36 / MO 26 */
+  font-size: var(--type-h3);
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(190, 60, 100, 0.22);
+}
+
+/* "혜택이 쏟아져요!" 옐로우 강조 — 시선 사로잡는 hook */
+.membership-banner__title-em {
+  color: #FFEC6A;
+  text-shadow: 0 2px 0 rgba(190, 60, 100, 0.18);
+}
+
+.membership-banner__desc {
+  margin: 4px 0 0;
+  font-family: var(--font-body);
+  /* 디자인 시스템 b2 토큰: PC 20 / TA 16 / MO 15 */
+  font-size: var(--type-b2);
+  font-weight: var(--weight-body-reg);
+  line-height: var(--lh-body);
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 2px rgba(190, 60, 100, 0.18);
+}
+
+/* CTA: 알약형 with 라벨 + arrow */
+.membership-banner__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(12px, 1vw, 16px) clamp(20px, 1.6vw, 28px);
+  border-radius: 999px;
+  background: #452219;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(13px, 1vw, 15px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow:
+    0 6px 16px rgba(69, 35, 25, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1),
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.membership-banner__cta:hover {
+  transform: translateY(-2px);
+  background: #5C2E22;
+  box-shadow:
+    0 10px 22px rgba(69, 35, 25, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.membership-banner__cta:active {
+  transform: translateY(0);
+}
+
+.membership-banner__cta-label {
+  display: inline-block;
+}
+
+.membership-banner__cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.2em;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.membership-banner__cta:hover .membership-banner__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* TA (≤1024px) — character/inner 살짝 압축, banner 고정 height 유지 (PC와 같은 overflow 룰) */
+@media (max-width: 1024px) {
+  .membership-banner__inner {
+    width: min(960px, calc(100% - clamp(32px, 5vw, 64px)));
+    height: clamp(180px, 22vw, 220px);
+    padding: 0;
+  }
+  .membership-banner__character {
+    /* TA: 머리 살짝 튀어나오도록 banner height(220 max)보다 큰 캐릭터 height 확보 */
+    width: clamp(160px, 22vw, 240px);
+    margin-right: clamp(20px, 3vw, 40px);
+  }
+}
+
+/* MO (≤768px) — 모든 요소 세로 정렬 + 정중앙 (텍스트/CTA 위쪽 → 캐릭터 banner 바닥에 닿음) */
+@media (max-width: 768px) {
+  /* MO 는 박스 안에 모든 콘텐츠 배치 — overflow hidden 으로 캐릭터 PNG 투명영역 클립 */
+  .membership-banner {
+    overflow: hidden;
+  }
+  /* inner: 세로 정렬, 정중앙 텍스트, padding-bottom 0 → 캐릭터(order 99)가 banner 바닥에 닿음
+     position: relative — CTA 를 absolute 로 띄워 캐릭터 앞치마 위에 오버레이 */
+  .membership-banner__inner {
+    position: relative;
+    width: min(420px, calc(100% - 32px));
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: auto;
+    min-height: auto;
+    padding: 32px 16px 0;
+    text-align: center;
+  }
+
+  /* 캐릭터: column 마지막 자식(order 99) — CTA 가 absolute 로 빠지면 column flow 마지막은 캐릭터.
+     inner padding-bottom: 0 → 캐릭터 발(허리) 라인이 banner 바닥에 정확히 닿음 */
+  .membership-banner__character {
+    order: 99;
+    width: clamp(140px, 38vw, 200px);
+    margin: 4px 0 0;
+    align-self: center;
+    z-index: 1;
+  }
+
+  /* 텍스트 영역: 정중앙 (text-align center + align-items center) */
+  .membership-banner__text {
+    flex: 0 0 auto;
+    align-items: center;
+    text-align: center;
+    margin-right: 0;
+    gap: 6px;
+  }
+
+  .membership-banner__eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  .membership-banner__title {
+    font-size: clamp(20px, 5.5vw, 26px);
+    line-height: 1.22;
+  }
+
+  .membership-banner__desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* CTA: absolute 로 띄워 캐릭터 앞치마 중앙(POPPI 라벨 부근) 위에 오버레이.
+     - left 50% + translateX(-50%) → 가운데 정렬
+     - bottom: 캐릭터 height 의 약 25~35% 지점 → 앞치마 중앙 영역
+     - z-index 3 → 캐릭터(z-index 1) 위에 렌더 */
+  .membership-banner__cta {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(28px, 9vw, 56px);
+    transform: translateX(-50%);
+    z-index: 3;
+    align-self: auto;
+    width: auto;
+    height: auto;
+    padding: 12px 24px;
+    gap: 8px;
+  }
+  /* hover lift 가 absolute + translateX 와 충돌 — translate 를 한 번에 합성 */
+  .membership-banner__cta:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+  .membership-banner__cta:active {
+    transform: translateX(-50%) translateY(0);
+  }
+  .membership-banner__cta-label { display: inline-block; }
+  .membership-banner__cta-arrow { font-size: 1.1em; }
+}
+
+/* prefers-reduced-motion — hover transform 비활성
+   MO 에선 CTA 가 absolute + translateX(-50%) 로 가운데 정렬되어 있으므로
+   transform: none 대신 translateX(-50%) 만 유지 */
+@media (prefers-reduced-motion: reduce) {
+  .membership-banner__cta,
+  .membership-banner__cta-arrow {
+    transition: none;
+  }
+  .membership-banner__cta:hover {
+    transform: none;
+  }
+  .membership-banner__cta:hover .membership-banner__cta-arrow {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 768px) {
+  .membership-banner__cta,
+  .membership-banner__cta:hover,
+  .membership-banner__cta:active {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>POPPI DONUTS | MENU</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/images/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="../assets/css/commons.css?v=ria-regular-v1">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css?v=legal-modal-pc-height">
+  <link rel="stylesheet" href="../assets/css/pages-common.css?v=menu-kv-572">
+  <link rel="stylesheet" href="../assets/css/menu.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="page-wrap">
+    <div data-include="site-header"></div>
+
+    <main>
+      <div class="poppi-menu-wrap">
+
+    <!-- 00. MENU KV — event-news .page-top 와 완전히 동일한 구조/스타일
+         (배경: 사용자 제공 menu-kv-bg-v2.png, 최대 높이 572) -->
+    <header class="page-top" aria-label="MENU 키비주얼">
+      <h1 class="kv-title" data-text="MENU">MENU</h1>
+    </header>
+
+    <div class="poppi-controls">
+      <div class="poppi-tabs">
+        <button class="poppi-btn-primary" data-filter="all">전체 메뉴</button>
+        <button class="poppi-btn-outline" data-filter="season">시즌 메뉴</button>
+        <button class="poppi-btn-outline" data-filter="fruit">과일 메뉴</button>
+        <button class="poppi-btn-outline" data-filter="basic">기본 메뉴</button>
+      </div>
+      <div class="poppi-search-wrapper">
+        <input type="text" class="poppi-search-input" placeholder="검색어를 입력하세요">
+        <img src="../assets/images/menu/search-orange.svg" class="search-icon-svg" alt="검색">
+      </div>
+    </div>
+
+    <section class="poppi-grid-container" aria-label="도넛 메뉴 목록">
+
+      <div class="poppi-card" data-category="season" onclick="openPoppiModal('레인보우 도넛', 'Rainbow Donut', '../assets/images/menu/rainbow-1.png', '달콤한 초코 위에 알록달록 스프링클이 가득한 도넛', '계란 - 국내산 / 밀가루 - 중국산 / 우유 - 미국산 / 버터 - 미국산', '계란 - 밀가루 - 대두 - 설탕 - 우유')">
+        <span class="badge badge-season">SEASON</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/rainbow-1.png" alt="레인보우 도넛"></div>
+        <h3 class="card-title">레인보우 도넛</h3>
+        <p class="card-sub">Rainbow Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="season" onclick="openPoppiModal('스트로베리 도넛', 'Strawberry Donut', '../assets/images/menu/strawberry-2.png', '상큼한 딸기 초콜릿 코팅에 사랑스러운 핑크빛을 더한 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 딸기 - 국내산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-season">SEASON</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/strawberry-2.png" alt="스트로베리 도넛"></div>
+        <h3 class="card-title">스트로베리 도넛</h3>
+        <p class="card-sub">Strawberry Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="season" onclick="openPoppiModal('슈가 파우더 도넛', 'Sugar Powder Donut', '../assets/images/menu/sugarpowder-3.png', '부드러운 도넛 위에 하얀 눈처럼 달콤한 슈가 파우더를 듬뿍 올린 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 설탕 - 국내산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-season">SEASON</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/sugarpowder-3.png" alt="슈가 파우더 도넛"></div>
+        <h3 class="card-title">슈가 파우더 도넛</h3>
+        <p class="card-sub">Sugar Powder Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="season" onclick="openPoppiModal('허니 크런치 도넛', 'Honey Crunch Donut', '../assets/images/menu/honeycrunch-4.png', '달콤한 꿀의 풍미와 바삭한 크런치 식감이 환상적인 조화를 이루는 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 천연꿀 - 국내산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-season">SEASON</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/honeycrunch-4.png" alt="허니 크런치 도넛"></div>
+        <h3 class="card-title">허니 크런치 도넛</h3>
+        <p class="card-sub">Honey Crunch Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('블루베리 도넛', 'Blueberry Donut', '../assets/images/menu/blueberry-5.png', '톡톡 터지는 생블루베리의 상큼함이 가득 스며든 과일 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 블루베리 - 칠레산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/blueberry-5.png" alt="블루베리 도넛"></div>
+        <h3 class="card-title">블루베리 도넛</h3>
+        <p class="card-sub">Blueberry Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('시나몬 슈가 도넛', 'Cinnamon Sugar Donut', '../assets/images/menu/cinnamonsugar-6.png', '은은한 시나몬 향과 달콤한 설탕 입자가 입안 가득 퍼지는 클래식 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 시나몬 파우더 - 베트남산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/cinnamonsugar-6.png" alt="시나몬 슈가 도넛"></div>
+        <h3 class="card-title">시나몬 슈가 도넛</h3>
+        <p class="card-sub">Cinnamon Sugar Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('메이플 베이컨 도넛', 'Maple Bacon Donut', '../assets/images/menu/maplebeacon-7.png', '달콤한 메이플 시럽과 짭짤한 베이컨이 어우러진 이색 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 베이컨 - 외국산', '계란 - 밀가루 - 대두 - 설탕 - 우유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/maplebeacon-7.png" alt="메이플 베이컨 도넛"></div>
+        <h3 class="card-title">메이플 베이컨 도넛</h3>
+        <p class="card-sub">Maple Bacon Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('레드벨벳 도넛', 'Red Velvet Donut', '../assets/images/menu/redvelvet-8.png', '진한 레드벨벳 베이스에 부드러운 크림치즈 스트라이프를 더한 고급스러운 맛', '계란 - 국내산 / 밀가루 - 미국산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/redvelvet-8.png" alt="레드벨벳 도넛"></div>
+        <h3 class="card-title">레드벨벳 도넛</h3>
+        <p class="card-sub">Red Velvet Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('쿠키앤크림 도넛', 'Cookies &amp; Cream Donut', '../assets/images/menu/cookiencream-9.png', '화이트 초코 코팅 위에 바삭한 오레오 쿠키 크럼블을 아낌없이 뿌린 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 쿠키분태 - 외국산', '계란 - 밀가루 - 대두 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/cookiencream-9.png" alt="쿠키앤크림 도넛"></div>
+        <h3 class="card-title">쿠키앤크림 도넛</h3>
+        <p class="card-sub">Cookies &amp; Cream Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('코코넛 크림 도넛', 'Coconut Cream Donut', '../assets/images/menu/coconutcream-10.png', '부드러운 크림을 품고 고소하게 구워진 코코넛 슬라이스를 가득 얹은 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 코코넛 - 필리핀산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/coconutcream-10.png" alt="코코넛 크림 도넛"></div>
+        <h3 class="card-title">코코넛 크림 도넛</h3>
+        <p class="card-sub">Coconut Cream Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('초코 드리즐 도넛', 'Choco Drizzle Donut', '../assets/images/menu/chocodrizzle-11.png', '진한 초콜릿 베이스 위에 한 번 더 달콤하게 드리즐을 더한 초코 매니아용 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 코코아파우더 - 네덜란드산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/chocodrizzle-11.png" alt="초코 드리즐 도넛"></div>
+        <h3 class="card-title">초코 드리즐 도넛</h3>
+        <p class="card-sub">Choco Drizzle Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('말차 글레이즈 도넛', 'Matcha Glaze Donut', '../assets/images/menu/matchaglaze-12.png', '쌉싸름하고 진한 말차 고유의 풍미를 달콤 쫀득한 글레이즈로 정돈한 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 말차분말 - 국내산 제주', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/matchaglaze-12.png" alt="말차 글레이즈 도넛"></div>
+        <h3 class="card-title">말차 글레이즈 도넛</h3>
+        <p class="card-sub">Matcha Glaze Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('카라멜 도넛', 'Caramel Donut', '../assets/images/menu/caramel-13.png', '깊고 진한 수제 카라멜 소스를 드리즐하여 입안 가득 달콤함이 남는 도넛', '계란 - 국내산 / 밀가루 - 미국산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/caramel-13.png" alt="카라멜 도넛"></div>
+        <h3 class="card-title">카라멜 도넛</h3>
+        <p class="card-sub">Caramel Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('피스타치오 도넛', 'Pistachio Donut', '../assets/images/menu/pistachio-14.png', '고소한 피스타치오 크림과 잘게 부순 원물 토핑이 만나 고급스러운 풍미를 내는 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 피스타치오 - 미국산', '계란 - 밀가루 - 우유 - 땅콩 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/pistachio-14.png" alt="피스타치오 도넛"></div>
+        <h3 class="card-title">피스타치오 도넛</h3>
+        <p class="card-sub">Pistachio Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('오리지널 도넛', 'Original Donut', '../assets/images/menu/original-15.png', 'POPPI DONUTS만의 퐁신하고 쫀득한 도넛 본연의 맛을 느낄 수 있는 대표 메뉴', '계란 - 국내산 / 밀가루 - 미국산 / 버터 - 프랑스산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/original-15.png" alt="오리지널 도넛"></div>
+        <h3 class="card-title">오리지널 도넛</h3>
+        <p class="card-sub">Original Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="basic" onclick="openPoppiModal('초코 크런치 도넛', 'Choco Crunch Donut', '../assets/images/menu/chococrunch-16.png', '진한 다크 초콜릿 위에 바삭바삭 씹히는 크런치 칩을 가득 덮은 식감 천재 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 다크초코 - 벨기에산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/chococrunch-16.png" alt="초코 크런치 도넛"></div>
+        <h3 class="card-title">초코 크런치 도넛</h3>
+        <p class="card-sub">Choco Crunch Donut</p>
+      </div>
+
+      <!-- 과일 메뉴 8종 -->
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('딸기 치즈 도넛', 'Strawberry Cheese Donut', '../assets/images/menu/strawberry_cheese-22.png', '진한 딸기와 부드러운 치즈 크림이 어우러진 달콤상큼 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 딸기 - 국내산 / 치즈 - 국내산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/strawberry_cheese-22.png" alt="딸기 치즈 도넛"></div>
+        <h3 class="card-title">딸기 치즈 도넛</h3>
+        <p class="card-sub">Strawberry Cheese Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('초코 바나나 도넛', 'Chocolate Banana Donut', '../assets/images/menu/chocobanana-23.png', '달콤한 바나나와 진한 초콜릿이 만나 풍부한 맛을 선사하는 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 바나나 - 필리핀산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/chocobanana-23.png" alt="초코 바나나 도넛"></div>
+        <h3 class="card-title">초코 바나나 도넛</h3>
+        <p class="card-sub">Chocolate Banana Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit season" onclick="openPoppiModal('망고 도넛', 'Mango Donut', '../assets/images/menu/mango-17.png', '열대 망고의 달콤함이 가득한 상큼한 시즌 과일 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 망고 - 태국산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-season">SEASON</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/mango-17.png" alt="망고 도넛"></div>
+        <h3 class="card-title">망고 도넛</h3>
+        <p class="card-sub">Mango Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('키위 생크림 도넛', 'Kiwi Cream Donut', '../assets/images/menu/kiwii-18.png', '상큼한 키위와 부드러운 생크림이 조화로운 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 키위 - 뉴질랜드산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/kiwii-18.png" alt="키위 생크림 도넛"></div>
+        <h3 class="card-title">키위 생크림 도넛</h3>
+        <p class="card-sub">Kiwi Cream Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('애플 시나몬 도넛', 'Apple Cinnamon Donut', '../assets/images/menu/applecinnamon-23.png', '달콤한 사과와 향긋한 시나몬이 어우러진 가을 무드 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 사과 - 국내산 / 시나몬 - 베트남산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/applecinnamon-23.png" alt="애플 시나몬 도넛"></div>
+        <h3 class="card-title">애플 시나몬 도넛</h3>
+        <p class="card-sub">Apple Cinnamon Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('그릴드 파인애플 도넛', 'Grilled Pineapple Donut', '../assets/images/menu/griled-pineapple-19.png', '그릴드 파인애플의 캐러멜라이즈드 풍미가 살아있는 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 파인애플 - 필리핀산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/griled-pineapple-19.png" alt="그릴드 파인애플 도넛"></div>
+        <h3 class="card-title">그릴드 파인애플 도넛</h3>
+        <p class="card-sub">Grilled Pineapple Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('라즈베리 도넛', 'Raspberry Donut', '../assets/images/menu/raseberry-20.png', '새콤달콤한 라즈베리 글레이즈가 가득한 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 라즈베리 - 칠레산', '계란 - 밀가루 - 우유 함유')">
+        <span class="badge badge-best">BEST</span>
+        <div class="card-img-wrap"><img src="../assets/images/menu/raseberry-20.png" alt="라즈베리 도넛"></div>
+        <h3 class="card-title">라즈베리 도넛</h3>
+        <p class="card-sub">Raspberry Donut</p>
+      </div>
+
+      <div class="poppi-card" data-category="fruit" onclick="openPoppiModal('체리 생크림 도넛', 'Cherry Cream Donut', '../assets/images/menu/cherrycream-21.png', '체리의 상큼함과 생크림의 부드러움이 만난 도넛', '계란 - 국내산 / 밀가루 - 미국산 / 체리 - 미국산', '계란 - 밀가루 - 우유 함유')">
+        <div class="card-img-wrap"><img src="../assets/images/menu/cherrycream-21.png" alt="체리 생크림 도넛"></div>
+        <h3 class="card-title">체리 생크림 도넛</h3>
+        <p class="card-sub">Cherry Cream Donut</p>
+      </div>
+
+    </section>
+
+    <div id="poppiModalOverlay" class="poppi-modal-overlay" style="display: none;" onclick="closePoppiModalViaOverlay(event)">
+      <div class="poppi-modal-content">
+        <button class="modal-close-btn" onclick="closePoppiModal()" type="button" aria-label="닫기">×</button>
+        <div class="poppi-modal-body">
+        <h2 id="modalTitle" class="modal-main-title">도넛 이름</h2>
+        <p id="modalSubTitle" class="modal-sub-title">Donut English Name</p>
+        <div class="modal-img-wrap">
+          <img id="modalImg" src="" alt="도넛 이미지">
+        </div>
+        <div class="modal-desc-box">
+          <p id="modalDesc">도넛 설명 박스</p>
+        </div>
+        <div class="modal-info-text">
+          <p class="info-row"><span class="lbl-orange">원산지 정보</span> <span id="modalOrigin">내용</span></p>
+          <p class="info-row"><span class="lbl-orange">알레르기 유발 요인</span> <span id="modalAllergy">내용</span></p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </main>
+
+    <div data-include="site-footer"></div>
+  </div>
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 공통 헤더/푸터 컴포넌트 — main.js 보다 먼저 로드 -->
+  <script src="../assets/js/components/site-header.js"></script>
+  <script src="../assets/js/components/site-ready-modal.js?v=ready-modal-v2"></script>
+  <script src="../assets/js/components/site-footer.js?v=legal-modal-ios"></script>
+  <script src="../assets/js/main.js?v=socials-v4"></script>
+  <script src="../assets/js/menu.js"></script>
+</body>
+</html>

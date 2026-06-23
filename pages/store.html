@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>POPPI DONUTS — Store</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/images/favicon-64.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- 캐러셀 도트 도넛 PNG 사전 디코딩 → 활성 전환 시 깜빡임 0 -->
+  <link rel="preload" as="image" href="../assets/images/store/dot-active-donut.png" />
+<link rel="stylesheet" href="../assets/css/commons.css?v=ria-regular-v1" />
+  <link rel="stylesheet" href="../assets/css/header.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/pages-common.css" />
+  <link rel="stylesheet" href="../assets/css/footer.css?v=legal-modal-pc-height" />
+  <link rel="stylesheet" href="../assets/css/store.css?v=tablet-filters-row" />
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20260609130729" />
+  </head>
+<body class="store-page">
+  <div class="page-wrap">
+    <div data-include="site-header"></div>
+
+    <main>
+
+      <!-- 00. STORE KV — event-news .page-top 와 완전히 동일한 구조/스타일
+           (도넛 합성본 대신 그리드 전용 배경, 높이 572) -->
+      <header class="page-top" aria-label="STORE 키비주얼">
+        <h1 class="kv-title" data-text="STORE">STORE</h1>
+      </header>
+
+      <!-- 01. INTERIOR — Figma 1193-2 (1920×1071 → 700~800px 로 축소: title 305×69 @y160, sub @y269, 중앙 1180×541 + 양옆 350×541 peek, 6 dots w/ donut active@idx2) -->
+      <!-- 01. INTERIOR — 850px 섹션
+           코너 데코 + INTERIOR(y=130) + 서브카피(y=242) + 무한 스와이퍼(y=326)
+           슬라이드 700×300, gap 20px, 자동 무한 루프 -->
+      <section class="store-interior" aria-label="POPPI 매장 인테리어">
+        <img
+          class="store-interior__deco"
+          src="../assets/images/store/interior-deco.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <header class="store-interior__head">
+          <h2 class="store-interior__title">INTERIOR</h2>
+          <p class="store-interior__sub">ORANGE &amp; PINK 무드로 완성한<br> POPPI의 시그니처 공간</p>
+        </header>
+
+        <div class="interior-carousel" data-interior-carousel
+             aria-roledescription="carousel" aria-label="POPPI 매장 인테리어 무한 캐러셀">
+          <div class="interior-carousel__viewport">
+            <div class="interior-carousel__track" data-interior-track>
+              <figure class="interior-carousel__slide is-active" data-interior-slide="0">
+                <img src="../assets/images/store/store-slide-1.png" alt="POPPI 매장 외관 — 코너 뷰" />
+              </figure>
+              <figure class="interior-carousel__slide" data-interior-slide="1">
+                <img src="../assets/images/store/store-slide-2.png" alt="POPPI 매장 외관 — 정면 뷰" />
+              </figure>
+              <figure class="interior-carousel__slide" data-interior-slide="2">
+                <img src="../assets/images/store/store-slide-3.png" alt="POPPI 매장 내부 — PICK UP & 좌석" />
+              </figure>
+              <figure class="interior-carousel__slide" data-interior-slide="3">
+                <img src="../assets/images/store/store-slide-4.png" alt="POPPI 매장 내부 — 메뉴 보드 & 카운터" />
+              </figure>
+              <figure class="interior-carousel__slide" data-interior-slide="4">
+                <img src="../assets/images/store/store-slide-5.png" alt="POPPI 매장 화장실" />
+              </figure>
+              <figure class="interior-carousel__slide" data-interior-slide="5">
+                <img src="../assets/images/store/store-slide-6.png" alt="POPPI 매장 테라스 좌석" />
+              </figure>
+            </div>
+          </div>
+
+          <!-- Figma 1270:280 — 6개 도트 (5 베이지 + 1 도넛 활성 인디케이터), gap 30px, 카드 아래 35px -->
+          <div class="interior-carousel__dots" role="tablist" aria-label="슬라이드 인디케이터" data-interior-dots>
+            <button type="button" class="interior-carousel__dot is-active" data-interior-dot="0" aria-label="사진 1" aria-current="true"></button>
+            <button type="button" class="interior-carousel__dot" data-interior-dot="1" aria-label="사진 2"></button>
+            <button type="button" class="interior-carousel__dot" data-interior-dot="2" aria-label="사진 3"></button>
+            <button type="button" class="interior-carousel__dot" data-interior-dot="3" aria-label="사진 4"></button>
+            <button type="button" class="interior-carousel__dot" data-interior-dot="4" aria-label="사진 5"></button>
+            <button type="button" class="interior-carousel__dot" data-interior-dot="5" aria-label="사진 6"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02. STORE SEARCH — Figma 1176-750 (필터 한 줄 + 큰 지도 위 좌측 매장리스트 패널) -->
+      <section id="store-search" class="store-search" aria-label="POPPI 매장 검색">
+        <div class="store-search__stage" data-store-search-stage>
+          <div class="store-search__sheet" data-store-search-sheet aria-expanded="false">
+            <div
+              class="store-search__sheet-handle"
+              data-store-sheet-handle
+              role="button"
+              tabindex="0"
+              aria-label="검색 패널 열기"
+            ></div>
+            <div class="store-search__sheet-scroll" data-store-sheet-scroll>
+              <header class="store-search__head" data-reveal>
+                <h2 class="store-search__title">STORE SEARCH</h2>
+              </header>
+
+          <div class="store-search__filters" role="group" aria-label="매장 필터">
+          <label class="store-search__select">
+            <span class="sr-only">도/시 선택</span>
+            <select aria-label="도/시 선택" data-filter-city>
+              <option value="">도/시 선택</option>
+              <option value="서울특별시">서울특별시</option>
+              <option value="인천광역시">인천광역시</option>
+              <option value="경기도">경기도</option>
+              <option value="부산광역시">부산광역시</option>
+            </select>
+          </label>
+          <label class="store-search__select">
+            <span class="sr-only">구/군 선택</span>
+            <select aria-label="구/군 선택" data-filter-district>
+              <option value="">구/군 선택</option>
+              <option value="강남구">강남구</option>
+              <option value="마포구">마포구</option>
+              <option value="송파구">송파구</option>
+              <option value="종로구">종로구</option>
+              <option value="남동구">남동구</option>
+              <option value="연수구">연수구</option>
+              <option value="성남시">성남시</option>
+              <option value="수원시">수원시</option>
+              <option value="해운대구">해운대구</option>
+              <option value="수영구">수영구</option>
+            </select>
+          </label>
+          <label class="store-search__select">
+            <span class="sr-only">점포유형 선택</span>
+            <select aria-label="점포유형 선택" data-filter-type>
+              <option value="">점포유형 선택</option>
+              <option value="주차 가능">주차 가능</option>
+              <option value="드라이브스루">드라이브스루</option>
+              <option value="테라스">테라스</option>
+            </select>
+          </label>
+          <!-- Figma 1327:260 — 내 주변 매장 (오렌지 필 버튼)
+               필터 변경 시 자동으로 결과가 반영되므로 별도 "검색" 버튼은 없음. -->
+          <button type="button" class="store-search__btn store-search__btn--primary" data-store-nearby aria-label="내 주변 매장 검색">
+            내 주변 매장
+          </button>
+          </div>
+
+          <aside class="store-search__list" aria-label="검색 결과 매장 목록">
+            <div class="store-search__search-input">
+              <input type="search" placeholder="매장명" aria-label="매장명 검색" data-store-keyword />
+              <span class="store-search__search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+            </div>
+            <ul class="store-search__store-list" data-store-list>
+              <li class="store-search__store-item is-active" data-store-id="1" data-lat="37.4979" data-lng="127.0276"
+                  data-city="서울특별시" data-district="강남구" data-type="주차 가능,테라스">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  서울 강남점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  서울특별시 강남구 테헤란로 152
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="2" data-lat="37.5563" data-lng="126.9233"
+                  data-city="서울특별시" data-district="마포구" data-type="주차 가능,테라스">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  서울 홍대점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  서울특별시 마포구 양화로 162
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="3" data-lat="37.5145" data-lng="127.1028"
+                  data-city="서울특별시" data-district="송파구" data-type="주차 가능,드라이브스루">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  서울 잠실점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  서울특별시 송파구 올림픽로 240
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="4" data-lat="37.5703" data-lng="126.9826"
+                  data-city="서울특별시" data-district="종로구" data-type="테라스">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  서울 종로점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  서울특별시 종로구 종로 51
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="5" data-lat="37.4485" data-lng="126.7311"
+                  data-city="인천광역시" data-district="남동구" data-type="주차 가능">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  인천 구월점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  인천광역시 남동구 정각로 29
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="6" data-lat="37.3838" data-lng="126.6573"
+                  data-city="인천광역시" data-district="연수구" data-type="주차 가능,테라스">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  인천 송도점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  인천광역시 연수구 컨벤시아대로 165
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="7" data-lat="37.4196" data-lng="127.1262"
+                  data-city="경기도" data-district="성남시" data-type="드라이브스루,주차 가능">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  경기 성남점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  경기도 성남시 분당구 판교역로 235
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="8" data-lat="37.2636" data-lng="127.0286"
+                  data-city="경기도" data-district="수원시" data-type="주차 가능">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  경기 수원점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  경기도 수원시 영통구 광교중앙로 145
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="9" data-lat="35.1631" data-lng="129.1635"
+                  data-city="부산광역시" data-district="해운대구" data-type="테라스">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  부산 해운대점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  부산광역시 해운대구 해운대해변로 264
+                </p>
+              </li>
+              <li class="store-search__store-item" data-store-id="10" data-lat="35.1535" data-lng="129.1184"
+                  data-city="부산광역시" data-district="수영구" data-type="주차 가능">
+                <p class="store-search__store-name">
+                  <span class="store-search__store-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 6 8 12 8 12s8-6 8-12c0-4.41-3.59-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                  </span>
+                  부산 광안리점
+                </p>
+                <p class="store-search__store-addr">
+                  <span class="store-search__store-icon store-search__store-icon--addr" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+                  </span>
+                  부산광역시 수영구 광안해변로 217
+                </p>
+              </li>
+            </ul>
+            <p class="store-search__empty" data-store-empty hidden>검색 결과가 없습니다.</p>
+          </aside>
+            </div>
+          </div>
+
+          <div class="store-search__map-body">
+            <div class="store-search__map-wrap">
+              <div id="kakao-map" class="store-search__map" role="img" aria-label="POPPI 매장 위치 지도"></div>
+              <div class="store-search__map-fallback" data-map-fallback hidden>
+                <p class="store-search__map-fallback-title">Kakao Map 키가 설정되지 않았습니다</p>
+                <p class="store-search__map-fallback-desc">
+                  <code>assets/js/store-map.js</code> 의 <code>KAKAO_APP_KEY</code> 값을 발급받은 키로 교체하면 지도가 표시됩니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div data-include="site-footer"></div>
+  </div>
+
+  <!-- GSAP runtime: assets/vendor/gsap 로컬 번들 사용 -->
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 공통 헤더/푸터 컴포넌트 — main.js 보다 먼저 로드 -->
+  <script src="../assets/js/components/site-header.js"></script>
+  <script src="../assets/js/components/site-ready-modal.js?v=ready-modal-v2"></script>
+  <script src="../assets/js/components/site-footer.js?v=legal-modal-ios"></script>
+  <script src="../assets/js/main.js?v=socials-v4"></script>
+  <script src="../assets/js/interior-carousel.js"></script>
+  <script src="../assets/js/store-map.js?v=mobile-clamp-v1"></script>
+  <script src="../assets/js/store-sheet.js"></script>
+  <script>
+    /* 스크롤 fade-in reveal — IntersectionObserver 기반 */
+    (() => {
+      const items = document.querySelectorAll('[data-reveal]');
+      if (!items.length) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach((el) => el.classList.add('is-revealed'));
+        return;
+      }
+
+      items.forEach((el) => {
+        const delay = parseInt(el.dataset.revealDelay || '0', 10);
+        if (delay > 0) el.style.transitionDelay = delay + 'ms';
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-revealed');
+            io.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.18, rootMargin: '0px 0px -60px 0px' }
+      );
+
+      items.forEach((el) => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
