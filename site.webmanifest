@@ -1,0 +1,19 @@
+{
+  "name": "POPPI DONUTS",
+  "short_name": "POPPI",
+  "description": "fresh donuts, happy days. POPPI DONUTS 공식 웹사이트.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#ED6325",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "./assets/images/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
